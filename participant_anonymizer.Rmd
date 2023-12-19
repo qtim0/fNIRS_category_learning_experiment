@@ -1,0 +1,23 @@
+
+```{r}
+setwd("C:/Users/user00/My Drive/category_fNIRS/OSF_package/experiment2_behaviouralData")
+filelist = list.files(pattern="*.csv$")
+
+filelist
+```
+
+
+
+```{r}
+library(tidyverse)
+setwd("C:/Users/user00/My Drive/category_fNIRS/OSF_package/experiment2_behaviouralData")
+
+for(i in filelist){
+  x <- read.csv(i)
+  
+  x <- select(x, !participant)
+  
+  write.csv(x = x, file = i)
+}
+
+```

@@ -1,0 +1,1012 @@
+﻿<?xml version="1.0" ?>
+<PsychoPy2experiment encoding="utf-8" version="2022.1.1">
+  <Settings>
+    <Param val="use prefs" valType="str" updates="None" name="Audio latency priority"/>
+    <Param val="use prefs" valType="str" updates="None" name="Audio lib"/>
+    <Param val="" valType="str" updates="None" name="Completed URL"/>
+    <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
+    <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
+    <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
+    <Param val="{'participant': '', 'session': '001'}" valType="code" updates="None" name="Experiment info"/>
+    <Param val="True" valType="bool" updates="None" name="Force stereo"/>
+    <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
+    <Param val="" valType="str" updates="None" name="HTML path"/>
+    <Param val="" valType="str" updates="None" name="Incomplete URL"/>
+    <Param val="testMonitor" valType="str" updates="None" name="Monitor"/>
+    <Param val="[]" valType="list" updates="None" name="Resources"/>
+    <Param val="False" valType="bool" updates="None" name="Save csv file"/>
+    <Param val="False" valType="bool" updates="None" name="Save excel file"/>
+    <Param val="False" valType="bool" updates="None" name="Save hdf5 file"/>
+    <Param val="True" valType="bool" updates="None" name="Save log file"/>
+    <Param val="True" valType="bool" updates="None" name="Save psydat file"/>
+    <Param val="True" valType="bool" updates="None" name="Save wide csv file"/>
+    <Param val="1" valType="num" updates="None" name="Screen"/>
+    <Param val="True" valType="bool" updates="None" name="Show info dlg"/>
+    <Param val="False" valType="bool" updates="None" name="Show mouse"/>
+    <Param val="height" valType="str" updates="None" name="Units"/>
+    <Param val="" valType="str" updates="None" name="Use version"/>
+    <Param val="[1920, 1080]" valType="list" updates="None" name="Window size (pixels)"/>
+    <Param val="avg" valType="str" updates="None" name="blendMode"/>
+    <Param val="$[-1.0000, -1.0000, -1.0000]" valType="color" updates="None" name="color"/>
+    <Param val="rgb" valType="str" updates="None" name="colorSpace"/>
+    <Param val="100.1.1.1" valType="str" updates="None" name="elAddress"/>
+    <Param val="FILTER_LEVEL_2" valType="str" updates="None" name="elDataFiltering"/>
+    <Param val="FILTER_LEVEL_OFF" valType="str" updates="None" name="elLiveFiltering"/>
+    <Param val="EYELINK 1000 DESKTOP" valType="str" updates="None" name="elModel"/>
+    <Param val="ELLIPSE_FIT" valType="str" updates="None" name="elPupilAlgorithm"/>
+    <Param val="PUPIL_AREA" valType="str" updates="None" name="elPupilMeasure"/>
+    <Param val="1000" valType="num" updates="None" name="elSampleRate"/>
+    <Param val="False" valType="bool" updates="None" name="elSimMode"/>
+    <Param val="RIGHT_EYE" valType="str" updates="None" name="elTrackEyes"/>
+    <Param val="PUPIL_CR_TRACKING" valType="str" updates="None" name="elTrackingMode"/>
+    <Param val="taskPrototype" valType="str" updates="None" name="expName"/>
+    <Param val="on Sync" valType="str" updates="None" name="exportHTML"/>
+    <Param val="None" valType="str" updates="None" name="eyetracker"/>
+    <Param val="127.0.0.1" valType="str" updates="None" name="gpAddress"/>
+    <Param val="4242" valType="num" updates="None" name="gpPort"/>
+    <Param val="ioHub" valType="str" updates="None" name="keyboardBackend"/>
+    <Param val="exp" valType="code" updates="None" name="logging level"/>
+    <Param val="('MIDDLE_BUTTON',)" valType="list" updates="None" name="mgBlink"/>
+    <Param val="CONTINUOUS" valType="str" updates="None" name="mgMove"/>
+    <Param val="0.5" valType="num" updates="None" name="mgSaccade"/>
+    <Param val="0.6" valType="num" updates="None" name="plConfidenceThreshold"/>
+    <Param val="True" valType="bool" updates="None" name="plPupilCaptureRecordingEnabled"/>
+    <Param val="" valType="str" updates="None" name="plPupilCaptureRecordingLocation"/>
+    <Param val="127.0.0.1" valType="str" updates="None" name="plPupilRemoteAddress"/>
+    <Param val="50020" valType="num" updates="None" name="plPupilRemotePort"/>
+    <Param val="1000" valType="num" updates="None" name="plPupilRemoteTimeoutMs"/>
+    <Param val="False" valType="bool" updates="None" name="plPupillometryOnly"/>
+    <Param val="psychopy_iohub_surface" valType="str" updates="None" name="plSurfaceName"/>
+    <Param val="" valType="str" updates="None" name="tbLicenseFile"/>
+    <Param val="" valType="str" updates="None" name="tbModel"/>
+    <Param val="60" valType="num" updates="None" name="tbSampleRate"/>
+    <Param val="" valType="str" updates="None" name="tbSerialNo"/>
+  </Settings>
+  <Routines>
+    <Routine name="start">
+      <CodeComponent name="init_code">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="#initalize the loop limits for each device&amp;#10;gaborLim = 24&amp;#10;ctrlLim = 24&amp;#10;blockLim = 5&amp;#10;learnlim = 180" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="gaborLim = 24;&amp;#10;ctrlLim = 24;&amp;#10;blockLim = 5;&amp;#10;learnlim = 180;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="init_code" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txt_start">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txt_start" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Begin Experiment&amp;#10;&amp;#10;Press [x]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_resp">
+        <Param val="'x'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_resp" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="gaborTrial">
+      <ImageComponent name="img_gaborTrial">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$stimID" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="img_gaborTrial" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.8, 0.8)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <KeyboardComponent name="key_gaborTrial">
+        <Param val="'1', '0'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="$keymap" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_gaborTrial" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <CodeComponent name="code_gaborTrial">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_gaborTrial" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="gaborFb">
+      <CodeComponent name="code_gaborFb">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="msg='doh!' #debug msg printing&amp;#10;gaborloopc = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="msg = &quot;doh!&quot;;&amp;#10;gaborloopc = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((! key_gaborTrial.keys)) {&amp;#10;    msg = &quot;Failed to respond&quot;;&amp;#10;    txt_gaborfb.color = &quot;Red&quot;;&amp;#10;    gaborfbdur = 0.5;&amp;#10;} else {&amp;#10;    if (key_gaborTrial.corr) {&amp;#10;        msg = &quot;Correct!&quot;;&amp;#10;        txt_gaborfb.color = &quot;Green&quot;;&amp;#10;        gaborfbdur = (0.5 + (1.5 - key_gaborTrial.rt));&amp;#10;    } else {&amp;#10;        msg = &quot;Incorrect&quot;;&amp;#10;        txt_gaborfb.color = &quot;Red&quot;;&amp;#10;        gaborfbdur = (0.5 + (1.5 - key_gaborTrial.rt));&amp;#10;    }&amp;#10;}&amp;#10;gaborloopc = (gaborloopc + 1);&amp;#10;if ((gaborloopc &gt;= gaborLim)) {&amp;#10;    gaborLoop.finished = true;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#provides feedback for trial&amp;#10;#no response/wrong shows red&amp;#10;#correct repsonse shows green&amp;#10;if not key_gaborTrial.keys:&amp;#10;    msg = &quot;Failed to respond&quot;&amp;#10;    txt_gaborfb.color = &quot;Red&quot;&amp;#10;    gaborfbdur = 0.5 #fb default 0.5s&amp;#10;elif key_gaborTrial.corr: #stored on last run routine&amp;#10;    msg = &quot;Correct!&quot;&amp;#10;    txt_gaborfb.color = &quot;Green&quot;&amp;#10;    gaborfbdur = 0.5 + (1.5 - key_gaborTrial.rt) #leftover t&amp;#10;else:&amp;#10;    msg = &quot;Incorrect&quot;&amp;#10;    txt_gaborfb.color = &quot;Red&quot;&amp;#10;    gaborfbdur = 0.5 + (1.5 - key_gaborTrial.rt)&amp;#10;&amp;#10;#adds loop counter&amp;#10;gaborloopc = gaborloopc + 1 &amp;#10;&amp;#10;#ends gabor loop at defined limit&amp;#10;if gaborloopc &gt;= gaborLim:  &amp;#10;    gaborLoop.finished = True&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_gaborFb" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txt_gaborfb">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txt_gaborfb" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$gaborfbdur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$msg" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="ctrlTrial">
+      <CodeComponent name="code_ctrlTrial">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_ctrlTrial" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <ImageComponent name="imgCtrlTrial">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$ctrlID" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="imgCtrlTrial" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, -0.05)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.8, 0.8)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <KeyboardComponent name="keyCtrlTrial">
+        <Param val="'1', '0'" valType="list" updates="set every repeat" name="allowedKeys"/>
+        <Param val="$ans" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyCtrlTrial" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <TextComponent name="txtCtrlTrial">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtCtrlTrial" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0.45)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.5" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="MATCH [1]                                          NO [0]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="ctrlFb">
+      <CodeComponent name="ctrlCode">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="msg = &quot;oop&quot;&amp;#10;&amp;#10;ctrlloopc = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="msg = &quot;oop&quot;;&amp;#10;ctrlloopc = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((! keyCtrlTrial.keys)) {&amp;#10;    msg = &quot;Failed to respond&quot;;&amp;#10;    txtCtrlFb.color = &quot;Red&quot;;&amp;#10;    ctrlfbdur = 0.5;&amp;#10;} else {&amp;#10;    if (keyCtrlTrial.corr) {&amp;#10;        msg = &quot;Correct!&quot;;&amp;#10;        txtCtrlFb.color = &quot;Green&quot;;&amp;#10;        ctrlfbdur = (0.5 + (1.5 - keyCtrlTrial.rt));&amp;#10;    } else {&amp;#10;        msg = &quot;Incorrect&quot;;&amp;#10;        txtCtrlFb.color = &quot;Red&quot;;&amp;#10;        ctrlfbdur = (0.5 + (1.5 - keyCtrlTrial.rt));&amp;#10;    }&amp;#10;}&amp;#10;ctrlloopc = (ctrlloopc + 1);&amp;#10;if ((ctrlloopc &gt;= ctrlLim)) {&amp;#10;    ctrlLoop.finished = true;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#provides feedback for ctrl trials&amp;#10;if not keyCtrlTrial.keys:&amp;#10;    msg = &quot;Failed to respond&quot;&amp;#10;    txtCtrlFb.color = &quot;Red&quot;&amp;#10;    ctrlfbdur = 0.5 #fb default 0.5s&amp;#10;elif keyCtrlTrial.corr: #stored on last run routine&amp;#10;    msg = &quot;Correct!&quot;&amp;#10;    txtCtrlFb.color = &quot;Green&quot;&amp;#10;    ctrlfbdur = 0.5 + (1.5 - keyCtrlTrial.rt) #leftover t&amp;#10;else:&amp;#10;    msg = &quot;Incorrect&quot;&amp;#10;    txtCtrlFb.color = &quot;Red&quot;&amp;#10;    ctrlfbdur = 0.5 + (1.5 - keyCtrlTrial.rt)&amp;#10;&amp;#10;#adds to control loop counter&amp;#10;ctrlloopc = ctrlloopc + 1 &amp;#10;&amp;#10;#ends trial at defined limit&amp;#10;if ctrlloopc &gt;= ctrlLim: &amp;#10;    ctrlLoop.finished = True&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="ctrlCode" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txtCtrlFb">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtCtrlFb" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$ctrlfbdur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$msg" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <TextComponent name="txtCtrlFbSustain">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtCtrlFbSustain" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0.45)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$ctrlfbdur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="MATCH [1]                                          NO [0]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="end">
+      <TextComponent name="text">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="text" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Experiment Finished!&amp;#10;&amp;#10;[Q]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="key_end">
+        <Param val="'q'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="key_end" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="rest1">
+      <CodeComponent name="code_rest1">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="gaborloopc = 0;&amp;#10;r1_jitter = [12, 14, 16, 18, 20];&amp;#10;r1_jitdur = r1_jitter[blockloopc];&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#resets gabor loopcounter for next iteration&amp;#10;gaborloopc = 0 &amp;#10;&amp;#10;#declare vector of jittered rest times&amp;#10;#assign duration based on blockloop index&amp;#10;#5B x 24T x 2s&amp;#10;r1_jitter = [12,14,16,18,20]&amp;#10;r1_jitdur = r1_jitter[blockloopc]&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_rest1" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txtFixation1">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtFixation1" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$r1_jitdur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="+" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="rest2">
+      <CodeComponent name="code_rest2">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="#initalize blockloop counter starting at 0&amp;#10;#blockloop gets ++ at end of each loop&amp;#10;blockloopc = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="blockloopc = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="ctrlloopc = 0;&amp;#10;r2_jitter = [20, 18, 16, 14, 12];&amp;#10;r2_jitdur = r2_jitter[blockloopc];&amp;#10;blockloopc = (blockloopc + 1);&amp;#10;if ((blockloopc &gt;= blockLim)) {&amp;#10;    blockLoop.finished = true;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#resets ctrl loop counter for next iteration&amp;#10;ctrlloopc = 0 &amp;#10;&amp;#10;#declare vector of jittered rest times&amp;#10;#assign duration based on blockloop index&amp;#10;#5B x 24T x 2s&amp;#10;r2_jitter = [20,18,16,14,12]&amp;#10;r2_jitdur = r2_jitter[blockloopc]&amp;#10;&amp;#10;#add to blockloop counter&amp;#10;blockloopc = blockloopc + 1&amp;#10;&amp;#10;#ends loop after once blocklimit is reached&amp;#10;if blockloopc &gt;= blockLim:&amp;#10;    blockLoop.finished = True&amp;#10;&amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="code_rest2" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txtFixation2">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtFixation2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$r2_jitdur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="+" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="learnTrial">
+      <ImageComponent name="imgLearn">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$stimID" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="imgLearn" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.8, 0.8)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="2.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+      <KeyboardComponent name="keyLearn">
+        <Param val="'1', '0'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="$keymap" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyLearn" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="2.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <CodeComponent name="codeLearnTrial">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codeLearnTrial" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+    <Routine name="learnFb">
+      <CodeComponent name="codeLearnFb">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="learnloopc = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="learnloopc = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((! keyLearn.keys)) {&amp;#10;    msg = &quot;Failed to respond&quot;;&amp;#10;    txtLearnFb.color = &quot;Red&quot;;&amp;#10;    learnFbDur = 1.0;&amp;#10;} else {&amp;#10;    if (keyLearn.corr) {&amp;#10;        msg = &quot;Correct!&quot;;&amp;#10;        txtLearnFb.color = &quot;Green&quot;;&amp;#10;        learnFbDur = (1.0 + (2.0 - keyLearn.rt));&amp;#10;    } else {&amp;#10;        msg = &quot;Incorrect&quot;;&amp;#10;        txtLearnFb.color = &quot;Red&quot;;&amp;#10;        learnFbDur = (1.0 + (2.0 - keyLearn.rt));&amp;#10;    }&amp;#10;}&amp;#10;learnloopc = (learnloopc + 1);&amp;#10;if ((learnloopc &gt;= learnlim)) {&amp;#10;    learnLoop.finished = true;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#provides feedback for trial&amp;#10;#no response/wrong shows red&amp;#10;#correct repsonse shows green&amp;#10;if not keyLearn.keys:&amp;#10;    msg = &quot;Failed to respond&quot;&amp;#10;    txtLearnFb.color = &quot;Red&quot;&amp;#10;    learnFbDur = 1.0 #fb default 0.5s&amp;#10;elif keyLearn.corr: #stored on last run routine&amp;#10;    msg = &quot;Correct!&quot;&amp;#10;    txtLearnFb.color = &quot;Green&quot;&amp;#10;    learnFbDur = 1.0 + (2.0 - keyLearn.rt) #leftover t&amp;#10;else:&amp;#10;    msg = &quot;Incorrect&quot;&amp;#10;    txtLearnFb.color = &quot;Red&quot;&amp;#10;    learnFbDur = 1.0 + (2.0 - keyLearn.rt)&amp;#10;&amp;#10;#adds loop counter&amp;#10;learnloopc = learnloopc + 1&amp;#10;&amp;#10;#ends gabor loop at defined limit&amp;#10;if learnloopc &gt;= learnlim:  &amp;#10;    learnLoop.finished = True&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codeLearnFb" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txtLearnFb">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtLearnFb" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$learnFbDur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$msg" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="rest0">
+      <CodeComponent name="codeRest0">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codeRest0" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+      <TextComponent name="txtRest0">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtRest0" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="20" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="+" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+    </Routine>
+    <Routine name="instruct1">
+      <TextComponent name="txtInstruct1">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtInstruct1" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Hello! &amp;#10;&amp;#10;We are about to begin the experiment. &amp;#10;&amp;#10;Please follow along with the brief tutorial.&amp;#10;&amp;#10;Press [m] to continue." valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="keyInstruct1">
+        <Param val="'m'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyInstruct1" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instruct2">
+      <TextComponent name="txtInstruct2">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtInstruct2" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="You will be shown a series of images. For each image you will have to decide whether they belong to one of two categories.&amp;#10;&amp;#10;You will respond by pressing either [1] or [0] on your keyboard.&amp;#10;&amp;#10;Continue [y]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="keyInstruct2">
+        <Param val="'y'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyInstruct2" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instruct3">
+      <TextComponent name="txtInstruct3">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtInstruct3" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="1.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="At first, you will not know which images belong to which category. You will start by guessing.&amp;#10;&amp;#10;As you receive feedback (correct/incorrect) you will learn over time.&amp;#10;&amp;#10;Give it a try now!&amp;#10;&amp;#10;Continue [c]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="keyInstruct3">
+        <Param val="'c'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyInstruct3" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="instruct4">
+      <TextComponent name="txtInstruct5">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtInstruct5" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="Let's start with 5 test trials.&amp;#10;&amp;#10;Remember, the buttons are [1] and [0].&amp;#10;&amp;#10;The trials will begin as soon as you press the button.&amp;#10;&amp;#10;BEGIN TRIAL [x]" valType="str" updates="constant" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <KeyboardComponent name="keyInstruct5">
+        <Param val="'x'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyInstruct5" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="False" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+    </Routine>
+    <Routine name="tutTrial">
+      <KeyboardComponent name="keyTutLearn">
+        <Param val="'1', '0'" valType="list" updates="constant" name="allowedKeys"/>
+        <Param val="$keymap" valType="str" updates="constant" name="correctAns"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="True" valType="bool" updates="constant" name="discard previous"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="True" valType="bool" updates="constant" name="forceEndRoutine"/>
+        <Param val="keyTutLearn" valType="code" updates="None" name="name"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="2.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="last key" valType="str" updates="constant" name="store"/>
+        <Param val="True" valType="bool" updates="constant" name="storeCorrect"/>
+        <Param val="True" valType="bool" updates="constant" name="syncScreenRefresh"/>
+      </KeyboardComponent>
+      <ImageComponent name="imgTutLearn">
+        <Param val="center" valType="str" updates="constant" name="anchor"/>
+        <Param val="$[1,1,1]" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="False" valType="bool" updates="constant" name="flipHoriz"/>
+        <Param val="False" valType="bool" updates="constant" name="flipVert"/>
+        <Param val="$stimID" valType="file" updates="set every repeat" name="image"/>
+        <Param val="linear" valType="str" updates="constant" name="interpolate"/>
+        <Param val="" valType="str" updates="constant" name="mask"/>
+        <Param val="imgTutLearn" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="(0.8, 0.8)" valType="list" updates="constant" name="size"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="2.0" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="128" valType="num" updates="constant" name="texture resolution"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+      </ImageComponent>
+    </Routine>
+    <Routine name="tutFb">
+      <TextComponent name="txtTutFb">
+        <Param val="white" valType="color" updates="constant" name="color"/>
+        <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
+        <Param val="1" valType="num" updates="constant" name="contrast"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="" valType="code" updates="None" name="durationEstim"/>
+        <Param val="None" valType="str" updates="constant" name="flip"/>
+        <Param val="Open Sans" valType="str" updates="constant" name="font"/>
+        <Param val="LTR" valType="str" updates="None" name="languageStyle"/>
+        <Param val="0.05" valType="num" updates="constant" name="letterHeight"/>
+        <Param val="txtTutFb" valType="code" updates="None" name="name"/>
+        <Param val="" valType="num" updates="constant" name="opacity"/>
+        <Param val="0" valType="num" updates="constant" name="ori"/>
+        <Param val="(0, 0)" valType="list" updates="constant" name="pos"/>
+        <Param val="True" valType="bool" updates="None" name="saveStartStop"/>
+        <Param val="" valType="code" updates="None" name="startEstim"/>
+        <Param val="time (s)" valType="str" updates="None" name="startType"/>
+        <Param val="0.0" valType="code" updates="None" name="startVal"/>
+        <Param val="duration (s)" valType="str" updates="None" name="stopType"/>
+        <Param val="$learnFbDur" valType="code" updates="constant" name="stopVal"/>
+        <Param val="True" valType="bool" updates="None" name="syncScreenRefresh"/>
+        <Param val="$msg" valType="str" updates="set every repeat" name="text"/>
+        <Param val="from exp settings" valType="str" updates="None" name="units"/>
+        <Param val="" valType="num" updates="constant" name="wrapWidth"/>
+      </TextComponent>
+      <CodeComponent name="codeTutFb">
+        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
+        <Param val="tutloopc = 0" valType="extendedCode" updates="constant" name="Begin Experiment"/>
+        <Param val="tutloopc = 0;&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
+        <Param val="if ((! keyLearn.keys)) {&amp;#10;    msg = &quot;Failed to respond&quot;;&amp;#10;    txtLearnFb.color = &quot;Red&quot;;&amp;#10;    learnFbDur = 1.0;&amp;#10;} else {&amp;#10;    if (keyLearn.corr) {&amp;#10;        msg = &quot;Correct!&quot;;&amp;#10;        txtLearnFb.color = &quot;Green&quot;;&amp;#10;        learnFbDur = (1.0 + (2.0 - keyLearn.rt));&amp;#10;    } else {&amp;#10;        msg = &quot;Incorrect&quot;;&amp;#10;        txtLearnFb.color = &quot;Red&quot;;&amp;#10;        learnFbDur = (1.0 + (2.0 - keyLearn.rt));&amp;#10;    }&amp;#10;}&amp;#10;learnloopc = (learnloopc + 1);&amp;#10;if ((learnloopc &gt;= learnlim)) {&amp;#10;    learnLoop.finished = true;&amp;#10;}&amp;#10;" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
+        <Param val="#provides feedback for trial&amp;#10;#no response/wrong shows red&amp;#10;#correct repsonse shows green&amp;#10;if not keyLearn.keys:&amp;#10;    msg = &quot;Failed to respond&quot;&amp;#10;    txtLearnFb.color = &quot;Red&quot;&amp;#10;    learnFbDur = 1.0 #fb default 0.5s&amp;#10;elif keyLearn.corr: #stored on last run routine&amp;#10;    msg = &quot;Correct!&quot;&amp;#10;    txtLearnFb.color = &quot;Green&quot;&amp;#10;    learnFbDur = 1.0 + (2.0 - keyLearn.rt) #leftover t&amp;#10;else:&amp;#10;    msg = &quot;Incorrect&quot;&amp;#10;    txtLearnFb.color = &quot;Red&quot;&amp;#10;    learnFbDur = 1.0 + (2.0 - keyLearn.rt)&amp;#10;&amp;#10;#adds loop counter&amp;#10;learnloopc = learnloopc + 1&amp;#10;&amp;#10;#ends gabor loop at defined limit&amp;#10;if learnloopc &gt;= learnlim:  &amp;#10;    learnLoop.finished = True&amp;#10;    &amp;#10;" valType="extendedCode" updates="constant" name="Begin Routine"/>
+        <Param val="Auto-&gt;JS" valType="str" updates="None" name="Code Type"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
+        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
+        <Param val="False" valType="bool" updates="None" name="disabled"/>
+        <Param val="codeTutFb" valType="code" updates="None" name="name"/>
+      </CodeComponent>
+    </Routine>
+  </Routines>
+  <Flow>
+    <Routine name="start"/>
+    <LoopInitiator loopType="TrialHandler" name="learnLoop">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[OrderedDict([('cpi', -34.1239259135635), ('deg', 22.7242072717054), ('keymap', 1), ('stimNum', 1), ('stimID', 'stim_II/II_A_1.png')]), OrderedDict([('cpi', -70.9375442911926), ('deg', 14.8848421951243), ('keymap', 1), ('stimNum', 2), ('stimID', 'stim_II/II_A_2.png')]), OrderedDict([('cpi', -58.1580741036101), ('deg', -3.9065910409847), ('keymap', 1), ('stimNum', 3), ('stimID', 'stim_II/II_A_3.png')]), OrderedDict([('cpi', -20.7443650364232), ('deg', 38.0474205907892), ('keymap', 1), ('stimNum', 4), ('stimID', 'stim_II/II_A_4.png')]), OrderedDict([('cpi', -78.5958691587837), ('deg', -2.13286433271152), ('keymap', 1), ('stimNum', 5), ('stimID', 'stim_II/II_A_5.png')]), OrderedDict([('cpi', -31.5861196526968), ('deg', 7.60997167699748), ('keymap', 1), ('stimNum', 6), ('stimID', 'stim_II/II_A_6.png')]), OrderedDict([('cpi', 23.7822344040269), ('deg', 69.5345469176152), ('keymap', 1), ('stimNum', 7), ('stimID', 'stim_II/II_A_7.png')]), OrderedDict([('cpi', -31.7759905991136), ('deg', 59.291106564708), ('keymap', 1), ('stimNum', 8), ('stimID', 'stim_II/II_A_8.png')]), OrderedDict([('cpi', -21.037330937784), ('deg', 26.3996783775659), ('keymap', 1), ('stimNum', 9), ('stimID', 'stim_II/II_A_9.png')]), OrderedDict([('cpi', -24.1596256234438), ('deg', 21.0442446836876), ('keymap', 1), ('stimNum', 10), ('stimID', 'stim_II/II_A_10.png')]), OrderedDict([('cpi', -78.5777697666209), ('deg', -15.2094684514019), ('keymap', 1), ('stimNum', 11), ('stimID', 'stim_II/II_A_11.png')]), OrderedDict([('cpi', -71.4980476718148), ('deg', 0.196370408057412), ('keymap', 1), ('stimNum', 12), ('stimID', 'stim_II/II_A_12.png')]), OrderedDict([('cpi', -41.4943482176393), ('deg', 12.0075624383393), ('keymap', 1), ('stimNum', 13), ('stimID', 'stim_II/II_A_13.png')]), OrderedDict([('cpi', -65.6974654885147), ('deg', -12.6771205730694), ('keymap', 1), ('stimNum', 14), ('stimID', 'stim_II/II_A_14.png')]), OrderedDict([('cpi', -24.5322445486056), ('deg', 28.9819941320449), ('keymap', 1), ('stimNum', 15), ('stimID', 'stim_II/II_A_15.png')]), OrderedDict([('cpi', -0.0521383062073149), ('deg', 49.9693320222647), ('keymap', 1), ('stimNum', 16), ('stimID', 'stim_II/II_A_16.png')]), OrderedDict([('cpi', -47.6305440891193), ('deg', 9.05796344623847), ('keymap', 1), ('stimNum', 17), ('stimID', 'stim_II/II_A_17.png')]), OrderedDict([('cpi', 2.40694170986768), ('deg', 49.3841119421443), ('keymap', 1), ('stimNum', 18), ('stimID', 'stim_II/II_A_18.png')]), OrderedDict([('cpi', 22.0674259733602), ('deg', 61.1235739725758), ('keymap', 1), ('stimNum', 19), ('stimID', 'stim_II/II_A_19.png')]), OrderedDict([('cpi', -58.1202474117658), ('deg', 3.78032727633151), ('keymap', 1), ('stimNum', 20), ('stimID', 'stim_II/II_A_20.png')]), OrderedDict([('cpi', -21.2220939909913), ('deg', 51.2188782468557), ('keymap', 1), ('stimNum', 21), ('stimID', 'stim_II/II_A_21.png')]), OrderedDict([('cpi', -29.7664959092513), ('deg', 38.8493880495037), ('keymap', 1), ('stimNum', 22), ('stimID', 'stim_II/II_A_22.png')]), OrderedDict([('cpi', -19.9955668821546), ('deg', 28.3507441204311), ('keymap', 1), ('stimNum', 23), ('stimID', 'stim_II/II_A_23.png')]), OrderedDict([('cpi', 20.9491549838032), ('deg', 106.470911522249), ('keymap', 1), ('stimNum', 24), ('stimID', 'stim_II/II_A_24.png')]), OrderedDict([('cpi', -68.9964037274289), ('deg', -16.3342515197369), ('keymap', 1), ('stimNum', 25), ('stimID', 'stim_II/II_A_25.png')]), OrderedDict([('cpi', -62.9888466750023), ('deg', 3.60274683669128), ('keymap', 1), ('stimNum', 26), ('stimID', 'stim_II/II_A_26.png')]), OrderedDict([('cpi', -1.49433998474758), ('deg', 50.0773706643293), ('keymap', 1), ('stimNum', 27), ('stimID', 'stim_II/II_A_27.png')]), OrderedDict([('cpi', -45.7072812135947), ('deg', 49.3837988830338), ('keymap', 1), ('stimNum', 28), ('stimID', 'stim_II/II_A_28.png')]), OrderedDict([('cpi', -61.7814242264377), ('deg', -0.0766144089974148), ('keymap', 1), ('stimNum', 29), ('stimID', 'stim_II/II_A_29.png')]), OrderedDict([('cpi', -49.3938541626572), ('deg', 0.892195161546752), ('keymap', 1), ('stimNum', 30), ('stimID', 'stim_II/II_A_30.png')]), OrderedDict([('cpi', -61.9745374130007), ('deg', -2.51963518526362), ('keymap', 1), ('stimNum', 31), ('stimID', 'stim_II/II_A_31.png')]), OrderedDict([('cpi', -52.5276333617882), ('deg', 25.0734242239301), ('keymap', 1), ('stimNum', 32), ('stimID', 'stim_II/II_A_32.png')]), OrderedDict([('cpi', -11.8522133721026), ('deg', 28.3327060645328), ('keymap', 1), ('stimNum', 33), ('stimID', 'stim_II/II_A_33.png')]), OrderedDict([('cpi', -41.8576035654336), ('deg', 38.2048355188274), ('keymap', 1), ('stimNum', 34), ('stimID', 'stim_II/II_A_34.png')]), OrderedDict([('cpi', -31.0276388543618), ('deg', 51.057524881813), ('keymap', 1), ('stimNum', 35), ('stimID', 'stim_II/II_A_35.png')]), OrderedDict([('cpi', -5.05092242131167), ('deg', 66.6411409099084), ('keymap', 1), ('stimNum', 36), ('stimID', 'stim_II/II_A_36.png')]), OrderedDict([('cpi', -75.3282783060514), ('deg', -2.14372444912607), ('keymap', 1), ('stimNum', 37), ('stimID', 'stim_II/II_A_37.png')]), OrderedDict([('cpi', -37.9885961726753), ('deg', -2.12514728047935), ('keymap', 1), ('stimNum', 38), ('stimID', 'stim_II/II_A_38.png')]), OrderedDict([('cpi', -66.3650167666672), ('deg', 8.01609598178468), ('keymap', 1), ('stimNum', 39), ('stimID', 'stim_II/II_A_39.png')]), OrderedDict([('cpi', -46.3160949473712), ('deg', -2.752525539736), ('keymap', 1), ('stimNum', 40), ('stimID', 'stim_II/II_A_40.png')]), OrderedDict([('cpi', -48.2627636601948), ('deg', 61.957146256448), ('keymap', 1), ('stimNum', 41), ('stimID', 'stim_II/II_A_41.png')]), OrderedDict([('cpi', -30.6547032189395), ('deg', 33.5898988662878), ('keymap', 1), ('stimNum', 42), ('stimID', 'stim_II/II_A_42.png')]), OrderedDict([('cpi', -13.161428625441), ('deg', 59.9475809233541), ('keymap', 1), ('stimNum', 43), ('stimID', 'stim_II/II_A_43.png')]), OrderedDict([('cpi', -53.8105769642858), ('deg', 27.12815836603), ('keymap', 1), ('stimNum', 44), ('stimID', 'stim_II/II_A_44.png')]), OrderedDict([('cpi', -14.2921654180748), ('deg', 56.7509395219111), ('keymap', 1), ('stimNum', 45), ('stimID', 'stim_II/II_A_45.png')]), OrderedDict([('cpi', -24.2832958863778), ('deg', 21.6852486905256), ('keymap', 1), ('stimNum', 46), ('stimID', 'stim_II/II_A_46.png')]), OrderedDict([('cpi', -36.1941106583049), ('deg', 51.5011855350601), ('keymap', 1), ('stimNum', 47), ('stimID', 'stim_II/II_A_47.png')]), OrderedDict([('cpi', -89.5351243639402), ('deg', -36.6551917683303), ('keymap', 1), ('stimNum', 48), ('stimID', 'stim_II/II_A_48.png')]), OrderedDict([('cpi', -3.88983528731202), ('deg', 22.8400649781241), ('keymap', 1), ('stimNum', 49), ('stimID', 'stim_II/II_A_49.png')]), OrderedDict([('cpi', -35.2255749445672), ('deg', -4.42006454546014), ('keymap', 1), ('stimNum', 50), ('stimID', 'stim_II/II_A_50.png')]), OrderedDict([('cpi', -22.0998668193807), ('deg', 30.3262496363743), ('keymap', 1), ('stimNum', 51), ('stimID', 'stim_II/II_A_51.png')]), OrderedDict([('cpi', 6.42621835882987), ('deg', 18.6855381536401), ('keymap', 1), ('stimNum', 52), ('stimID', 'stim_II/II_A_52.png')]), OrderedDict([('cpi', -63.0446018987184), ('deg', -9.53079362570784), ('keymap', 1), ('stimNum', 53), ('stimID', 'stim_II/II_A_53.png')]), OrderedDict([('cpi', -32.9420420155282), ('deg', 12.9590564665363), ('keymap', 1), ('stimNum', 54), ('stimID', 'stim_II/II_A_54.png')]), OrderedDict([('cpi', 10.1555502111829), ('deg', 100.067032187273), ('keymap', 1), ('stimNum', 55), ('stimID', 'stim_II/II_A_55.png')]), OrderedDict([('cpi', -60.7650667321761), ('deg', 5.31710201474693), ('keymap', 1), ('stimNum', 56), ('stimID', 'stim_II/II_A_56.png')]), OrderedDict([('cpi', -57.3774603948635), ('deg', 13.8461767338072), ('keymap', 1), ('stimNum', 57), ('stimID', 'stim_II/II_A_57.png')]), OrderedDict([('cpi', -54.9541715782293), ('deg', 6.54736125017034), ('keymap', 1), ('stimNum', 58), ('stimID', 'stim_II/II_A_58.png')]), OrderedDict([('cpi', 10.956723800458), ('deg', 60.1671617747188), ('keymap', 1), ('stimNum', 59), ('stimID', 'stim_II/II_A_59.png')]), OrderedDict([('cpi', -75.3835199633407), ('deg', -27.003393965266), ('keymap', 1), ('stimNum', 60), ('stimID', 'stim_II/II_A_60.png')]), OrderedDict([('cpi', -71.2633889732404), ('deg', -5.96912933465531), ('keymap', 1), ('stimNum', 61), ('stimID', 'stim_II/II_A_61.png')]), OrderedDict([('cpi', -17.4726604970035), ('deg', 19.9798836832306), ('keymap', 1), ('stimNum', 62), ('stimID', 'stim_II/II_A_62.png')]), OrderedDict([('cpi', -39.9933984277106), ('deg', 37.2924044883056), ('keymap', 1), ('stimNum', 63), ('stimID', 'stim_II/II_A_63.png')]), OrderedDict([('cpi', -76.399011776051), ('deg', 7.11114380130588), ('keymap', 1), ('stimNum', 64), ('stimID', 'stim_II/II_A_64.png')]), OrderedDict([('cpi', -5.38863915867833), ('deg', 67.4966191763351), ('keymap', 1), ('stimNum', 65), ('stimID', 'stim_II/II_A_65.png')]), OrderedDict([('cpi', -87.5436876439079), ('deg', 13.5090353337371), ('keymap', 1), ('stimNum', 66), ('stimID', 'stim_II/II_A_66.png')]), OrderedDict([('cpi', -50.9458271115747), ('deg', -10.849290150872), ('keymap', 1), ('stimNum', 67), ('stimID', 'stim_II/II_A_67.png')]), OrderedDict([('cpi', 0.16097945128115), ('deg', 76.0542177759735), ('keymap', 1), ('stimNum', 68), ('stimID', 'stim_II/II_A_68.png')]), OrderedDict([('cpi', -31.217639181779), ('deg', 36.9092546828629), ('keymap', 1), ('stimNum', 69), ('stimID', 'stim_II/II_A_69.png')]), OrderedDict([('cpi', -49.7884540527932), ('deg', 29.0882034934174), ('keymap', 1), ('stimNum', 70), ('stimID', 'stim_II/II_A_70.png')]), OrderedDict([('cpi', 5.33815555132874), ('deg', 90.6928531139566), ('keymap', 1), ('stimNum', 71), ('stimID', 'stim_II/II_A_71.png')]), OrderedDict([('cpi', -62.8866816107156), ('deg', 2.86773585216633), ('keymap', 1), ('stimNum', 72), ('stimID', 'stim_II/II_A_72.png')]), OrderedDict([('cpi', -24.8390560820503), ('deg', 20.9563585284444), ('keymap', 1), ('stimNum', 73), ('stimID', 'stim_II/II_A_73.png')]), OrderedDict([('cpi', -44.1397565778628), ('deg', 8.89504514610377), ('keymap', 1), ('stimNum', 74), ('stimID', 'stim_II/II_A_74.png')]), OrderedDict([('cpi', 10.0069913597011), ('deg', 56.440475616698), ('keymap', 1), ('stimNum', 75), ('stimID', 'stim_II/II_A_75.png')]), OrderedDict([('cpi', -43.4627704038726), ('deg', 24.3584058069495), ('keymap', 1), ('stimNum', 76), ('stimID', 'stim_II/II_A_76.png')]), OrderedDict([('cpi', -26.1325373520567), ('deg', 27.4398503544728), ('keymap', 1), ('stimNum', 77), ('stimID', 'stim_II/II_A_77.png')]), OrderedDict([('cpi', -67.6429781461952), ('deg', 7.36283754349456), ('keymap', 1), ('stimNum', 78), ('stimID', 'stim_II/II_A_78.png')]), OrderedDict([('cpi', -28.1647325609743), ('deg', 35.2422383757392), ('keymap', 1), ('stimNum', 79), ('stimID', 'stim_II/II_A_79.png')]), OrderedDict([('cpi', -54.5718540633438), ('deg', -0.205588207843785), ('keymap', 1), ('stimNum', 80), ('stimID', 'stim_II/II_A_80.png')]), OrderedDict([('cpi', 27.4057774812619), ('deg', 55.6905361443967), ('keymap', 1), ('stimNum', 81), ('stimID', 'stim_II/II_A_81.png')]), OrderedDict([('cpi', -43.8879288438085), ('deg', 10.9266378344038), ('keymap', 1), ('stimNum', 82), ('stimID', 'stim_II/II_A_82.png')]), OrderedDict([('cpi', -67.924215640304), ('deg', -11.4762348209761), ('keymap', 1), ('stimNum', 83), ('stimID', 'stim_II/II_A_83.png')]), OrderedDict([('cpi', -59.6551996318951), ('deg', -12.3938309456416), ('keymap', 1), ('stimNum', 84), ('stimID', 'stim_II/II_A_84.png')]), OrderedDict([('cpi', -23.7287396450945), ('deg', 29.9712370541919), ('keymap', 1), ('stimNum', 85), ('stimID', 'stim_II/II_A_85.png')]), OrderedDict([('cpi', -26.6259704153933), ('deg', 50.3585570688673), ('keymap', 1), ('stimNum', 86), ('stimID', 'stim_II/II_A_86.png')]), OrderedDict([('cpi', -29.8093387212193), ('deg', 43.4420663656943), ('keymap', 1), ('stimNum', 87), ('stimID', 'stim_II/II_A_87.png')]), OrderedDict([('cpi', -55.2426568132333), ('deg', 22.8826692667515), ('keymap', 1), ('stimNum', 88), ('stimID', 'stim_II/II_A_88.png')]), OrderedDict([('cpi', -50.1478674515783), ('deg', 13.453246041704), ('keymap', 1), ('stimNum', 89), ('stimID', 'stim_II/II_A_89.png')]), OrderedDict([('cpi', -56.2447955753378), ('deg', 21.8892662821912), ('keymap', 1), ('stimNum', 90), ('stimID', 'stim_II/II_A_90.png')]), OrderedDict([('cpi', -12.3769198849511), ('deg', 72.9459236607204), ('keymap', 1), ('stimNum', 91), ('stimID', 'stim_II/II_A_91.png')]), OrderedDict([('cpi', -6.07921927918989), ('deg', 96.503774720282), ('keymap', 1), ('stimNum', 92), ('stimID', 'stim_II/II_A_92.png')]), OrderedDict([('cpi', -23.9134002549921), ('deg', 21.4478735776866), ('keymap', 1), ('stimNum', 93), ('stimID', 'stim_II/II_A_93.png')]), OrderedDict([('cpi', -43.7295729961061), ('deg', 24.3723536549597), ('keymap', 1), ('stimNum', 94), ('stimID', 'stim_II/II_A_94.png')]), OrderedDict([('cpi', -71.6272672632246), ('deg', 3.13381145309819), ('keymap', 1), ('stimNum', 95), ('stimID', 'stim_II/II_A_95.png')]), OrderedDict([('cpi', 22.2455271381361), ('deg', 66.6295922848733), ('keymap', 1), ('stimNum', 96), ('stimID', 'stim_II/II_A_96.png')]), OrderedDict([('cpi', 4.03578164300021), ('deg', 48.203768909293), ('keymap', 1), ('stimNum', 97), ('stimID', 'stim_II/II_A_97.png')]), OrderedDict([('cpi', -43.9166674686681), ('deg', 27.8172955135012), ('keymap', 1), ('stimNum', 98), ('stimID', 'stim_II/II_A_98.png')]), OrderedDict([('cpi', -32.2268204835075), ('deg', 36.8731028014982), ('keymap', 1), ('stimNum', 99), ('stimID', 'stim_II/II_A_99.png')]), OrderedDict([('cpi', -67.6839920174103), ('deg', -16.6854167425783), ('keymap', 1), ('stimNum', 100), ('stimID', 'stim_II/II_A_100.png')]), OrderedDict([('cpi', -51.2155641180177), ('deg', 0.943399857860967), ('keymap', 1), ('stimNum', 101), ('stimID', 'stim_II/II_A_101.png')]), OrderedDict([('cpi', -60.1652662305785), ('deg', -34.0630926024116), ('keymap', 1), ('stimNum', 102), ('stimID', 'stim_II/II_A_102.png')]), OrderedDict([('cpi', -48.3665733407739), ('deg', 29.4897867327332), ('keymap', 1), ('stimNum', 103), ('stimID', 'stim_II/II_A_103.png')]), OrderedDict([('cpi', -28.2705928557156), ('deg', 1.48309963572567), ('keymap', 1), ('stimNum', 104), ('stimID', 'stim_II/II_A_104.png')]), OrderedDict([('cpi', -7.34974372214266), ('deg', 48.8581904324689), ('keymap', 1), ('stimNum', 105), ('stimID', 'stim_II/II_A_105.png')]), OrderedDict([('cpi', -59.2113001060787), ('deg', 21.815274315395), ('keymap', 1), ('stimNum', 106), ('stimID', 'stim_II/II_A_106.png')]), OrderedDict([('cpi', -56.4833980452578), ('deg', 14.7079524828409), ('keymap', 1), ('stimNum', 107), ('stimID', 'stim_II/II_A_107.png')]), OrderedDict([('cpi', -30.1143837181745), ('deg', 32.2738463726164), ('keymap', 1), ('stimNum', 108), ('stimID', 'stim_II/II_A_108.png')]), OrderedDict([('cpi', -67.6161343688488), ('deg', 15.6764467375476), ('keymap', 1), ('stimNum', 109), ('stimID', 'stim_II/II_A_109.png')]), OrderedDict([('cpi', -41.2942484601082), ('deg', 17.4241424126872), ('keymap', 1), ('stimNum', 110), ('stimID', 'stim_II/II_A_110.png')]), OrderedDict([('cpi', -17.4337510938649), ('deg', 43.3847889883105), ('keymap', 1), ('stimNum', 111), ('stimID', 'stim_II/II_A_111.png')]), OrderedDict([('cpi', -15.6758326896276), ('deg', 31.7858872210455), ('keymap', 1), ('stimNum', 112), ('stimID', 'stim_II/II_A_112.png')]), OrderedDict([('cpi', -63.3169352072916), ('deg', 1.98147737708649), ('keymap', 1), ('stimNum', 113), ('stimID', 'stim_II/II_A_113.png')]), OrderedDict([('cpi', 4.23908895460037), ('deg', 36.1284228355155), ('keymap', 1), ('stimNum', 114), ('stimID', 'stim_II/II_A_114.png')]), OrderedDict([('cpi', -36.0761835890918), ('deg', 17.453848276394), ('keymap', 1), ('stimNum', 115), ('stimID', 'stim_II/II_A_115.png')]), OrderedDict([('cpi', -29.7947261522571), ('deg', 13.7224533379312), ('keymap', 1), ('stimNum', 116), ('stimID', 'stim_II/II_A_116.png')]), OrderedDict([('cpi', 23.3921389082551), ('deg', 38.8944595611774), ('keymap', 1), ('stimNum', 117), ('stimID', 'stim_II/II_A_117.png')]), OrderedDict([('cpi', 13.8760339591383), ('deg', 60.2974687410593), ('keymap', 1), ('stimNum', 118), ('stimID', 'stim_II/II_A_118.png')]), OrderedDict([('cpi', -41.1966062911621), ('deg', 10.9961643813783), ('keymap', 1), ('stimNum', 119), ('stimID', 'stim_II/II_A_119.png')]), OrderedDict([('cpi', -65.5242896376796), ('deg', 26.3773662613289), ('keymap', 1), ('stimNum', 120), ('stimID', 'stim_II/II_A_120.png')]), OrderedDict([('cpi', -6.3962691921764), ('deg', 35.5937687410903), ('keymap', 1), ('stimNum', 121), ('stimID', 'stim_II/II_A_121.png')]), OrderedDict([('cpi', -10.3261005825572), ('deg', 68.135650380666), ('keymap', 1), ('stimNum', 122), ('stimID', 'stim_II/II_A_122.png')]), OrderedDict([('cpi', -33.6284812628294), ('deg', -2.50857116756009), ('keymap', 1), ('stimNum', 123), ('stimID', 'stim_II/II_A_123.png')]), OrderedDict([('cpi', -37.8543427431618), ('deg', 30.2939505891442), ('keymap', 1), ('stimNum', 124), ('stimID', 'stim_II/II_A_124.png')]), OrderedDict([('cpi', 21.1535352253506), ('deg', 57.8057149615832), ('keymap', 1), ('stimNum', 125), ('stimID', 'stim_II/II_A_125.png')]), OrderedDict([('cpi', -17.4248165386496), ('deg', 47.7417861594543), ('keymap', 1), ('stimNum', 126), ('stimID', 'stim_II/II_A_126.png')]), OrderedDict([('cpi', 1.49945064613367), ('deg', 65.2681689843685), ('keymap', 1), ('stimNum', 127), ('stimID', 'stim_II/II_A_127.png')]), OrderedDict([('cpi', -48.3783844793625), ('deg', 34.7405027737945), ('keymap', 1), ('stimNum', 128), ('stimID', 'stim_II/II_A_128.png')]), OrderedDict([('cpi', -31.5583866210899), ('deg', 42.1590568716306), ('keymap', 1), ('stimNum', 129), ('stimID', 'stim_II/II_A_129.png')]), OrderedDict([('cpi', -55.4125471145118), ('deg', -14.1501621454239), ('keymap', 1), ('stimNum', 130), ('stimID', 'stim_II/II_A_130.png')]), OrderedDict([('cpi', -39.8817737693283), ('deg', 2.19896660596821), ('keymap', 1), ('stimNum', 131), ('stimID', 'stim_II/II_A_131.png')]), OrderedDict([('cpi', -8.57705597636063), ('deg', 29.3631354822024), ('keymap', 1), ('stimNum', 132), ('stimID', 'stim_II/II_A_132.png')]), OrderedDict([('cpi', -43.0505508176456), ('deg', 16.7288264065302), ('keymap', 1), ('stimNum', 133), ('stimID', 'stim_II/II_A_133.png')]), OrderedDict([('cpi', -53.2402552449332), ('deg', 6.79185658215808), ('keymap', 1), ('stimNum', 134), ('stimID', 'stim_II/II_A_134.png')]), OrderedDict([('cpi', -16.1796464350313), ('deg', 27.5707844573982), ('keymap', 1), ('stimNum', 135), ('stimID', 'stim_II/II_A_135.png')]), OrderedDict([('cpi', -25.5790377911125), ('deg', 19.9434660334256), ('keymap', 1), ('stimNum', 136), ('stimID', 'stim_II/II_A_136.png')]), OrderedDict([('cpi', -27.0327880347713), ('deg', 74.6732399367122), ('keymap', 1), ('stimNum', 137), ('stimID', 'stim_II/II_A_137.png')]), OrderedDict([('cpi', -83.7723412049821), ('deg', 11.8137915241579), ('keymap', 1), ('stimNum', 138), ('stimID', 'stim_II/II_A_138.png')]), OrderedDict([('cpi', -53.9782579065197), ('deg', 31.390221390543), ('keymap', 1), ('stimNum', 139), ('stimID', 'stim_II/II_A_139.png')]), OrderedDict([('cpi', -32.4036213201694), ('deg', 38.587170297474), ('keymap', 1), ('stimNum', 140), ('stimID', 'stim_II/II_A_140.png')]), OrderedDict([('cpi', -7.28611877321445), ('deg', 38.4874234524107), ('keymap', 1), ('stimNum', 141), ('stimID', 'stim_II/II_A_141.png')]), OrderedDict([('cpi', 9.47966854678522), ('deg', 62.4997961627043), ('keymap', 1), ('stimNum', 142), ('stimID', 'stim_II/II_A_142.png')]), OrderedDict([('cpi', -32.0971660008651), ('deg', 32.3949289516922), ('keymap', 1), ('stimNum', 143), ('stimID', 'stim_II/II_A_143.png')]), OrderedDict([('cpi', -68.1542800037379), ('deg', 11.7557594779054), ('keymap', 1), ('stimNum', 144), ('stimID', 'stim_II/II_A_144.png')]), OrderedDict([('cpi', -37.5321745372589), ('deg', 21.7600863611416), ('keymap', 1), ('stimNum', 145), ('stimID', 'stim_II/II_A_145.png')]), OrderedDict([('cpi', -43.1030655238052), ('deg', 10.3841199034997), ('keymap', 1), ('stimNum', 146), ('stimID', 'stim_II/II_A_146.png')]), OrderedDict([('cpi', -22.0890079836257), ('deg', 34.0732788254567), ('keymap', 1), ('stimNum', 147), ('stimID', 'stim_II/II_A_147.png')]), OrderedDict([('cpi', -12.3481675641812), ('deg', 34.1202914774008), ('keymap', 1), ('stimNum', 148), ('stimID', 'stim_II/II_A_148.png')]), OrderedDict([('cpi', -34.2785310278058), ('deg', 45.6915654106758), ('keymap', 1), ('stimNum', 149), ('stimID', 'stim_II/II_A_149.png')]), OrderedDict([('cpi', -55.226453403725), ('deg', -13.8557382027139), ('keymap', 1), ('stimNum', 150), ('stimID', 'stim_II/II_A_150.png')]), OrderedDict([('cpi', -26.4376239262875), ('deg', -56.9788851841033), ('keymap', 0), ('stimNum', 1), ('stimID', 'stim_II/II_B_1.png')]), OrderedDict([('cpi', 65.9934354867951), ('deg', -5.72848278985574), ('keymap', 0), ('stimNum', 2), ('stimID', 'stim_II/II_B_2.png')]), OrderedDict([('cpi', 47.4926815384239), ('deg', -11.6047190387384), ('keymap', 0), ('stimNum', 3), ('stimID', 'stim_II/II_B_3.png')]), OrderedDict([('cpi', 48.9727301326302), ('deg', -30.250706159506), ('keymap', 0), ('stimNum', 4), ('stimID', 'stim_II/II_B_4.png')]), OrderedDict([('cpi', 24.6250262616773), ('deg', -43.3165175126345), ('keymap', 0), ('stimNum', 5), ('stimID', 'stim_II/II_B_5.png')]), OrderedDict([('cpi', 7.69123919837223), ('deg', -26.9200372439265), ('keymap', 0), ('stimNum', 6), ('stimID', 'stim_II/II_B_6.png')]), OrderedDict([('cpi', 27.7284479891132), ('deg', -17.44347802522), ('keymap', 0), ('stimNum', 7), ('stimID', 'stim_II/II_B_7.png')]), OrderedDict([('cpi', 1.74935530885224), ('deg', -36.7746447131289), ('keymap', 0), ('stimNum', 8), ('stimID', 'stim_II/II_B_8.png')]), OrderedDict([('cpi', 58.05541746158), ('deg', -9.82952844025347), ('keymap', 0), ('stimNum', 9), ('stimID', 'stim_II/II_B_9.png')]), OrderedDict([('cpi', 0.537518125270594), ('deg', -57.6109155507604), ('keymap', 0), ('stimNum', 10), ('stimID', 'stim_II/II_B_10.png')]), OrderedDict([('cpi', 21.7844230200643), ('deg', -34.0945425450561), ('keymap', 0), ('stimNum', 11), ('stimID', 'stim_II/II_B_11.png')]), OrderedDict([('cpi', 0.566083081744878), ('deg', -82.8284577139174), ('keymap', 0), ('stimNum', 12), ('stimID', 'stim_II/II_B_12.png')]), OrderedDict([('cpi', 15.57175968371), ('deg', -10.6077932206529), ('keymap', 0), ('stimNum', 13), ('stimID', 'stim_II/II_B_13.png')]), OrderedDict([('cpi', -13.6574135880299), ('deg', -53.3941599604214), ('keymap', 0), ('stimNum', 14), ('stimID', 'stim_II/II_B_14.png')]), OrderedDict([('cpi', 80.5576651690914), ('deg', 14.3785602521791), ('keymap', 0), ('stimNum', 15), ('stimID', 'stim_II/II_B_15.png')]), OrderedDict([('cpi', 35.0933875642143), ('deg', -38.8250225375674), ('keymap', 0), ('stimNum', 16), ('stimID', 'stim_II/II_B_16.png')]), OrderedDict([('cpi', 34.6834045404768), ('deg', -18.5843820369761), ('keymap', 0), ('stimNum', 17), ('stimID', 'stim_II/II_B_17.png')]), OrderedDict([('cpi', 46.761322618284), ('deg', -48.6708805965747), ('keymap', 0), ('stimNum', 18), ('stimID', 'stim_II/II_B_18.png')]), OrderedDict([('cpi', 46.6897610910248), ('deg', -19.1304160214684), ('keymap', 0), ('stimNum', 19), ('stimID', 'stim_II/II_B_19.png')]), OrderedDict([('cpi', 3.52691314794938), ('deg', -48.8127199670763), ('keymap', 0), ('stimNum', 20), ('stimID', 'stim_II/II_B_20.png')]), OrderedDict([('cpi', 83.5998939184397), ('deg', -23.5018416420698), ('keymap', 0), ('stimNum', 21), ('stimID', 'stim_II/II_B_21.png')]), OrderedDict([('cpi', 32.0792105056688), ('deg', -13.6534331986033), ('keymap', 0), ('stimNum', 22), ('stimID', 'stim_II/II_B_22.png')]), OrderedDict([('cpi', 28.9503104359402), ('deg', -32.528901310093), ('keymap', 0), ('stimNum', 23), ('stimID', 'stim_II/II_B_23.png')]), OrderedDict([('cpi', -11.0768187310656), ('deg', -44.4309880550349), ('keymap', 0), ('stimNum', 24), ('stimID', 'stim_II/II_B_24.png')]), OrderedDict([('cpi', -1.71426531641125), ('deg', -34.643143697305), ('keymap', 0), ('stimNum', 25), ('stimID', 'stim_II/II_B_25.png')]), OrderedDict([('cpi', 54.3809878715949), ('deg', -17.1389619867732), ('keymap', 0), ('stimNum', 26), ('stimID', 'stim_II/II_B_26.png')]), OrderedDict([('cpi', 46.1939745651853), ('deg', -18.6947006863074), ('keymap', 0), ('stimNum', 27), ('stimID', 'stim_II/II_B_27.png')]), OrderedDict([('cpi', 24.8428009789772), ('deg', -9.88847981405844), ('keymap', 0), ('stimNum', 28), ('stimID', 'stim_II/II_B_28.png')]), OrderedDict([('cpi', 54.4683206041985), ('deg', -26.8263742400249), ('keymap', 0), ('stimNum', 29), ('stimID', 'stim_II/II_B_29.png')]), OrderedDict([('cpi', -13.4493006667176), ('deg', -57.9276595741161), ('keymap', 0), ('stimNum', 30), ('stimID', 'stim_II/II_B_30.png')]), OrderedDict([('cpi', 42.4508462008579), ('deg', -26.7796036101067), ('keymap', 0), ('stimNum', 31), ('stimID', 'stim_II/II_B_31.png')]), OrderedDict([('cpi', -9.3952452931388), ('deg', -74.6641585233253), ('keymap', 0), ('stimNum', 32), ('stimID', 'stim_II/II_B_32.png')]), OrderedDict([('cpi', 63.036086792488), ('deg', -7.67948751933868), ('keymap', 0), ('stimNum', 33), ('stimID', 'stim_II/II_B_33.png')]), OrderedDict([('cpi', 21.3882438242307), ('deg', -19.8924683209851), ('keymap', 0), ('stimNum', 34), ('stimID', 'stim_II/II_B_34.png')]), OrderedDict([('cpi', 38.7107020586593), ('deg', -10.0871674770019), ('keymap', 0), ('stimNum', 35), ('stimID', 'stim_II/II_B_35.png')]), OrderedDict([('cpi', 59.8683069944638), ('deg', 12.9995461376891), ('keymap', 0), ('stimNum', 36), ('stimID', 'stim_II/II_B_36.png')]), OrderedDict([('cpi', 64.3364433120621), ('deg', -1.60083193893943), ('keymap', 0), ('stimNum', 37), ('stimID', 'stim_II/II_B_37.png')]), OrderedDict([('cpi', 8.05716477494275), ('deg', -29.1841209980894), ('keymap', 0), ('stimNum', 38), ('stimID', 'stim_II/II_B_38.png')]), OrderedDict([('cpi', 36.1374587757104), ('deg', -1.03288597515759), ('keymap', 0), ('stimNum', 39), ('stimID', 'stim_II/II_B_39.png')]), OrderedDict([('cpi', -4.70947109712328), ('deg', -43.4582779649329), ('keymap', 0), ('stimNum', 40), ('stimID', 'stim_II/II_B_40.png')]), OrderedDict([('cpi', 32.2208307489684), ('deg', -43.8684154053005), ('keymap', 0), ('stimNum', 41), ('stimID', 'stim_II/II_B_41.png')]), OrderedDict([('cpi', 57.7696542457552), ('deg', -35.8030759479655), ('keymap', 0), ('stimNum', 42), ('stimID', 'stim_II/II_B_42.png')]), OrderedDict([('cpi', 16.9601477343122), ('deg', -49.96712877755), ('keymap', 0), ('stimNum', 43), ('stimID', 'stim_II/II_B_43.png')]), OrderedDict([('cpi', 72.3824327024715), ('deg', 0.708614064629923), ('keymap', 0), ('stimNum', 44), ('stimID', 'stim_II/II_B_44.png')]), OrderedDict([('cpi', 26.2823001905545), ('deg', -44.024704400268), ('keymap', 0), ('stimNum', 45), ('stimID', 'stim_II/II_B_45.png')]), OrderedDict([('cpi', 9.8729624583542), ('deg', -34.0076677213366), ('keymap', 0), ('stimNum', 46), ('stimID', 'stim_II/II_B_46.png')]), OrderedDict([('cpi', 68.1575224890466), ('deg', 0.951712273395515), ('keymap', 0), ('stimNum', 47), ('stimID', 'stim_II/II_B_47.png')]), OrderedDict([('cpi', 36.8180531873628), ('deg', -2.68887049869917), ('keymap', 0), ('stimNum', 48), ('stimID', 'stim_II/II_B_48.png')]), OrderedDict([('cpi', 18.7130273004807), ('deg', -38.0101033103232), ('keymap', 0), ('stimNum', 49), ('stimID', 'stim_II/II_B_49.png')]), OrderedDict([('cpi', 30.8411716710419), ('deg', -20.2785636762593), ('keymap', 0), ('stimNum', 50), ('stimID', 'stim_II/II_B_50.png')]), OrderedDict([('cpi', 39.7591318860045), ('deg', 1.60612919898673), ('keymap', 0), ('stimNum', 51), ('stimID', 'stim_II/II_B_51.png')]), OrderedDict([('cpi', 36.2266140912498), ('deg', 3.16736045221549), ('keymap', 0), ('stimNum', 52), ('stimID', 'stim_II/II_B_52.png')]), OrderedDict([('cpi', 71.7762576258915), ('deg', -1.36314555438886), ('keymap', 0), ('stimNum', 53), ('stimID', 'stim_II/II_B_53.png')]), OrderedDict([('cpi', 6.93094152800135), ('deg', -48.9711869527001), ('keymap', 0), ('stimNum', 54), ('stimID', 'stim_II/II_B_54.png')]), OrderedDict([('cpi', 27.2927876888676), ('deg', -40.9455895034749), ('keymap', 0), ('stimNum', 55), ('stimID', 'stim_II/II_B_55.png')]), OrderedDict([('cpi', 32.0295410982274), ('deg', -61.7725592523571), ('keymap', 0), ('stimNum', 56), ('stimID', 'stim_II/II_B_56.png')]), OrderedDict([('cpi', 38.1679236755931), ('deg', -12.3095343261009), ('keymap', 0), ('stimNum', 57), ('stimID', 'stim_II/II_B_57.png')]), OrderedDict([('cpi', 70.4599605828436), ('deg', -12.3442749808163), ('keymap', 0), ('stimNum', 58), ('stimID', 'stim_II/II_B_58.png')]), OrderedDict([('cpi', 42.5383257588605), ('deg', -42.616973135444), ('keymap', 0), ('stimNum', 59), ('stimID', 'stim_II/II_B_59.png')]), OrderedDict([('cpi', -16.946698821201), ('deg', -51.6959523531109), ('keymap', 0), ('stimNum', 60), ('stimID', 'stim_II/II_B_60.png')]), OrderedDict([('cpi', 4.26454530091825), ('deg', -44.5739507541071), ('keymap', 0), ('stimNum', 61), ('stimID', 'stim_II/II_B_61.png')]), OrderedDict([('cpi', 46.888950673548), ('deg', -20.3061815150719), ('keymap', 0), ('stimNum', 62), ('stimID', 'stim_II/II_B_62.png')]), OrderedDict([('cpi', 43.1079470143599), ('deg', -35.1993022472055), ('keymap', 0), ('stimNum', 63), ('stimID', 'stim_II/II_B_63.png')]), OrderedDict([('cpi', 36.153463605236), ('deg', -36.2648761510172), ('keymap', 0), ('stimNum', 64), ('stimID', 'stim_II/II_B_64.png')]), OrderedDict([('cpi', 42.9559869389273), ('deg', -31.1532864351793), ('keymap', 0), ('stimNum', 65), ('stimID', 'stim_II/II_B_65.png')]), OrderedDict([('cpi', 24.4472509690393), ('deg', -47.1362293613342), ('keymap', 0), ('stimNum', 66), ('stimID', 'stim_II/II_B_66.png')]), OrderedDict([('cpi', 52.2540545533438), ('deg', -25.621351435543), ('keymap', 0), ('stimNum', 67), ('stimID', 'stim_II/II_B_67.png')]), OrderedDict([('cpi', 46.8089353563609), ('deg', -36.1149335914996), ('keymap', 0), ('stimNum', 68), ('stimID', 'stim_II/II_B_68.png')]), OrderedDict([('cpi', -12.4589096025897), ('deg', -58.5954579119596), ('keymap', 0), ('stimNum', 69), ('stimID', 'stim_II/II_B_69.png')]), OrderedDict([('cpi', 68.9394523924876), ('deg', 6.37704274398405), ('keymap', 0), ('stimNum', 70), ('stimID', 'stim_II/II_B_70.png')]), OrderedDict([('cpi', 31.7887608144667), ('deg', -31.9968084083566), ('keymap', 0), ('stimNum', 71), ('stimID', 'stim_II/II_B_71.png')]), OrderedDict([('cpi', 56.2346380105776), ('deg', -8.81992238776122), ('keymap', 0), ('stimNum', 72), ('stimID', 'stim_II/II_B_72.png')]), OrderedDict([('cpi', 21.2130036639055), ('deg', -26.6287474462256), ('keymap', 0), ('stimNum', 73), ('stimID', 'stim_II/II_B_73.png')]), OrderedDict([('cpi', 8.33620463716057), ('deg', -80.8711887191936), ('keymap', 0), ('stimNum', 74), ('stimID', 'stim_II/II_B_74.png')]), OrderedDict([('cpi', -9.26141947126294), ('deg', -56.7039923108111), ('keymap', 0), ('stimNum', 75), ('stimID', 'stim_II/II_B_75.png')]), OrderedDict([('cpi', 63.7811764136496), ('deg', -2.78372518890659), ('keymap', 0), ('stimNum', 76), ('stimID', 'stim_II/II_B_76.png')]), OrderedDict([('cpi', 75.8896532101914), ('deg', 1.05071623647249), ('keymap', 0), ('stimNum', 77), ('stimID', 'stim_II/II_B_77.png')]), OrderedDict([('cpi', 10.9720856162883), ('deg', -43.94284384412), ('keymap', 0), ('stimNum', 78), ('stimID', 'stim_II/II_B_78.png')]), OrderedDict([('cpi', 45.7061727086428), ('deg', -23.8202289333343), ('keymap', 0), ('stimNum', 79), ('stimID', 'stim_II/II_B_79.png')]), OrderedDict([('cpi', 8.24464365114186), ('deg', -18.5411199698341), ('keymap', 0), ('stimNum', 80), ('stimID', 'stim_II/II_B_80.png')]), OrderedDict([('cpi', -1.05780960633654), ('deg', -47.288159165003), ('keymap', 0), ('stimNum', 81), ('stimID', 'stim_II/II_B_81.png')]), OrderedDict([('cpi', 30.5010094421533), ('deg', -79.1573611331817), ('keymap', 0), ('stimNum', 82), ('stimID', 'stim_II/II_B_82.png')]), OrderedDict([('cpi', -14.3522071015449), ('deg', -66.6780141486596), ('keymap', 0), ('stimNum', 83), ('stimID', 'stim_II/II_B_83.png')]), OrderedDict([('cpi', 37.1537864520989), ('deg', -51.943599228233), ('keymap', 0), ('stimNum', 84), ('stimID', 'stim_II/II_B_84.png')]), OrderedDict([('cpi', -17.2294234424125), ('deg', -65.5761316527868), ('keymap', 0), ('stimNum', 85), ('stimID', 'stim_II/II_B_85.png')]), OrderedDict([('cpi', -3.36841832461144), ('deg', -58.9074704025553), ('keymap', 0), ('stimNum', 86), ('stimID', 'stim_II/II_B_86.png')]), OrderedDict([('cpi', 60.8495043824671), ('deg', 26.7578872439015), ('keymap', 0), ('stimNum', 87), ('stimID', 'stim_II/II_B_87.png')]), OrderedDict([('cpi', 52.1423130211993), ('deg', -39.1461433168428), ('keymap', 0), ('stimNum', 88), ('stimID', 'stim_II/II_B_88.png')]), OrderedDict([('cpi', 37.2382675636389), ('deg', 24.3336089152143), ('keymap', 0), ('stimNum', 89), ('stimID', 'stim_II/II_B_89.png')]), OrderedDict([('cpi', 31.5988405069177), ('deg', -31.0020302038625), ('keymap', 0), ('stimNum', 90), ('stimID', 'stim_II/II_B_90.png')]), OrderedDict([('cpi', 3.83372129757927), ('deg', -55.2813173858724), ('keymap', 0), ('stimNum', 91), ('stimID', 'stim_II/II_B_91.png')]), OrderedDict([('cpi', 39.8679558018261), ('deg', -32.0741364405765), ('keymap', 0), ('stimNum', 92), ('stimID', 'stim_II/II_B_92.png')]), OrderedDict([('cpi', 8.95942870234101), ('deg', -44.3678570971766), ('keymap', 0), ('stimNum', 93), ('stimID', 'stim_II/II_B_93.png')]), OrderedDict([('cpi', 23.7929112583917), ('deg', -39.7343128859065), ('keymap', 0), ('stimNum', 94), ('stimID', 'stim_II/II_B_94.png')]), OrderedDict([('cpi', 39.5383013817432), ('deg', -16.8332497494278), ('keymap', 0), ('stimNum', 95), ('stimID', 'stim_II/II_B_95.png')]), OrderedDict([('cpi', -11.937832292227), ('deg', -78.1328540447012), ('keymap', 0), ('stimNum', 96), ('stimID', 'stim_II/II_B_96.png')]), OrderedDict([('cpi', 34.9863317147463), ('deg', -11.4957692089519), ('keymap', 0), ('stimNum', 97), ('stimID', 'stim_II/II_B_97.png')]), OrderedDict([('cpi', 32.6933576670235), ('deg', -24.5652757353625), ('keymap', 0), ('stimNum', 98), ('stimID', 'stim_II/II_B_98.png')]), OrderedDict([('cpi', 72.0013754952691), ('deg', 35.2133159122562), ('keymap', 0), ('stimNum', 99), ('stimID', 'stim_II/II_B_99.png')]), OrderedDict([('cpi', 80.3316462874449), ('deg', 12.0308096998277), ('keymap', 0), ('stimNum', 100), ('stimID', 'stim_II/II_B_100.png')]), OrderedDict([('cpi', 47.9192779206134), ('deg', -5.03970315498348), ('keymap', 0), ('stimNum', 101), ('stimID', 'stim_II/II_B_101.png')]), OrderedDict([('cpi', 18.7262432262265), ('deg', -39.6800278994475), ('keymap', 0), ('stimNum', 102), ('stimID', 'stim_II/II_B_102.png')]), OrderedDict([('cpi', 55.7817027873875), ('deg', -44.5677025805122), ('keymap', 0), ('stimNum', 103), ('stimID', 'stim_II/II_B_103.png')]), OrderedDict([('cpi', 31.4266820904798), ('deg', -40.3297293433045), ('keymap', 0), ('stimNum', 104), ('stimID', 'stim_II/II_B_104.png')]), OrderedDict([('cpi', 14.8350835439704), ('deg', -58.2088014913047), ('keymap', 0), ('stimNum', 105), ('stimID', 'stim_II/II_B_105.png')]), OrderedDict([('cpi', 33.2739273034529), ('deg', -20.461344367874), ('keymap', 0), ('stimNum', 106), ('stimID', 'stim_II/II_B_106.png')]), OrderedDict([('cpi', 4.47799910646411), ('deg', -45.3789015962528), ('keymap', 0), ('stimNum', 107), ('stimID', 'stim_II/II_B_107.png')]), OrderedDict([('cpi', 39.8771489279079), ('deg', 26.2807028099828), ('keymap', 0), ('stimNum', 108), ('stimID', 'stim_II/II_B_108.png')]), OrderedDict([('cpi', 4.2785659208041), ('deg', -61.0632673886638), ('keymap', 0), ('stimNum', 109), ('stimID', 'stim_II/II_B_109.png')]), OrderedDict([('cpi', 95.5116786214873), ('deg', 39.8620236409816), ('keymap', 0), ('stimNum', 110), ('stimID', 'stim_II/II_B_110.png')]), OrderedDict([('cpi', 42.8941904358522), ('deg', -24.110654339879), ('keymap', 0), ('stimNum', 111), ('stimID', 'stim_II/II_B_111.png')]), OrderedDict([('cpi', 55.0382697587264), ('deg', -13.96637161094), ('keymap', 0), ('stimNum', 112), ('stimID', 'stim_II/II_B_112.png')]), OrderedDict([('cpi', -0.73744818773794), ('deg', -49.5595901750283), ('keymap', 0), ('stimNum', 113), ('stimID', 'stim_II/II_B_113.png')]), OrderedDict([('cpi', 18.1293394531646), ('deg', -30.2050516308245), ('keymap', 0), ('stimNum', 114), ('stimID', 'stim_II/II_B_114.png')]), OrderedDict([('cpi', 13.946115359796), ('deg', -69.3051040533691), ('keymap', 0), ('stimNum', 115), ('stimID', 'stim_II/II_B_115.png')]), OrderedDict([('cpi', 31.0667440681089), ('deg', -41.7011424591378), ('keymap', 0), ('stimNum', 116), ('stimID', 'stim_II/II_B_116.png')]), OrderedDict([('cpi', -26.9313804933241), ('deg', -94.6523171329769), ('keymap', 0), ('stimNum', 117), ('stimID', 'stim_II/II_B_117.png')]), OrderedDict([('cpi', -6.26879137602126), ('deg', -32.2193749244942), ('keymap', 0), ('stimNum', 118), ('stimID', 'stim_II/II_B_118.png')]), OrderedDict([('cpi', 21.3444415533567), ('deg', -35.2999394312757), ('keymap', 0), ('stimNum', 119), ('stimID', 'stim_II/II_B_119.png')]), OrderedDict([('cpi', -8.80988607787493), ('deg', -68.3652517145072), ('keymap', 0), ('stimNum', 120), ('stimID', 'stim_II/II_B_120.png')]), OrderedDict([('cpi', 48.7446441925229), ('deg', -9.94484849353489), ('keymap', 0), ('stimNum', 121), ('stimID', 'stim_II/II_B_121.png')]), OrderedDict([('cpi', 46.3846600443942), ('deg', -12.7143659677792), ('keymap', 0), ('stimNum', 122), ('stimID', 'stim_II/II_B_122.png')]), OrderedDict([('cpi', 69.4761659777554), ('deg', -13.276516833725), ('keymap', 0), ('stimNum', 123), ('stimID', 'stim_II/II_B_123.png')]), OrderedDict([('cpi', -0.350709705051045), ('deg', -43.8110584638124), ('keymap', 0), ('stimNum', 124), ('stimID', 'stim_II/II_B_124.png')]), OrderedDict([('cpi', 35.9297474665127), ('deg', -12.1097889555063), ('keymap', 0), ('stimNum', 125), ('stimID', 'stim_II/II_B_125.png')]), OrderedDict([('cpi', 11.0053717159441), ('deg', -48.1529834705463), ('keymap', 0), ('stimNum', 126), ('stimID', 'stim_II/II_B_126.png')]), OrderedDict([('cpi', 72.7083018846514), ('deg', 4.98415659083057), ('keymap', 0), ('stimNum', 127), ('stimID', 'stim_II/II_B_127.png')]), OrderedDict([('cpi', 43.6046802986895), ('deg', -13.3286741198313), ('keymap', 0), ('stimNum', 128), ('stimID', 'stim_II/II_B_128.png')]), OrderedDict([('cpi', 50.8147686835053), ('deg', -19.0928573589667), ('keymap', 0), ('stimNum', 129), ('stimID', 'stim_II/II_B_129.png')]), OrderedDict([('cpi', 21.0242610103186), ('deg', -30.6897311416013), ('keymap', 0), ('stimNum', 130), ('stimID', 'stim_II/II_B_130.png')]), OrderedDict([('cpi', 23.9173046634733), ('deg', -59.164156397637), ('keymap', 0), ('stimNum', 131), ('stimID', 'stim_II/II_B_131.png')]), OrderedDict([('cpi', 32.8640230937221), ('deg', -5.48781571787968), ('keymap', 0), ('stimNum', 132), ('stimID', 'stim_II/II_B_132.png')]), OrderedDict([('cpi', -10.2842855937808), ('deg', -35.9096538861909), ('keymap', 0), ('stimNum', 133), ('stimID', 'stim_II/II_B_133.png')]), OrderedDict([('cpi', -6.65625992654732), ('deg', -71.4315402962862), ('keymap', 0), ('stimNum', 134), ('stimID', 'stim_II/II_B_134.png')]), OrderedDict([('cpi', 6.00871678936333), ('deg', -17.819303987448), ('keymap', 0), ('stimNum', 135), ('stimID', 'stim_II/II_B_135.png')]), OrderedDict([('cpi', 42.7237292007179), ('deg', -28.8044784489899), ('keymap', 0), ('stimNum', 136), ('stimID', 'stim_II/II_B_136.png')]), OrderedDict([('cpi', 45.0826534836204), ('deg', -45.8270284586674), ('keymap', 0), ('stimNum', 137), ('stimID', 'stim_II/II_B_137.png')]), OrderedDict([('cpi', 9.45389124889568), ('deg', -35.9226129006354), ('keymap', 0), ('stimNum', 138), ('stimID', 'stim_II/II_B_138.png')]), OrderedDict([('cpi', 68.6245573225337), ('deg', 22.2576216061916), ('keymap', 0), ('stimNum', 139), ('stimID', 'stim_II/II_B_139.png')]), OrderedDict([('cpi', -7.37779763170822), ('deg', -48.1590921523816), ('keymap', 0), ('stimNum', 140), ('stimID', 'stim_II/II_B_140.png')]), OrderedDict([('cpi', 31.5735119858666), ('deg', -36.9036888742455), ('keymap', 0), ('stimNum', 141), ('stimID', 'stim_II/II_B_141.png')]), OrderedDict([('cpi', 22.0595733630521), ('deg', -59.3300409379377), ('keymap', 0), ('stimNum', 142), ('stimID', 'stim_II/II_B_142.png')]), OrderedDict([('cpi', 39.5203628965763), ('deg', -0.275774259497901), ('keymap', 0), ('stimNum', 143), ('stimID', 'stim_II/II_B_143.png')]), OrderedDict([('cpi', 24.6553910694025), ('deg', -61.441552127379), ('keymap', 0), ('stimNum', 144), ('stimID', 'stim_II/II_B_144.png')]), OrderedDict([('cpi', 8.88579855755125), ('deg', -19.8747072051332), ('keymap', 0), ('stimNum', 145), ('stimID', 'stim_II/II_B_145.png')]), OrderedDict([('cpi', 75.0316655923128), ('deg', 7.50355835587208), ('keymap', 0), ('stimNum', 146), ('stimID', 'stim_II/II_B_146.png')]), OrderedDict([('cpi', 33.8747351136587), ('deg', -24.159862932612), ('keymap', 0), ('stimNum', 147), ('stimID', 'stim_II/II_B_147.png')]), OrderedDict([('cpi', -14.8277545038404), ('deg', -63.0115632670915), ('keymap', 0), ('stimNum', 148), ('stimID', 'stim_II/II_B_148.png')]), OrderedDict([('cpi', 24.847199014044), ('deg', -35.4265554929613), ('keymap', 0), ('stimNum', 149), ('stimID', 'stim_II/II_B_149.png')]), OrderedDict([('cpi', 61.1853090988511), ('deg', 9.49283587225467), ('keymap', 0), ('stimNum', 150), ('stimID', 'stim_II/II_B_150.png')])]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="II_coord_arbitrary.csv" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="learnLoop" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="learnTrial"/>
+    <Routine name="learnFb"/>
+    <LoopTerminator name="learnLoop"/>
+    <Routine name="rest0"/>
+    <LoopInitiator loopType="TrialHandler" name="blockLoop">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="None" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="False" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="6" valType="num"/>
+      <Param name="name" updates="None" val="blockLoop" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <LoopInitiator loopType="TrialHandler" name="gaborLoop">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[OrderedDict([('cpi', -34.1239259135635), ('deg', 22.7242072717054), ('keymap', 1), ('stimNum', 1), ('stimID', 'stim_II/II_A_1.png')]), OrderedDict([('cpi', -70.9375442911926), ('deg', 14.8848421951243), ('keymap', 1), ('stimNum', 2), ('stimID', 'stim_II/II_A_2.png')]), OrderedDict([('cpi', -58.1580741036101), ('deg', -3.9065910409847), ('keymap', 1), ('stimNum', 3), ('stimID', 'stim_II/II_A_3.png')]), OrderedDict([('cpi', -20.7443650364232), ('deg', 38.0474205907892), ('keymap', 1), ('stimNum', 4), ('stimID', 'stim_II/II_A_4.png')]), OrderedDict([('cpi', -78.5958691587837), ('deg', -2.13286433271152), ('keymap', 1), ('stimNum', 5), ('stimID', 'stim_II/II_A_5.png')]), OrderedDict([('cpi', -31.5861196526968), ('deg', 7.60997167699748), ('keymap', 1), ('stimNum', 6), ('stimID', 'stim_II/II_A_6.png')]), OrderedDict([('cpi', 23.7822344040269), ('deg', 69.5345469176152), ('keymap', 1), ('stimNum', 7), ('stimID', 'stim_II/II_A_7.png')]), OrderedDict([('cpi', -31.7759905991136), ('deg', 59.291106564708), ('keymap', 1), ('stimNum', 8), ('stimID', 'stim_II/II_A_8.png')]), OrderedDict([('cpi', -21.037330937784), ('deg', 26.3996783775659), ('keymap', 1), ('stimNum', 9), ('stimID', 'stim_II/II_A_9.png')]), OrderedDict([('cpi', -24.1596256234438), ('deg', 21.0442446836876), ('keymap', 1), ('stimNum', 10), ('stimID', 'stim_II/II_A_10.png')]), OrderedDict([('cpi', -78.5777697666209), ('deg', -15.2094684514019), ('keymap', 1), ('stimNum', 11), ('stimID', 'stim_II/II_A_11.png')]), OrderedDict([('cpi', -71.4980476718148), ('deg', 0.196370408057412), ('keymap', 1), ('stimNum', 12), ('stimID', 'stim_II/II_A_12.png')]), OrderedDict([('cpi', -41.4943482176393), ('deg', 12.0075624383393), ('keymap', 1), ('stimNum', 13), ('stimID', 'stim_II/II_A_13.png')]), OrderedDict([('cpi', -65.6974654885147), ('deg', -12.6771205730694), ('keymap', 1), ('stimNum', 14), ('stimID', 'stim_II/II_A_14.png')]), OrderedDict([('cpi', -24.5322445486056), ('deg', 28.9819941320449), ('keymap', 1), ('stimNum', 15), ('stimID', 'stim_II/II_A_15.png')]), OrderedDict([('cpi', -0.0521383062073149), ('deg', 49.9693320222647), ('keymap', 1), ('stimNum', 16), ('stimID', 'stim_II/II_A_16.png')]), OrderedDict([('cpi', -47.6305440891193), ('deg', 9.05796344623847), ('keymap', 1), ('stimNum', 17), ('stimID', 'stim_II/II_A_17.png')]), OrderedDict([('cpi', 2.40694170986768), ('deg', 49.3841119421443), ('keymap', 1), ('stimNum', 18), ('stimID', 'stim_II/II_A_18.png')]), OrderedDict([('cpi', 22.0674259733602), ('deg', 61.1235739725758), ('keymap', 1), ('stimNum', 19), ('stimID', 'stim_II/II_A_19.png')]), OrderedDict([('cpi', -58.1202474117658), ('deg', 3.78032727633151), ('keymap', 1), ('stimNum', 20), ('stimID', 'stim_II/II_A_20.png')]), OrderedDict([('cpi', -21.2220939909913), ('deg', 51.2188782468557), ('keymap', 1), ('stimNum', 21), ('stimID', 'stim_II/II_A_21.png')]), OrderedDict([('cpi', -29.7664959092513), ('deg', 38.8493880495037), ('keymap', 1), ('stimNum', 22), ('stimID', 'stim_II/II_A_22.png')]), OrderedDict([('cpi', -19.9955668821546), ('deg', 28.3507441204311), ('keymap', 1), ('stimNum', 23), ('stimID', 'stim_II/II_A_23.png')]), OrderedDict([('cpi', 20.9491549838032), ('deg', 106.470911522249), ('keymap', 1), ('stimNum', 24), ('stimID', 'stim_II/II_A_24.png')]), OrderedDict([('cpi', -68.9964037274289), ('deg', -16.3342515197369), ('keymap', 1), ('stimNum', 25), ('stimID', 'stim_II/II_A_25.png')]), OrderedDict([('cpi', -62.9888466750023), ('deg', 3.60274683669128), ('keymap', 1), ('stimNum', 26), ('stimID', 'stim_II/II_A_26.png')]), OrderedDict([('cpi', -1.49433998474758), ('deg', 50.0773706643293), ('keymap', 1), ('stimNum', 27), ('stimID', 'stim_II/II_A_27.png')]), OrderedDict([('cpi', -45.7072812135947), ('deg', 49.3837988830338), ('keymap', 1), ('stimNum', 28), ('stimID', 'stim_II/II_A_28.png')]), OrderedDict([('cpi', -61.7814242264377), ('deg', -0.0766144089974148), ('keymap', 1), ('stimNum', 29), ('stimID', 'stim_II/II_A_29.png')]), OrderedDict([('cpi', -49.3938541626572), ('deg', 0.892195161546752), ('keymap', 1), ('stimNum', 30), ('stimID', 'stim_II/II_A_30.png')]), OrderedDict([('cpi', -61.9745374130007), ('deg', -2.51963518526362), ('keymap', 1), ('stimNum', 31), ('stimID', 'stim_II/II_A_31.png')]), OrderedDict([('cpi', -52.5276333617882), ('deg', 25.0734242239301), ('keymap', 1), ('stimNum', 32), ('stimID', 'stim_II/II_A_32.png')]), OrderedDict([('cpi', -11.8522133721026), ('deg', 28.3327060645328), ('keymap', 1), ('stimNum', 33), ('stimID', 'stim_II/II_A_33.png')]), OrderedDict([('cpi', -41.8576035654336), ('deg', 38.2048355188274), ('keymap', 1), ('stimNum', 34), ('stimID', 'stim_II/II_A_34.png')]), OrderedDict([('cpi', -31.0276388543618), ('deg', 51.057524881813), ('keymap', 1), ('stimNum', 35), ('stimID', 'stim_II/II_A_35.png')]), OrderedDict([('cpi', -5.05092242131167), ('deg', 66.6411409099084), ('keymap', 1), ('stimNum', 36), ('stimID', 'stim_II/II_A_36.png')]), OrderedDict([('cpi', -75.3282783060514), ('deg', -2.14372444912607), ('keymap', 1), ('stimNum', 37), ('stimID', 'stim_II/II_A_37.png')]), OrderedDict([('cpi', -37.9885961726753), ('deg', -2.12514728047935), ('keymap', 1), ('stimNum', 38), ('stimID', 'stim_II/II_A_38.png')]), OrderedDict([('cpi', -66.3650167666672), ('deg', 8.01609598178468), ('keymap', 1), ('stimNum', 39), ('stimID', 'stim_II/II_A_39.png')]), OrderedDict([('cpi', -46.3160949473712), ('deg', -2.752525539736), ('keymap', 1), ('stimNum', 40), ('stimID', 'stim_II/II_A_40.png')]), OrderedDict([('cpi', -48.2627636601948), ('deg', 61.957146256448), ('keymap', 1), ('stimNum', 41), ('stimID', 'stim_II/II_A_41.png')]), OrderedDict([('cpi', -30.6547032189395), ('deg', 33.5898988662878), ('keymap', 1), ('stimNum', 42), ('stimID', 'stim_II/II_A_42.png')]), OrderedDict([('cpi', -13.161428625441), ('deg', 59.9475809233541), ('keymap', 1), ('stimNum', 43), ('stimID', 'stim_II/II_A_43.png')]), OrderedDict([('cpi', -53.8105769642858), ('deg', 27.12815836603), ('keymap', 1), ('stimNum', 44), ('stimID', 'stim_II/II_A_44.png')]), OrderedDict([('cpi', -14.2921654180748), ('deg', 56.7509395219111), ('keymap', 1), ('stimNum', 45), ('stimID', 'stim_II/II_A_45.png')]), OrderedDict([('cpi', -24.2832958863778), ('deg', 21.6852486905256), ('keymap', 1), ('stimNum', 46), ('stimID', 'stim_II/II_A_46.png')]), OrderedDict([('cpi', -36.1941106583049), ('deg', 51.5011855350601), ('keymap', 1), ('stimNum', 47), ('stimID', 'stim_II/II_A_47.png')]), OrderedDict([('cpi', -89.5351243639402), ('deg', -36.6551917683303), ('keymap', 1), ('stimNum', 48), ('stimID', 'stim_II/II_A_48.png')]), OrderedDict([('cpi', -3.88983528731202), ('deg', 22.8400649781241), ('keymap', 1), ('stimNum', 49), ('stimID', 'stim_II/II_A_49.png')]), OrderedDict([('cpi', -35.2255749445672), ('deg', -4.42006454546014), ('keymap', 1), ('stimNum', 50), ('stimID', 'stim_II/II_A_50.png')]), OrderedDict([('cpi', -22.0998668193807), ('deg', 30.3262496363743), ('keymap', 1), ('stimNum', 51), ('stimID', 'stim_II/II_A_51.png')]), OrderedDict([('cpi', 6.42621835882987), ('deg', 18.6855381536401), ('keymap', 1), ('stimNum', 52), ('stimID', 'stim_II/II_A_52.png')]), OrderedDict([('cpi', -63.0446018987184), ('deg', -9.53079362570784), ('keymap', 1), ('stimNum', 53), ('stimID', 'stim_II/II_A_53.png')]), OrderedDict([('cpi', -32.9420420155282), ('deg', 12.9590564665363), ('keymap', 1), ('stimNum', 54), ('stimID', 'stim_II/II_A_54.png')]), OrderedDict([('cpi', 10.1555502111829), ('deg', 100.067032187273), ('keymap', 1), ('stimNum', 55), ('stimID', 'stim_II/II_A_55.png')]), OrderedDict([('cpi', -60.7650667321761), ('deg', 5.31710201474693), ('keymap', 1), ('stimNum', 56), ('stimID', 'stim_II/II_A_56.png')]), OrderedDict([('cpi', -57.3774603948635), ('deg', 13.8461767338072), ('keymap', 1), ('stimNum', 57), ('stimID', 'stim_II/II_A_57.png')]), OrderedDict([('cpi', -54.9541715782293), ('deg', 6.54736125017034), ('keymap', 1), ('stimNum', 58), ('stimID', 'stim_II/II_A_58.png')]), OrderedDict([('cpi', 10.956723800458), ('deg', 60.1671617747188), ('keymap', 1), ('stimNum', 59), ('stimID', 'stim_II/II_A_59.png')]), OrderedDict([('cpi', -75.3835199633407), ('deg', -27.003393965266), ('keymap', 1), ('stimNum', 60), ('stimID', 'stim_II/II_A_60.png')]), OrderedDict([('cpi', -71.2633889732404), ('deg', -5.96912933465531), ('keymap', 1), ('stimNum', 61), ('stimID', 'stim_II/II_A_61.png')]), OrderedDict([('cpi', -17.4726604970035), ('deg', 19.9798836832306), ('keymap', 1), ('stimNum', 62), ('stimID', 'stim_II/II_A_62.png')]), OrderedDict([('cpi', -39.9933984277106), ('deg', 37.2924044883056), ('keymap', 1), ('stimNum', 63), ('stimID', 'stim_II/II_A_63.png')]), OrderedDict([('cpi', -76.399011776051), ('deg', 7.11114380130588), ('keymap', 1), ('stimNum', 64), ('stimID', 'stim_II/II_A_64.png')]), OrderedDict([('cpi', -5.38863915867833), ('deg', 67.4966191763351), ('keymap', 1), ('stimNum', 65), ('stimID', 'stim_II/II_A_65.png')]), OrderedDict([('cpi', -87.5436876439079), ('deg', 13.5090353337371), ('keymap', 1), ('stimNum', 66), ('stimID', 'stim_II/II_A_66.png')]), OrderedDict([('cpi', -50.9458271115747), ('deg', -10.849290150872), ('keymap', 1), ('stimNum', 67), ('stimID', 'stim_II/II_A_67.png')]), OrderedDict([('cpi', 0.16097945128115), ('deg', 76.0542177759735), ('keymap', 1), ('stimNum', 68), ('stimID', 'stim_II/II_A_68.png')]), OrderedDict([('cpi', -31.217639181779), ('deg', 36.9092546828629), ('keymap', 1), ('stimNum', 69), ('stimID', 'stim_II/II_A_69.png')]), OrderedDict([('cpi', -49.7884540527932), ('deg', 29.0882034934174), ('keymap', 1), ('stimNum', 70), ('stimID', 'stim_II/II_A_70.png')]), OrderedDict([('cpi', 5.33815555132874), ('deg', 90.6928531139566), ('keymap', 1), ('stimNum', 71), ('stimID', 'stim_II/II_A_71.png')]), OrderedDict([('cpi', -62.8866816107156), ('deg', 2.86773585216633), ('keymap', 1), ('stimNum', 72), ('stimID', 'stim_II/II_A_72.png')]), OrderedDict([('cpi', -24.8390560820503), ('deg', 20.9563585284444), ('keymap', 1), ('stimNum', 73), ('stimID', 'stim_II/II_A_73.png')]), OrderedDict([('cpi', -44.1397565778628), ('deg', 8.89504514610377), ('keymap', 1), ('stimNum', 74), ('stimID', 'stim_II/II_A_74.png')]), OrderedDict([('cpi', 10.0069913597011), ('deg', 56.440475616698), ('keymap', 1), ('stimNum', 75), ('stimID', 'stim_II/II_A_75.png')]), OrderedDict([('cpi', -43.4627704038726), ('deg', 24.3584058069495), ('keymap', 1), ('stimNum', 76), ('stimID', 'stim_II/II_A_76.png')]), OrderedDict([('cpi', -26.1325373520567), ('deg', 27.4398503544728), ('keymap', 1), ('stimNum', 77), ('stimID', 'stim_II/II_A_77.png')]), OrderedDict([('cpi', -67.6429781461952), ('deg', 7.36283754349456), ('keymap', 1), ('stimNum', 78), ('stimID', 'stim_II/II_A_78.png')]), OrderedDict([('cpi', -28.1647325609743), ('deg', 35.2422383757392), ('keymap', 1), ('stimNum', 79), ('stimID', 'stim_II/II_A_79.png')]), OrderedDict([('cpi', -54.5718540633438), ('deg', -0.205588207843785), ('keymap', 1), ('stimNum', 80), ('stimID', 'stim_II/II_A_80.png')]), OrderedDict([('cpi', 27.4057774812619), ('deg', 55.6905361443967), ('keymap', 1), ('stimNum', 81), ('stimID', 'stim_II/II_A_81.png')]), OrderedDict([('cpi', -43.8879288438085), ('deg', 10.9266378344038), ('keymap', 1), ('stimNum', 82), ('stimID', 'stim_II/II_A_82.png')]), OrderedDict([('cpi', -67.924215640304), ('deg', -11.4762348209761), ('keymap', 1), ('stimNum', 83), ('stimID', 'stim_II/II_A_83.png')]), OrderedDict([('cpi', -59.6551996318951), ('deg', -12.3938309456416), ('keymap', 1), ('stimNum', 84), ('stimID', 'stim_II/II_A_84.png')]), OrderedDict([('cpi', -23.7287396450945), ('deg', 29.9712370541919), ('keymap', 1), ('stimNum', 85), ('stimID', 'stim_II/II_A_85.png')]), OrderedDict([('cpi', -26.6259704153933), ('deg', 50.3585570688673), ('keymap', 1), ('stimNum', 86), ('stimID', 'stim_II/II_A_86.png')]), OrderedDict([('cpi', -29.8093387212193), ('deg', 43.4420663656943), ('keymap', 1), ('stimNum', 87), ('stimID', 'stim_II/II_A_87.png')]), OrderedDict([('cpi', -55.2426568132333), ('deg', 22.8826692667515), ('keymap', 1), ('stimNum', 88), ('stimID', 'stim_II/II_A_88.png')]), OrderedDict([('cpi', -50.1478674515783), ('deg', 13.453246041704), ('keymap', 1), ('stimNum', 89), ('stimID', 'stim_II/II_A_89.png')]), OrderedDict([('cpi', -56.2447955753378), ('deg', 21.8892662821912), ('keymap', 1), ('stimNum', 90), ('stimID', 'stim_II/II_A_90.png')]), OrderedDict([('cpi', -12.3769198849511), ('deg', 72.9459236607204), ('keymap', 1), ('stimNum', 91), ('stimID', 'stim_II/II_A_91.png')]), OrderedDict([('cpi', -6.07921927918989), ('deg', 96.503774720282), ('keymap', 1), ('stimNum', 92), ('stimID', 'stim_II/II_A_92.png')]), OrderedDict([('cpi', -23.9134002549921), ('deg', 21.4478735776866), ('keymap', 1), ('stimNum', 93), ('stimID', 'stim_II/II_A_93.png')]), OrderedDict([('cpi', -43.7295729961061), ('deg', 24.3723536549597), ('keymap', 1), ('stimNum', 94), ('stimID', 'stim_II/II_A_94.png')]), OrderedDict([('cpi', -71.6272672632246), ('deg', 3.13381145309819), ('keymap', 1), ('stimNum', 95), ('stimID', 'stim_II/II_A_95.png')]), OrderedDict([('cpi', 22.2455271381361), ('deg', 66.6295922848733), ('keymap', 1), ('stimNum', 96), ('stimID', 'stim_II/II_A_96.png')]), OrderedDict([('cpi', 4.03578164300021), ('deg', 48.203768909293), ('keymap', 1), ('stimNum', 97), ('stimID', 'stim_II/II_A_97.png')]), OrderedDict([('cpi', -43.9166674686681), ('deg', 27.8172955135012), ('keymap', 1), ('stimNum', 98), ('stimID', 'stim_II/II_A_98.png')]), OrderedDict([('cpi', -32.2268204835075), ('deg', 36.8731028014982), ('keymap', 1), ('stimNum', 99), ('stimID', 'stim_II/II_A_99.png')]), OrderedDict([('cpi', -67.6839920174103), ('deg', -16.6854167425783), ('keymap', 1), ('stimNum', 100), ('stimID', 'stim_II/II_A_100.png')]), OrderedDict([('cpi', -51.2155641180177), ('deg', 0.943399857860967), ('keymap', 1), ('stimNum', 101), ('stimID', 'stim_II/II_A_101.png')]), OrderedDict([('cpi', -60.1652662305785), ('deg', -34.0630926024116), ('keymap', 1), ('stimNum', 102), ('stimID', 'stim_II/II_A_102.png')]), OrderedDict([('cpi', -48.3665733407739), ('deg', 29.4897867327332), ('keymap', 1), ('stimNum', 103), ('stimID', 'stim_II/II_A_103.png')]), OrderedDict([('cpi', -28.2705928557156), ('deg', 1.48309963572567), ('keymap', 1), ('stimNum', 104), ('stimID', 'stim_II/II_A_104.png')]), OrderedDict([('cpi', -7.34974372214266), ('deg', 48.8581904324689), ('keymap', 1), ('stimNum', 105), ('stimID', 'stim_II/II_A_105.png')]), OrderedDict([('cpi', -59.2113001060787), ('deg', 21.815274315395), ('keymap', 1), ('stimNum', 106), ('stimID', 'stim_II/II_A_106.png')]), OrderedDict([('cpi', -56.4833980452578), ('deg', 14.7079524828409), ('keymap', 1), ('stimNum', 107), ('stimID', 'stim_II/II_A_107.png')]), OrderedDict([('cpi', -30.1143837181745), ('deg', 32.2738463726164), ('keymap', 1), ('stimNum', 108), ('stimID', 'stim_II/II_A_108.png')]), OrderedDict([('cpi', -67.6161343688488), ('deg', 15.6764467375476), ('keymap', 1), ('stimNum', 109), ('stimID', 'stim_II/II_A_109.png')]), OrderedDict([('cpi', -41.2942484601082), ('deg', 17.4241424126872), ('keymap', 1), ('stimNum', 110), ('stimID', 'stim_II/II_A_110.png')]), OrderedDict([('cpi', -17.4337510938649), ('deg', 43.3847889883105), ('keymap', 1), ('stimNum', 111), ('stimID', 'stim_II/II_A_111.png')]), OrderedDict([('cpi', -15.6758326896276), ('deg', 31.7858872210455), ('keymap', 1), ('stimNum', 112), ('stimID', 'stim_II/II_A_112.png')]), OrderedDict([('cpi', -63.3169352072916), ('deg', 1.98147737708649), ('keymap', 1), ('stimNum', 113), ('stimID', 'stim_II/II_A_113.png')]), OrderedDict([('cpi', 4.23908895460037), ('deg', 36.1284228355155), ('keymap', 1), ('stimNum', 114), ('stimID', 'stim_II/II_A_114.png')]), OrderedDict([('cpi', -36.0761835890918), ('deg', 17.453848276394), ('keymap', 1), ('stimNum', 115), ('stimID', 'stim_II/II_A_115.png')]), OrderedDict([('cpi', -29.7947261522571), ('deg', 13.7224533379312), ('keymap', 1), ('stimNum', 116), ('stimID', 'stim_II/II_A_116.png')]), OrderedDict([('cpi', 23.3921389082551), ('deg', 38.8944595611774), ('keymap', 1), ('stimNum', 117), ('stimID', 'stim_II/II_A_117.png')]), OrderedDict([('cpi', 13.8760339591383), ('deg', 60.2974687410593), ('keymap', 1), ('stimNum', 118), ('stimID', 'stim_II/II_A_118.png')]), OrderedDict([('cpi', -41.1966062911621), ('deg', 10.9961643813783), ('keymap', 1), ('stimNum', 119), ('stimID', 'stim_II/II_A_119.png')]), OrderedDict([('cpi', -65.5242896376796), ('deg', 26.3773662613289), ('keymap', 1), ('stimNum', 120), ('stimID', 'stim_II/II_A_120.png')]), OrderedDict([('cpi', -6.3962691921764), ('deg', 35.5937687410903), ('keymap', 1), ('stimNum', 121), ('stimID', 'stim_II/II_A_121.png')]), OrderedDict([('cpi', -10.3261005825572), ('deg', 68.135650380666), ('keymap', 1), ('stimNum', 122), ('stimID', 'stim_II/II_A_122.png')]), OrderedDict([('cpi', -33.6284812628294), ('deg', -2.50857116756009), ('keymap', 1), ('stimNum', 123), ('stimID', 'stim_II/II_A_123.png')]), OrderedDict([('cpi', -37.8543427431618), ('deg', 30.2939505891442), ('keymap', 1), ('stimNum', 124), ('stimID', 'stim_II/II_A_124.png')]), OrderedDict([('cpi', 21.1535352253506), ('deg', 57.8057149615832), ('keymap', 1), ('stimNum', 125), ('stimID', 'stim_II/II_A_125.png')]), OrderedDict([('cpi', -17.4248165386496), ('deg', 47.7417861594543), ('keymap', 1), ('stimNum', 126), ('stimID', 'stim_II/II_A_126.png')]), OrderedDict([('cpi', 1.49945064613367), ('deg', 65.2681689843685), ('keymap', 1), ('stimNum', 127), ('stimID', 'stim_II/II_A_127.png')]), OrderedDict([('cpi', -48.3783844793625), ('deg', 34.7405027737945), ('keymap', 1), ('stimNum', 128), ('stimID', 'stim_II/II_A_128.png')]), OrderedDict([('cpi', -31.5583866210899), ('deg', 42.1590568716306), ('keymap', 1), ('stimNum', 129), ('stimID', 'stim_II/II_A_129.png')]), OrderedDict([('cpi', -55.4125471145118), ('deg', -14.1501621454239), ('keymap', 1), ('stimNum', 130), ('stimID', 'stim_II/II_A_130.png')]), OrderedDict([('cpi', -39.8817737693283), ('deg', 2.19896660596821), ('keymap', 1), ('stimNum', 131), ('stimID', 'stim_II/II_A_131.png')]), OrderedDict([('cpi', -8.57705597636063), ('deg', 29.3631354822024), ('keymap', 1), ('stimNum', 132), ('stimID', 'stim_II/II_A_132.png')]), OrderedDict([('cpi', -43.0505508176456), ('deg', 16.7288264065302), ('keymap', 1), ('stimNum', 133), ('stimID', 'stim_II/II_A_133.png')]), OrderedDict([('cpi', -53.2402552449332), ('deg', 6.79185658215808), ('keymap', 1), ('stimNum', 134), ('stimID', 'stim_II/II_A_134.png')]), OrderedDict([('cpi', -16.1796464350313), ('deg', 27.5707844573982), ('keymap', 1), ('stimNum', 135), ('stimID', 'stim_II/II_A_135.png')]), OrderedDict([('cpi', -25.5790377911125), ('deg', 19.9434660334256), ('keymap', 1), ('stimNum', 136), ('stimID', 'stim_II/II_A_136.png')]), OrderedDict([('cpi', -27.0327880347713), ('deg', 74.6732399367122), ('keymap', 1), ('stimNum', 137), ('stimID', 'stim_II/II_A_137.png')]), OrderedDict([('cpi', -83.7723412049821), ('deg', 11.8137915241579), ('keymap', 1), ('stimNum', 138), ('stimID', 'stim_II/II_A_138.png')]), OrderedDict([('cpi', -53.9782579065197), ('deg', 31.390221390543), ('keymap', 1), ('stimNum', 139), ('stimID', 'stim_II/II_A_139.png')]), OrderedDict([('cpi', -32.4036213201694), ('deg', 38.587170297474), ('keymap', 1), ('stimNum', 140), ('stimID', 'stim_II/II_A_140.png')]), OrderedDict([('cpi', -7.28611877321445), ('deg', 38.4874234524107), ('keymap', 1), ('stimNum', 141), ('stimID', 'stim_II/II_A_141.png')]), OrderedDict([('cpi', 9.47966854678522), ('deg', 62.4997961627043), ('keymap', 1), ('stimNum', 142), ('stimID', 'stim_II/II_A_142.png')]), OrderedDict([('cpi', -32.0971660008651), ('deg', 32.3949289516922), ('keymap', 1), ('stimNum', 143), ('stimID', 'stim_II/II_A_143.png')]), OrderedDict([('cpi', -68.1542800037379), ('deg', 11.7557594779054), ('keymap', 1), ('stimNum', 144), ('stimID', 'stim_II/II_A_144.png')]), OrderedDict([('cpi', -37.5321745372589), ('deg', 21.7600863611416), ('keymap', 1), ('stimNum', 145), ('stimID', 'stim_II/II_A_145.png')]), OrderedDict([('cpi', -43.1030655238052), ('deg', 10.3841199034997), ('keymap', 1), ('stimNum', 146), ('stimID', 'stim_II/II_A_146.png')]), OrderedDict([('cpi', -22.0890079836257), ('deg', 34.0732788254567), ('keymap', 1), ('stimNum', 147), ('stimID', 'stim_II/II_A_147.png')]), OrderedDict([('cpi', -12.3481675641812), ('deg', 34.1202914774008), ('keymap', 1), ('stimNum', 148), ('stimID', 'stim_II/II_A_148.png')]), OrderedDict([('cpi', -34.2785310278058), ('deg', 45.6915654106758), ('keymap', 1), ('stimNum', 149), ('stimID', 'stim_II/II_A_149.png')]), OrderedDict([('cpi', -55.226453403725), ('deg', -13.8557382027139), ('keymap', 1), ('stimNum', 150), ('stimID', 'stim_II/II_A_150.png')]), OrderedDict([('cpi', -26.4376239262875), ('deg', -56.9788851841033), ('keymap', 0), ('stimNum', 1), ('stimID', 'stim_II/II_B_1.png')]), OrderedDict([('cpi', 65.9934354867951), ('deg', -5.72848278985574), ('keymap', 0), ('stimNum', 2), ('stimID', 'stim_II/II_B_2.png')]), OrderedDict([('cpi', 47.4926815384239), ('deg', -11.6047190387384), ('keymap', 0), ('stimNum', 3), ('stimID', 'stim_II/II_B_3.png')]), OrderedDict([('cpi', 48.9727301326302), ('deg', -30.250706159506), ('keymap', 0), ('stimNum', 4), ('stimID', 'stim_II/II_B_4.png')]), OrderedDict([('cpi', 24.6250262616773), ('deg', -43.3165175126345), ('keymap', 0), ('stimNum', 5), ('stimID', 'stim_II/II_B_5.png')]), OrderedDict([('cpi', 7.69123919837223), ('deg', -26.9200372439265), ('keymap', 0), ('stimNum', 6), ('stimID', 'stim_II/II_B_6.png')]), OrderedDict([('cpi', 27.7284479891132), ('deg', -17.44347802522), ('keymap', 0), ('stimNum', 7), ('stimID', 'stim_II/II_B_7.png')]), OrderedDict([('cpi', 1.74935530885224), ('deg', -36.7746447131289), ('keymap', 0), ('stimNum', 8), ('stimID', 'stim_II/II_B_8.png')]), OrderedDict([('cpi', 58.05541746158), ('deg', -9.82952844025347), ('keymap', 0), ('stimNum', 9), ('stimID', 'stim_II/II_B_9.png')]), OrderedDict([('cpi', 0.537518125270594), ('deg', -57.6109155507604), ('keymap', 0), ('stimNum', 10), ('stimID', 'stim_II/II_B_10.png')]), OrderedDict([('cpi', 21.7844230200643), ('deg', -34.0945425450561), ('keymap', 0), ('stimNum', 11), ('stimID', 'stim_II/II_B_11.png')]), OrderedDict([('cpi', 0.566083081744878), ('deg', -82.8284577139174), ('keymap', 0), ('stimNum', 12), ('stimID', 'stim_II/II_B_12.png')]), OrderedDict([('cpi', 15.57175968371), ('deg', -10.6077932206529), ('keymap', 0), ('stimNum', 13), ('stimID', 'stim_II/II_B_13.png')]), OrderedDict([('cpi', -13.6574135880299), ('deg', -53.3941599604214), ('keymap', 0), ('stimNum', 14), ('stimID', 'stim_II/II_B_14.png')]), OrderedDict([('cpi', 80.5576651690914), ('deg', 14.3785602521791), ('keymap', 0), ('stimNum', 15), ('stimID', 'stim_II/II_B_15.png')]), OrderedDict([('cpi', 35.0933875642143), ('deg', -38.8250225375674), ('keymap', 0), ('stimNum', 16), ('stimID', 'stim_II/II_B_16.png')]), OrderedDict([('cpi', 34.6834045404768), ('deg', -18.5843820369761), ('keymap', 0), ('stimNum', 17), ('stimID', 'stim_II/II_B_17.png')]), OrderedDict([('cpi', 46.761322618284), ('deg', -48.6708805965747), ('keymap', 0), ('stimNum', 18), ('stimID', 'stim_II/II_B_18.png')]), OrderedDict([('cpi', 46.6897610910248), ('deg', -19.1304160214684), ('keymap', 0), ('stimNum', 19), ('stimID', 'stim_II/II_B_19.png')]), OrderedDict([('cpi', 3.52691314794938), ('deg', -48.8127199670763), ('keymap', 0), ('stimNum', 20), ('stimID', 'stim_II/II_B_20.png')]), OrderedDict([('cpi', 83.5998939184397), ('deg', -23.5018416420698), ('keymap', 0), ('stimNum', 21), ('stimID', 'stim_II/II_B_21.png')]), OrderedDict([('cpi', 32.0792105056688), ('deg', -13.6534331986033), ('keymap', 0), ('stimNum', 22), ('stimID', 'stim_II/II_B_22.png')]), OrderedDict([('cpi', 28.9503104359402), ('deg', -32.528901310093), ('keymap', 0), ('stimNum', 23), ('stimID', 'stim_II/II_B_23.png')]), OrderedDict([('cpi', -11.0768187310656), ('deg', -44.4309880550349), ('keymap', 0), ('stimNum', 24), ('stimID', 'stim_II/II_B_24.png')]), OrderedDict([('cpi', -1.71426531641125), ('deg', -34.643143697305), ('keymap', 0), ('stimNum', 25), ('stimID', 'stim_II/II_B_25.png')]), OrderedDict([('cpi', 54.3809878715949), ('deg', -17.1389619867732), ('keymap', 0), ('stimNum', 26), ('stimID', 'stim_II/II_B_26.png')]), OrderedDict([('cpi', 46.1939745651853), ('deg', -18.6947006863074), ('keymap', 0), ('stimNum', 27), ('stimID', 'stim_II/II_B_27.png')]), OrderedDict([('cpi', 24.8428009789772), ('deg', -9.88847981405844), ('keymap', 0), ('stimNum', 28), ('stimID', 'stim_II/II_B_28.png')]), OrderedDict([('cpi', 54.4683206041985), ('deg', -26.8263742400249), ('keymap', 0), ('stimNum', 29), ('stimID', 'stim_II/II_B_29.png')]), OrderedDict([('cpi', -13.4493006667176), ('deg', -57.9276595741161), ('keymap', 0), ('stimNum', 30), ('stimID', 'stim_II/II_B_30.png')]), OrderedDict([('cpi', 42.4508462008579), ('deg', -26.7796036101067), ('keymap', 0), ('stimNum', 31), ('stimID', 'stim_II/II_B_31.png')]), OrderedDict([('cpi', -9.3952452931388), ('deg', -74.6641585233253), ('keymap', 0), ('stimNum', 32), ('stimID', 'stim_II/II_B_32.png')]), OrderedDict([('cpi', 63.036086792488), ('deg', -7.67948751933868), ('keymap', 0), ('stimNum', 33), ('stimID', 'stim_II/II_B_33.png')]), OrderedDict([('cpi', 21.3882438242307), ('deg', -19.8924683209851), ('keymap', 0), ('stimNum', 34), ('stimID', 'stim_II/II_B_34.png')]), OrderedDict([('cpi', 38.7107020586593), ('deg', -10.0871674770019), ('keymap', 0), ('stimNum', 35), ('stimID', 'stim_II/II_B_35.png')]), OrderedDict([('cpi', 59.8683069944638), ('deg', 12.9995461376891), ('keymap', 0), ('stimNum', 36), ('stimID', 'stim_II/II_B_36.png')]), OrderedDict([('cpi', 64.3364433120621), ('deg', -1.60083193893943), ('keymap', 0), ('stimNum', 37), ('stimID', 'stim_II/II_B_37.png')]), OrderedDict([('cpi', 8.05716477494275), ('deg', -29.1841209980894), ('keymap', 0), ('stimNum', 38), ('stimID', 'stim_II/II_B_38.png')]), OrderedDict([('cpi', 36.1374587757104), ('deg', -1.03288597515759), ('keymap', 0), ('stimNum', 39), ('stimID', 'stim_II/II_B_39.png')]), OrderedDict([('cpi', -4.70947109712328), ('deg', -43.4582779649329), ('keymap', 0), ('stimNum', 40), ('stimID', 'stim_II/II_B_40.png')]), OrderedDict([('cpi', 32.2208307489684), ('deg', -43.8684154053005), ('keymap', 0), ('stimNum', 41), ('stimID', 'stim_II/II_B_41.png')]), OrderedDict([('cpi', 57.7696542457552), ('deg', -35.8030759479655), ('keymap', 0), ('stimNum', 42), ('stimID', 'stim_II/II_B_42.png')]), OrderedDict([('cpi', 16.9601477343122), ('deg', -49.96712877755), ('keymap', 0), ('stimNum', 43), ('stimID', 'stim_II/II_B_43.png')]), OrderedDict([('cpi', 72.3824327024715), ('deg', 0.708614064629923), ('keymap', 0), ('stimNum', 44), ('stimID', 'stim_II/II_B_44.png')]), OrderedDict([('cpi', 26.2823001905545), ('deg', -44.024704400268), ('keymap', 0), ('stimNum', 45), ('stimID', 'stim_II/II_B_45.png')]), OrderedDict([('cpi', 9.8729624583542), ('deg', -34.0076677213366), ('keymap', 0), ('stimNum', 46), ('stimID', 'stim_II/II_B_46.png')]), OrderedDict([('cpi', 68.1575224890466), ('deg', 0.951712273395515), ('keymap', 0), ('stimNum', 47), ('stimID', 'stim_II/II_B_47.png')]), OrderedDict([('cpi', 36.8180531873628), ('deg', -2.68887049869917), ('keymap', 0), ('stimNum', 48), ('stimID', 'stim_II/II_B_48.png')]), OrderedDict([('cpi', 18.7130273004807), ('deg', -38.0101033103232), ('keymap', 0), ('stimNum', 49), ('stimID', 'stim_II/II_B_49.png')]), OrderedDict([('cpi', 30.8411716710419), ('deg', -20.2785636762593), ('keymap', 0), ('stimNum', 50), ('stimID', 'stim_II/II_B_50.png')]), OrderedDict([('cpi', 39.7591318860045), ('deg', 1.60612919898673), ('keymap', 0), ('stimNum', 51), ('stimID', 'stim_II/II_B_51.png')]), OrderedDict([('cpi', 36.2266140912498), ('deg', 3.16736045221549), ('keymap', 0), ('stimNum', 52), ('stimID', 'stim_II/II_B_52.png')]), OrderedDict([('cpi', 71.7762576258915), ('deg', -1.36314555438886), ('keymap', 0), ('stimNum', 53), ('stimID', 'stim_II/II_B_53.png')]), OrderedDict([('cpi', 6.93094152800135), ('deg', -48.9711869527001), ('keymap', 0), ('stimNum', 54), ('stimID', 'stim_II/II_B_54.png')]), OrderedDict([('cpi', 27.2927876888676), ('deg', -40.9455895034749), ('keymap', 0), ('stimNum', 55), ('stimID', 'stim_II/II_B_55.png')]), OrderedDict([('cpi', 32.0295410982274), ('deg', -61.7725592523571), ('keymap', 0), ('stimNum', 56), ('stimID', 'stim_II/II_B_56.png')]), OrderedDict([('cpi', 38.1679236755931), ('deg', -12.3095343261009), ('keymap', 0), ('stimNum', 57), ('stimID', 'stim_II/II_B_57.png')]), OrderedDict([('cpi', 70.4599605828436), ('deg', -12.3442749808163), ('keymap', 0), ('stimNum', 58), ('stimID', 'stim_II/II_B_58.png')]), OrderedDict([('cpi', 42.5383257588605), ('deg', -42.616973135444), ('keymap', 0), ('stimNum', 59), ('stimID', 'stim_II/II_B_59.png')]), OrderedDict([('cpi', -16.946698821201), ('deg', -51.6959523531109), ('keymap', 0), ('stimNum', 60), ('stimID', 'stim_II/II_B_60.png')]), OrderedDict([('cpi', 4.26454530091825), ('deg', -44.5739507541071), ('keymap', 0), ('stimNum', 61), ('stimID', 'stim_II/II_B_61.png')]), OrderedDict([('cpi', 46.888950673548), ('deg', -20.3061815150719), ('keymap', 0), ('stimNum', 62), ('stimID', 'stim_II/II_B_62.png')]), OrderedDict([('cpi', 43.1079470143599), ('deg', -35.1993022472055), ('keymap', 0), ('stimNum', 63), ('stimID', 'stim_II/II_B_63.png')]), OrderedDict([('cpi', 36.153463605236), ('deg', -36.2648761510172), ('keymap', 0), ('stimNum', 64), ('stimID', 'stim_II/II_B_64.png')]), OrderedDict([('cpi', 42.9559869389273), ('deg', -31.1532864351793), ('keymap', 0), ('stimNum', 65), ('stimID', 'stim_II/II_B_65.png')]), OrderedDict([('cpi', 24.4472509690393), ('deg', -47.1362293613342), ('keymap', 0), ('stimNum', 66), ('stimID', 'stim_II/II_B_66.png')]), OrderedDict([('cpi', 52.2540545533438), ('deg', -25.621351435543), ('keymap', 0), ('stimNum', 67), ('stimID', 'stim_II/II_B_67.png')]), OrderedDict([('cpi', 46.8089353563609), ('deg', -36.1149335914996), ('keymap', 0), ('stimNum', 68), ('stimID', 'stim_II/II_B_68.png')]), OrderedDict([('cpi', -12.4589096025897), ('deg', -58.5954579119596), ('keymap', 0), ('stimNum', 69), ('stimID', 'stim_II/II_B_69.png')]), OrderedDict([('cpi', 68.9394523924876), ('deg', 6.37704274398405), ('keymap', 0), ('stimNum', 70), ('stimID', 'stim_II/II_B_70.png')]), OrderedDict([('cpi', 31.7887608144667), ('deg', -31.9968084083566), ('keymap', 0), ('stimNum', 71), ('stimID', 'stim_II/II_B_71.png')]), OrderedDict([('cpi', 56.2346380105776), ('deg', -8.81992238776122), ('keymap', 0), ('stimNum', 72), ('stimID', 'stim_II/II_B_72.png')]), OrderedDict([('cpi', 21.2130036639055), ('deg', -26.6287474462256), ('keymap', 0), ('stimNum', 73), ('stimID', 'stim_II/II_B_73.png')]), OrderedDict([('cpi', 8.33620463716057), ('deg', -80.8711887191936), ('keymap', 0), ('stimNum', 74), ('stimID', 'stim_II/II_B_74.png')]), OrderedDict([('cpi', -9.26141947126294), ('deg', -56.7039923108111), ('keymap', 0), ('stimNum', 75), ('stimID', 'stim_II/II_B_75.png')]), OrderedDict([('cpi', 63.7811764136496), ('deg', -2.78372518890659), ('keymap', 0), ('stimNum', 76), ('stimID', 'stim_II/II_B_76.png')]), OrderedDict([('cpi', 75.8896532101914), ('deg', 1.05071623647249), ('keymap', 0), ('stimNum', 77), ('stimID', 'stim_II/II_B_77.png')]), OrderedDict([('cpi', 10.9720856162883), ('deg', -43.94284384412), ('keymap', 0), ('stimNum', 78), ('stimID', 'stim_II/II_B_78.png')]), OrderedDict([('cpi', 45.7061727086428), ('deg', -23.8202289333343), ('keymap', 0), ('stimNum', 79), ('stimID', 'stim_II/II_B_79.png')]), OrderedDict([('cpi', 8.24464365114186), ('deg', -18.5411199698341), ('keymap', 0), ('stimNum', 80), ('stimID', 'stim_II/II_B_80.png')]), OrderedDict([('cpi', -1.05780960633654), ('deg', -47.288159165003), ('keymap', 0), ('stimNum', 81), ('stimID', 'stim_II/II_B_81.png')]), OrderedDict([('cpi', 30.5010094421533), ('deg', -79.1573611331817), ('keymap', 0), ('stimNum', 82), ('stimID', 'stim_II/II_B_82.png')]), OrderedDict([('cpi', -14.3522071015449), ('deg', -66.6780141486596), ('keymap', 0), ('stimNum', 83), ('stimID', 'stim_II/II_B_83.png')]), OrderedDict([('cpi', 37.1537864520989), ('deg', -51.943599228233), ('keymap', 0), ('stimNum', 84), ('stimID', 'stim_II/II_B_84.png')]), OrderedDict([('cpi', -17.2294234424125), ('deg', -65.5761316527868), ('keymap', 0), ('stimNum', 85), ('stimID', 'stim_II/II_B_85.png')]), OrderedDict([('cpi', -3.36841832461144), ('deg', -58.9074704025553), ('keymap', 0), ('stimNum', 86), ('stimID', 'stim_II/II_B_86.png')]), OrderedDict([('cpi', 60.8495043824671), ('deg', 26.7578872439015), ('keymap', 0), ('stimNum', 87), ('stimID', 'stim_II/II_B_87.png')]), OrderedDict([('cpi', 52.1423130211993), ('deg', -39.1461433168428), ('keymap', 0), ('stimNum', 88), ('stimID', 'stim_II/II_B_88.png')]), OrderedDict([('cpi', 37.2382675636389), ('deg', 24.3336089152143), ('keymap', 0), ('stimNum', 89), ('stimID', 'stim_II/II_B_89.png')]), OrderedDict([('cpi', 31.5988405069177), ('deg', -31.0020302038625), ('keymap', 0), ('stimNum', 90), ('stimID', 'stim_II/II_B_90.png')]), OrderedDict([('cpi', 3.83372129757927), ('deg', -55.2813173858724), ('keymap', 0), ('stimNum', 91), ('stimID', 'stim_II/II_B_91.png')]), OrderedDict([('cpi', 39.8679558018261), ('deg', -32.0741364405765), ('keymap', 0), ('stimNum', 92), ('stimID', 'stim_II/II_B_92.png')]), OrderedDict([('cpi', 8.95942870234101), ('deg', -44.3678570971766), ('keymap', 0), ('stimNum', 93), ('stimID', 'stim_II/II_B_93.png')]), OrderedDict([('cpi', 23.7929112583917), ('deg', -39.7343128859065), ('keymap', 0), ('stimNum', 94), ('stimID', 'stim_II/II_B_94.png')]), OrderedDict([('cpi', 39.5383013817432), ('deg', -16.8332497494278), ('keymap', 0), ('stimNum', 95), ('stimID', 'stim_II/II_B_95.png')]), OrderedDict([('cpi', -11.937832292227), ('deg', -78.1328540447012), ('keymap', 0), ('stimNum', 96), ('stimID', 'stim_II/II_B_96.png')]), OrderedDict([('cpi', 34.9863317147463), ('deg', -11.4957692089519), ('keymap', 0), ('stimNum', 97), ('stimID', 'stim_II/II_B_97.png')]), OrderedDict([('cpi', 32.6933576670235), ('deg', -24.5652757353625), ('keymap', 0), ('stimNum', 98), ('stimID', 'stim_II/II_B_98.png')]), OrderedDict([('cpi', 72.0013754952691), ('deg', 35.2133159122562), ('keymap', 0), ('stimNum', 99), ('stimID', 'stim_II/II_B_99.png')]), OrderedDict([('cpi', 80.3316462874449), ('deg', 12.0308096998277), ('keymap', 0), ('stimNum', 100), ('stimID', 'stim_II/II_B_100.png')]), OrderedDict([('cpi', 47.9192779206134), ('deg', -5.03970315498348), ('keymap', 0), ('stimNum', 101), ('stimID', 'stim_II/II_B_101.png')]), OrderedDict([('cpi', 18.7262432262265), ('deg', -39.6800278994475), ('keymap', 0), ('stimNum', 102), ('stimID', 'stim_II/II_B_102.png')]), OrderedDict([('cpi', 55.7817027873875), ('deg', -44.5677025805122), ('keymap', 0), ('stimNum', 103), ('stimID', 'stim_II/II_B_103.png')]), OrderedDict([('cpi', 31.4266820904798), ('deg', -40.3297293433045), ('keymap', 0), ('stimNum', 104), ('stimID', 'stim_II/II_B_104.png')]), OrderedDict([('cpi', 14.8350835439704), ('deg', -58.2088014913047), ('keymap', 0), ('stimNum', 105), ('stimID', 'stim_II/II_B_105.png')]), OrderedDict([('cpi', 33.2739273034529), ('deg', -20.461344367874), ('keymap', 0), ('stimNum', 106), ('stimID', 'stim_II/II_B_106.png')]), OrderedDict([('cpi', 4.47799910646411), ('deg', -45.3789015962528), ('keymap', 0), ('stimNum', 107), ('stimID', 'stim_II/II_B_107.png')]), OrderedDict([('cpi', 39.8771489279079), ('deg', 26.2807028099828), ('keymap', 0), ('stimNum', 108), ('stimID', 'stim_II/II_B_108.png')]), OrderedDict([('cpi', 4.2785659208041), ('deg', -61.0632673886638), ('keymap', 0), ('stimNum', 109), ('stimID', 'stim_II/II_B_109.png')]), OrderedDict([('cpi', 95.5116786214873), ('deg', 39.8620236409816), ('keymap', 0), ('stimNum', 110), ('stimID', 'stim_II/II_B_110.png')]), OrderedDict([('cpi', 42.8941904358522), ('deg', -24.110654339879), ('keymap', 0), ('stimNum', 111), ('stimID', 'stim_II/II_B_111.png')]), OrderedDict([('cpi', 55.0382697587264), ('deg', -13.96637161094), ('keymap', 0), ('stimNum', 112), ('stimID', 'stim_II/II_B_112.png')]), OrderedDict([('cpi', -0.73744818773794), ('deg', -49.5595901750283), ('keymap', 0), ('stimNum', 113), ('stimID', 'stim_II/II_B_113.png')]), OrderedDict([('cpi', 18.1293394531646), ('deg', -30.2050516308245), ('keymap', 0), ('stimNum', 114), ('stimID', 'stim_II/II_B_114.png')]), OrderedDict([('cpi', 13.946115359796), ('deg', -69.3051040533691), ('keymap', 0), ('stimNum', 115), ('stimID', 'stim_II/II_B_115.png')]), OrderedDict([('cpi', 31.0667440681089), ('deg', -41.7011424591378), ('keymap', 0), ('stimNum', 116), ('stimID', 'stim_II/II_B_116.png')]), OrderedDict([('cpi', -26.9313804933241), ('deg', -94.6523171329769), ('keymap', 0), ('stimNum', 117), ('stimID', 'stim_II/II_B_117.png')]), OrderedDict([('cpi', -6.26879137602126), ('deg', -32.2193749244942), ('keymap', 0), ('stimNum', 118), ('stimID', 'stim_II/II_B_118.png')]), OrderedDict([('cpi', 21.3444415533567), ('deg', -35.2999394312757), ('keymap', 0), ('stimNum', 119), ('stimID', 'stim_II/II_B_119.png')]), OrderedDict([('cpi', -8.80988607787493), ('deg', -68.3652517145072), ('keymap', 0), ('stimNum', 120), ('stimID', 'stim_II/II_B_120.png')]), OrderedDict([('cpi', 48.7446441925229), ('deg', -9.94484849353489), ('keymap', 0), ('stimNum', 121), ('stimID', 'stim_II/II_B_121.png')]), OrderedDict([('cpi', 46.3846600443942), ('deg', -12.7143659677792), ('keymap', 0), ('stimNum', 122), ('stimID', 'stim_II/II_B_122.png')]), OrderedDict([('cpi', 69.4761659777554), ('deg', -13.276516833725), ('keymap', 0), ('stimNum', 123), ('stimID', 'stim_II/II_B_123.png')]), OrderedDict([('cpi', -0.350709705051045), ('deg', -43.8110584638124), ('keymap', 0), ('stimNum', 124), ('stimID', 'stim_II/II_B_124.png')]), OrderedDict([('cpi', 35.9297474665127), ('deg', -12.1097889555063), ('keymap', 0), ('stimNum', 125), ('stimID', 'stim_II/II_B_125.png')]), OrderedDict([('cpi', 11.0053717159441), ('deg', -48.1529834705463), ('keymap', 0), ('stimNum', 126), ('stimID', 'stim_II/II_B_126.png')]), OrderedDict([('cpi', 72.7083018846514), ('deg', 4.98415659083057), ('keymap', 0), ('stimNum', 127), ('stimID', 'stim_II/II_B_127.png')]), OrderedDict([('cpi', 43.6046802986895), ('deg', -13.3286741198313), ('keymap', 0), ('stimNum', 128), ('stimID', 'stim_II/II_B_128.png')]), OrderedDict([('cpi', 50.8147686835053), ('deg', -19.0928573589667), ('keymap', 0), ('stimNum', 129), ('stimID', 'stim_II/II_B_129.png')]), OrderedDict([('cpi', 21.0242610103186), ('deg', -30.6897311416013), ('keymap', 0), ('stimNum', 130), ('stimID', 'stim_II/II_B_130.png')]), OrderedDict([('cpi', 23.9173046634733), ('deg', -59.164156397637), ('keymap', 0), ('stimNum', 131), ('stimID', 'stim_II/II_B_131.png')]), OrderedDict([('cpi', 32.8640230937221), ('deg', -5.48781571787968), ('keymap', 0), ('stimNum', 132), ('stimID', 'stim_II/II_B_132.png')]), OrderedDict([('cpi', -10.2842855937808), ('deg', -35.9096538861909), ('keymap', 0), ('stimNum', 133), ('stimID', 'stim_II/II_B_133.png')]), OrderedDict([('cpi', -6.65625992654732), ('deg', -71.4315402962862), ('keymap', 0), ('stimNum', 134), ('stimID', 'stim_II/II_B_134.png')]), OrderedDict([('cpi', 6.00871678936333), ('deg', -17.819303987448), ('keymap', 0), ('stimNum', 135), ('stimID', 'stim_II/II_B_135.png')]), OrderedDict([('cpi', 42.7237292007179), ('deg', -28.8044784489899), ('keymap', 0), ('stimNum', 136), ('stimID', 'stim_II/II_B_136.png')]), OrderedDict([('cpi', 45.0826534836204), ('deg', -45.8270284586674), ('keymap', 0), ('stimNum', 137), ('stimID', 'stim_II/II_B_137.png')]), OrderedDict([('cpi', 9.45389124889568), ('deg', -35.9226129006354), ('keymap', 0), ('stimNum', 138), ('stimID', 'stim_II/II_B_138.png')]), OrderedDict([('cpi', 68.6245573225337), ('deg', 22.2576216061916), ('keymap', 0), ('stimNum', 139), ('stimID', 'stim_II/II_B_139.png')]), OrderedDict([('cpi', -7.37779763170822), ('deg', -48.1590921523816), ('keymap', 0), ('stimNum', 140), ('stimID', 'stim_II/II_B_140.png')]), OrderedDict([('cpi', 31.5735119858666), ('deg', -36.9036888742455), ('keymap', 0), ('stimNum', 141), ('stimID', 'stim_II/II_B_141.png')]), OrderedDict([('cpi', 22.0595733630521), ('deg', -59.3300409379377), ('keymap', 0), ('stimNum', 142), ('stimID', 'stim_II/II_B_142.png')]), OrderedDict([('cpi', 39.5203628965763), ('deg', -0.275774259497901), ('keymap', 0), ('stimNum', 143), ('stimID', 'stim_II/II_B_143.png')]), OrderedDict([('cpi', 24.6553910694025), ('deg', -61.441552127379), ('keymap', 0), ('stimNum', 144), ('stimID', 'stim_II/II_B_144.png')]), OrderedDict([('cpi', 8.88579855755125), ('deg', -19.8747072051332), ('keymap', 0), ('stimNum', 145), ('stimID', 'stim_II/II_B_145.png')]), OrderedDict([('cpi', 75.0316655923128), ('deg', 7.50355835587208), ('keymap', 0), ('stimNum', 146), ('stimID', 'stim_II/II_B_146.png')]), OrderedDict([('cpi', 33.8747351136587), ('deg', -24.159862932612), ('keymap', 0), ('stimNum', 147), ('stimID', 'stim_II/II_B_147.png')]), OrderedDict([('cpi', -14.8277545038404), ('deg', -63.0115632670915), ('keymap', 0), ('stimNum', 148), ('stimID', 'stim_II/II_B_148.png')]), OrderedDict([('cpi', 24.847199014044), ('deg', -35.4265554929613), ('keymap', 0), ('stimNum', 149), ('stimID', 'stim_II/II_B_149.png')]), OrderedDict([('cpi', 61.1853090988511), ('deg', 9.49283587225467), ('keymap', 0), ('stimNum', 150), ('stimID', 'stim_II/II_B_150.png')])]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="II_coord_arbitrary.csv" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="gaborLoop" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="gaborTrial"/>
+    <Routine name="gaborFb"/>
+    <LoopTerminator name="gaborLoop"/>
+    <Routine name="rest1"/>
+    <LoopInitiator loopType="TrialHandler" name="ctrlLoop">
+      <Param name="Selected rows" updates="None" val="" valType="str"/>
+      <Param name="conditions" updates="None" val="[OrderedDict([('ctrlID', 'stim_ctrl/incongruent_1.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_2.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_3.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_4.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_5.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_6.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_7.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_8.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_9.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_10.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_11.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_12.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_13.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_14.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_15.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_16.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_17.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_18.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_19.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_20.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_21.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_22.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_23.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_24.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_25.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_26.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_27.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_28.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_29.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_30.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_31.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_32.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_33.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_34.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_35.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_36.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_37.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_38.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_39.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_40.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_41.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_42.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_43.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_44.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_45.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_46.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_47.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_48.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_49.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_50.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_51.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_52.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_53.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_54.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_55.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_56.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_57.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_58.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_59.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/incongruent_60.png'), ('ans', 0)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_1.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_2.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_3.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_4.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_5.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_6.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_7.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_8.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_9.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_10.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_11.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_12.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_13.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_14.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_15.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_16.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_17.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_18.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_19.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_20.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_21.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_22.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_23.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_24.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_25.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_26.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_27.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_28.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_29.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_30.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_31.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_32.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_33.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_34.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_35.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_36.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_37.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_38.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_39.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_40.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_41.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_42.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_43.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_44.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_45.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_46.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_47.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_48.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_49.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_50.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_51.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_52.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_53.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_54.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_55.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_56.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_57.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_58.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_59.png'), ('ans', 1)]), OrderedDict([('ctrlID', 'stim_ctrl/congruent_60.png'), ('ans', 1)])]" valType="str"/>
+      <Param name="conditionsFile" updates="None" val="ctrl_coord.csv" valType="file"/>
+      <Param name="endPoints" updates="None" val="[0, 1]" valType="num"/>
+      <Param name="isTrials" updates="None" val="True" valType="bool"/>
+      <Param name="loopType" updates="None" val="random" valType="str"/>
+      <Param name="nReps" updates="None" val="1" valType="num"/>
+      <Param name="name" updates="None" val="ctrlLoop" valType="code"/>
+      <Param name="random seed" updates="None" val="" valType="code"/>
+    </LoopInitiator>
+    <Routine name="ctrlTrial"/>
+    <Routine name="ctrlFb"/>
+    <LoopTerminator name="ctrlLoop"/>
+    <Routine name="rest2"/>
+    <LoopTerminator name="blockLoop"/>
+    <Routine name="end"/>
+  </Flow>
+</PsychoPy2experiment>

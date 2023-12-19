@@ -1,0 +1,889 @@
+---
+title: "behaviouralPilotAnalysis"
+author: "Tim Qiu"
+date: "17/03/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+
+#Initialization
+
+```{r}
+library(grt)
+library(tidyverse)
+library(GGally)
+library(rstatix)
+library(ggpubr)
+library(ggsci)
+```
+
+
+Color Palette = c("#086375", "#B9314F", "#5B3000", "#47682C", "#F9E0D9")
+
+
+
+
+Set working directory
+```{r}
+
+# setwd("C:/Users/Tim/Google Drive/category/analysis") #home computer
+
+setwd("C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis") #work computer
+
+```
+
+
+
+
+
+
+
+
+```{r}
+d <- read.csv("C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/ii/ppt (1).csv")
+d
+```
+
+
+
+# Functions for data extraction
+
+
+Functions for extracting II and CR data from individual ppt datafiles.
+
+Data must be named in the following format: `ppt (n).csv` where `n` is file number.
+```{r}
+
+##Extraction function data
+#extraction takes argument nppt (participant number)
+#fdir = folder directory path
+d_extract <- function(nppt, fdir){ 
+  
+  #reads in ppt datafile
+  r_data <- read.csv(paste0(fdir, "/ppt (", nppt, ").csv"))
+
+  #extracts only the ii-relevant data
+  data <- r_data %>%
+    select(participant, keymap, cpi, deg, keyLearn.keys, key_gaborTrial.keys) %>%  #select relevant columns
+    filter(!is.na(keymap)) %>%  #filter all trials that are not category
+    mutate(response = c(keyLearn.keys[1:180], key_gaborTrial.keys[181:300])) %>% #concatenate learn trials with interleaved trials
+    mutate(keymap = factor(keymap),
+           response = factor(response)) %>%
+    select(-c(keyLearn.keys,key_gaborTrial.keys))
+  
+  return(data)
+}
+
+
+d <- d_extract(nppt = 3, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/ii")
+View(d)
+
+```
+
+
+
+Functions for taking extracted data and creating performance curves
+```{r}
+
+
+
+d_curve <- function(df, cond){
+  
+  
+  id <- rep(df[1,"participant"], 5)
+
+
+  perf <- df %>%
+    mutate(corr = ifelse(keymap == response, 1, 0)) %>%                         #codes correct answers
+    mutate(block = c(rep(1, 60), rep(2, 60), rep(3, 60), rep(4, 60), rep(5,60))) %>% #creates block numbers of 5 x 60 = 300
+    mutate(block = factor(block, levels = c("1", "2", "3", "4", "5"))) %>%  #makes blocks factors
+    mutate(corr = ifelse(is.na(corr), 9, corr)) %>%  #pseudocodes NA values as '9'
+    mutate(corr = factor(corr, levels = c("0", "1", '9'), labels = c('wrong', 'right', 'none'))) %>% #makes answers factors
+    dplyr::group_by(block, .drop = FALSE) %>%  #groups by block
+    count(corr, .drop = FALSE) %>%  #counts number of each answer for each block
+    filter(corr == 'right' | corr == 'none') %>%        #gathers correct answers and NA responses
+    spread(corr, n) %>%
+    mutate(ntrial = 60 - none) %>%   #finds number of trials with non-zero answer
+    mutate(perf = right/ntrial) %>%    #computes accuracy of completed trials
+    mutate(cond = factor(cond)) %>%
+    select(cond, block, perf)
+  
+  perf <- cbind(id, perf)
+  perf <- rename(perf, id = ...1)
+  
+  return(perf)
+  
+}
+
+p <- d_curve(d, "II")
+View(p)
+```
+
+
+
+
+
+
+
+
+
+# Extracting data from participants
+
+Extract data from participants and store as "long" format.
+
+//TODO elaborate your function for screening out people who didn't learn properly
+perhaps use average of last two blocks or something like that?
+```{r}
+n <- 35+37
+
+pptLong <- data.frame()
+
+pptDumb <- 0
+
+
+#Loops through ii participants, extracts raw data and converts to long format
+for (i in 1:37){
+  
+  
+  #extracts ii/cr learning rates
+  ii_perf <- d_curve(d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/ii"), "II")
+  
+  
+  #screens out ppt who did not achieve above cutoff accuracy on the last three blocks
+  if(ii_perf$perf[4] <= 0.67){
+
+    #counts number of ppt who didn't learn at all
+    pptDumb <- pptDumb + 1
+
+  } else {
+    #appends to dataframe containing all participants
+    pptLong <- rbind(pptLong, ii_perf)
+  }
+  
+  print(i)  #print loop number for diagnosing bad datafiles
+  
+}
+
+#Loops through cr participants, extracts raw data and converts to long format
+for (i in 1:35){
+  
+  
+  #extracts ii/cr learning rates
+  cr_perf <- d_curve(d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/cr"), "CR")
+  
+  
+  #screens out ppt who did not achieve above cutoff accuracy on the last three blocks
+  if(cr_perf$perf[4] <= 0.67){
+
+    #counts number of ppt who didn't learn at all
+    pptDumb <- pptDumb + 1
+
+  } else {
+    #appends to dataframe containing all participants
+    pptLong <- rbind(pptLong, cr_perf)
+  }
+  
+  print(i)  #print loop number for diagnosing bad datafiles
+  
+}
+
+pptLong
+
+
+print(paste0("Number of removed ppt: ", pptDumb))
+print(paste0("Number of ppt left: ", (n-pptDumb)))
+
+
+
+
+
+
+
+```
+
+Problematic participants (id overlap)
+aang03
+erer03
+isor03
+
+
+
+
+
+ cr_perf <- d_curve(d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/cr"), "CR")
+  
+  cr_3ba <- cr_perf %>%   #computes mean of last 3 blocks
+    filter(block == 3 | block == 4 | block == 5)
+  cr_3ba <- mean(cr_3ba$perf)
+
+
+
+
+
+
+
+
+# Statistical Analyses
+
+
+Repeated Measures ANOVA
+```{r}
+#Change variable types to run stats
+pptLong <- pptLong %>%
+  mutate(id = factor(id)) %>%
+  mutate(block = factor(block)) %>%
+  mutate(cond = factor(cond))
+
+pptLong
+# a <- pptLong %>%
+#   count(id)
+# 
+# a
+
+#Run ANOVA model
+repaov <- anova_test(data = pptLong, 
+                     formula = perf ~ cond*block + Error(id/block))
+
+#Extract ANOVA parameters
+get_anova_table(repaov)
+
+```
+
+
+Post-hoc main effect block for each condition
+```{r}
+ph_b <- pptLong %>%
+  group_by(cond) %>%
+  anova_test(dv = perf,
+             wid = id,
+             within = block) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "holm")
+
+ph_b
+
+```
+
+Pairwise block comparisons
+```{r}
+pwb <- pptLong %>%
+  group_by(cond) %>%
+  pairwise_t_test(
+    formula = perf ~ block,
+    paired = TRUE,
+    p.adjust.method = "holm"
+  )
+
+pwb
+```
+
+
+pairwise condition comparisons
+```{r}
+ph_c <- pptLong %>%
+  group_by(block) %>%
+  pairwise_t_test(formula = perf ~ cond,
+                  detailed = TRUE) %>%
+  adjust_pvalue(method = 'bonferroni') %>%
+  add_significance()
+  
+  
+  
+ph_c
+
+```
+
+
+
+
+
+
+
+
+#define function for calcuating standard error
+se <- function(x, na.rm=FALSE) {
+  if (na.rm) x <- na.omit(x)
+  sqrt(var(x)/length(x))
+}
+
+
+# Plots
+
+Visualize by plotting means +/- ci 
+```{r}
+
+#get performance means and confidence intervals
+vizdf <- pptLong %>%
+  mutate(block = as.numeric(block)) %>%  #chg type for painfree plots
+  group_by(cond, block) %>%  #yo group_by is a lit function you can group by more than just one variable
+  summarise(perf_m = mean(perf), cilo = confint(lm(perf~1), level = 0.99)[1], cihi = confint(lm(perf~1), level = 0.99)[2])  #gets confidence interval on mean (9)
+#Note: the regression of an intercept only produces the mean perf~1
+#Note: 99% confidence interval is the bonferroni corrected of 95%
+
+
+vizdf
+pptLong
+
+learncurve <- ggplot(vizdf, aes(x = block, y = perf_m)) +
+  geom_errorbar(aes(ymin = cilo, ymax = cihi, color = cond), size = 1, width = 0.1, position = position_dodge(width = 0.2)) +
+  geom_point(aes(shape = cond, color = cond), size = 4, position = position_dodge(width = 0.2)) +
+  geom_line(aes(linetype = cond, color = cond), size = 1) +
+  scale_color_manual(name = "Condition", labels = c("II", "CR"), values = c("#086375", "#B9314F", "#5B3000", "#47682C", "#F9E0D9")) + 
+  scale_shape_manual(name = "Condition", labels = c("II", "CR"), values = c(17,19)) +
+  scale_linetype_manual(name = "Condition", labels = c("II", "CR"), values = c('solid', 'dashed')) +
+  ylim(0.60, 1.0) +
+  xlab("Blocks (60 trials)") +
+  ylab("Accuracy") +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+        axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+        axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+        axis.text = element_text(color = "black", face = "bold", size = 14),
+        legend.title = element_text(color = "black", face = "bold", size = 14),
+        legend.text = element_text(color = "black", face = "bold", size = 10)) 
+  
+  
+
+
+learncurve
+
+ggsave("C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/outputs/learncurve.png", width = 7.5, height = 7.5, dpi = 1000)
+```
+
+
+
+
+
+
+
+# Strategy Modeling
+
+//TODO modify function output for participant modeling instead of optimized for running simulations... (especially text output could probably be a dataframe or smg)
+
+Function for fitting model and determining best fit with AIC Used below for error simulations
+CR = Conjunctive, II = Info-Integ, FR = Freq Rule, OR = Orient Rule.
+```{r}
+#Function fits 4 categorization strategies and pulls AIC values for each
+#pptdata: a dataframe input with columns - category, respones, cpi, deg
+#plots: whether you want to see the decision bounds plotted, a boolean
+modelfit <- function(pptdat, plots){
+  
+  #fits CR,II models
+  cr_strat <- gcjc(response ~ cpi + deg, data = pptdat, category = pptdat$keymap, config = 1, zlimit=7)  #2D Conjunctive rule 
+  ii_strat <- glc(response ~ cpi + deg, data = pptdat, category = pptdat$keymap, zlimit=7)     #2D information integration
+  fr_strat <- glc(response ~ cpi, data = pptdat, category = pptdat$keymap, zlimit=7)           #1D frequency rule (fr)
+  or_strat <- glc(response ~ deg, data = pptdat, category = pptdat$keymap, zlimit=7)           #1D orientation rule (or)
+
+  #computes AIC for all models
+  aic_report <- AIC(cr_strat, ii_strat, fr_strat, or_strat) #returns AIC 
+  aic_report
+
+  #gets AIC from aic_report, order of AIC values are hardcoded (CR, II, FR, OR)
+  aicLabel <- c(aic_report$AIC)
+  
+  
+  #prints plots 
+  if (plots == TRUE){
+    plot.gcjc(cr_strat)
+    plot.glc(ii_strat)
+  }
+
+  return(aicLabel)
+  
+}
+```
+
+
+# Participant Strategy Modeling
+```{r}
+#initialize empty dataframe storing AIC for each condition's models
+II_aic <- data.frame()
+CR_aic <- data.frame()
+
+pptDumb <- 0
+
+#loop through all ii ppt datafiles
+for (i in 1:30){
+  
+  #extracts ii learning rates
+  ii_perf <- d_curve(d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/ii"), "II")
+  ii_resp <- d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/ii")
+  
+  
+  #screens out ppt who did not achieve above cutoff accuracy on the last three blocks
+  if(ii_perf$perf[4] <= 0.67){
+
+    #counts number of ppt who didn't learn at all
+    pptDumb <- pptDumb + 1
+
+  } else {
+    #modify response file for modeling compatibility
+    ii_resp <- ii_resp %>%
+      na.omit() %>%
+      mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+      mutate(response = ifelse(response == 0, 2, 1)) #changes 0->2 otherwise gcjc breaks
+    
+    II_aic <- rbind(II_aic, modelfit(ii_resp, FALSE))
+  }
+  
+}
+
+#loop through all cr ppt datafiles
+for (i in 1:30){
+  
+  #extracts ii learning rates
+  cr_perf <- d_curve(d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/cr"), "CR")
+  cr_resp <- d_extract(nppt = i, fdir = "C:/Users/Tim/My Drive/category_fNIRS/exp2_fnirtask/analysis/data/cr")
+  
+  
+  #screens out ppt who did not achieve above cutoff accuracy on the last three blocks
+  if(cr_perf$perf[4] <= 0.67){
+
+    #counts number of ppt who didn't learn at all
+    pptDumb <- pptDumb + 1
+
+  } else {
+    #modify response file for modeling compatibility
+    cr_resp <- cr_resp %>%
+      na.omit() %>%
+      mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+      mutate(response = ifelse(response == 0, 2, 1)) #changes 0->2 otherwise gcjc breaks
+    
+    CR_aic <- rbind(CR_aic, modelfit(cr_resp, FALSE))
+  }
+  
+}
+
+#name dataframe columns according to strategy
+colnames(II_aic) <- c("CR", "II", "FR", "OR")
+colnames(CR_aic) <- c("CR", "II", "FR", "OR")
+
+print(paste0("Number of removed ppt: ", pptDumb))
+print(paste0("Number of ppt left: ", (n-pptDumb)))
+
+II_aic
+CR_aic
+```
+
+
+# Compute proportion of categorization strategies per task
+```{r}
+#define function for finding minimum value in row
+min.col <- function(m, ...) max.col(-m, ...)
+
+#finds best fitting model strategy for II condition
+II_modfit <- II_aic %>%
+  mutate(best = colnames(II_aic)[min.col(II_aic)]) %>% #grab col (cond) name of bestfit model
+  mutate(best = factor(best, levels = c("CR", "II", "FR", "OR"))) %>% #keeps 0 counts too
+  count(best, .drop = FALSE)
+
+#compute proportion for each strategy in the II condition notation: condition_strat_prop
+II_cr_prop <- filter(II_modfit, best == "CR")[,'n'] / (sum(II_modfit$n))  #compute proportion of II-strat used in II-condition
+II_ii_prop <- filter(II_modfit, best == "II")[,'n'] / (sum(II_modfit$n))
+II_fr_prop <- filter(II_modfit, best == "FR")[,'n'] / (sum(II_modfit$n))
+II_or_prop <- filter(II_modfit, best == "OR")[,'n'] / (sum(II_modfit$n))
+II_rb_prop <- II_fr_prop + II_or_prop
+
+
+
+
+#finds best fitting model strategy for CR condition
+CR_modfit <- CR_aic %>%
+  mutate(best = colnames(CR_aic)[min.col(CR_aic)]) %>%
+  mutate(best = factor(best, levels = c("CR", "II", "FR", "OR"))) %>% #keeps 0 counts too
+  count(best, .drop = FALSE)
+
+#compute proportion for each strategy in the II condition notation: condition_strat_prop
+CR_cr_prop <- filter(CR_modfit, best == "CR")[,'n'] / (sum(CR_modfit$n)) 
+CR_ii_prop <- filter(CR_modfit, best == "II")[,'n'] / (sum(CR_modfit$n))
+CR_fr_prop <- filter(CR_modfit, best == "FR")[,'n'] / (sum(CR_modfit$n))
+CR_or_prop <- filter(CR_modfit, best == "OR")[,'n'] / (sum(CR_modfit$n))
+CR_rb_prop <- CR_fr_prop + CR_or_prop #single dimenision rb proportion (or + fr)
+
+
+
+#create dataframe storing all proportions data
+II_cond <- rep("II", 3)
+II_strat <- c("cr", "ii", "rb")
+II_prop <- c(II_cr_prop, II_ii_prop, II_rb_prop)
+II_df <- data.frame(cond = II_cond, strat = II_strat, prop = II_prop)
+
+CR_cond <- rep("CR", 3)
+CR_strat <- c("cr", "ii", "rb")
+CR_prop <- c(CR_cr_prop, CR_ii_prop, CR_rb_prop)
+CR_df <- data.frame(cond = CR_cond, strat = CR_strat, prop = CR_prop)
+
+prop_df <- rbind(II_df, CR_df) #combine into 1 dataframe
+
+prop_df <- prop_df %>%
+  mutate(se = sqrt((prop * (1-prop)) / 108)) %>%
+  mutate(sehi = prop + se) %>%
+  mutate(selo = prop - se)
+
+prop_df
+```
+
+
+
+
+//TODO visualize proportions in barchart
+```{r}
+
+stratprop <- ggplot(prop_df, aes(fill = strat, x = cond, y = prop)) +
+  geom_bar(aes(fill = strat), color = "black", position = "dodge", stat = "identity", width = .5) +
+  geom_errorbar(aes(ymin = selo, ymax = sehi, color = strat), color = "black", size = 1, width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_fill_manual(name = "Model Strategy", labels = c("CR", "II", "RB"), values = c("#086375", "#B9314F", "#5B3000", "#47682C", "#F9E0D9")) + 
+  ylim(0,1) +
+  xlab("Experimental Condition") +
+  ylab("Proportion of Best Fit Model") +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+        axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+        axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+        axis.text = element_text(color = "black", face = "bold", size = 14),
+        legend.title = element_text(color = "black", face = "bold", size = 14),
+        legend.text = element_text(color = "black", face = "bold", size = 10)) 
+
+
+stratprop
+# ggsave("C:/Users/Tim/Google Drive/category/analysis/outputs/strat-prop.png", dpi = 600)
+
+
+```
+
+
+
+
+
+
+
+
+
+
+##### ///BELOW IS CODE GRAVEYARD - TESTING GROUNDS AND SHIT
+
+
+
+
+
+
+
+```{r}
+CR_modfit
+```
+
+
+
+
+
+```{r}
+test <- ii_extract(5)
+
+#modifies file so its ready for modelfit (especially changing 0/1 to 1/2 is very important)
+test <- test %>% 
+  na.omit() %>%
+  rename(response = II_catResp.keys) %>%
+  mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+  mutate(response = ifelse(response == 0, 2, 1)) #changes 0->2 otherwise gcjc breaks
+
+modelfit(test, plots = TRUE)
+```
+
+
+
+
+
+
+Manual worked examples below
+
+Manual Version II
+```{r}
+ii_test <- ii_extract(1)
+
+ii_test <- ii_test %>% 
+  na.omit() %>%
+  rename(response = II_catResp.keys) %>%
+  mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+  mutate(response = ifelse(response == 0, 2, 1)) #changes 0->2 otherwise gcjc breaks
+  
+  
+ii_test
+
+cr_strat <- gcjc(response ~ cpi + deg, data = ii_test, category = ii_test$keymap, config = 1, zlimit=7)  #2D Conjunctive rule 
+ii_strat <- glc(response ~ cpi + deg, data = ii_test, category = ii_test$keymap, zlimit=7)
+
+aic_report <- AIC(cr_strat, ii_strat)
+
+aic_report
+plot.gcjc(cr_strat)
+plot.glc(ii_strat)
+```
+Manual Version CR
+```{r}
+cr_test <- cr_extract(1)
+
+cr_test <- cr_test %>% 
+  na.omit() %>%
+  rename(response = CR_catResp.keys) %>%
+  mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+  mutate(response = ifelse(response == 0, 2, 1)) #changes response 0->2 otherwise gcjc breaks
+  
+cr_test
+
+cr_strat <- gcjc(response ~ cpi + deg, data = cr_test, category = cr_test$keymap, config = 1, zlimit=7)  #2D Conjunctive rule 
+ii_strat <- glc(response ~ cpi + deg, data = cr_test, category = cr_test$keymap, zlimit=7)
+
+aic_report <- AIC(cr_strat, ii_strat)
+
+aic_report
+plot.gcjc(cr_strat)
+plot.glc(ii_strat)
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+parallel coordinates plot
+```{r}
+pptLong <- spread(pptLong, block, perf)
+ggparcoord(pptLong, columns = 3:7, groupColumn = 2, order = "anyClass")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+Proof of Concept Code Extracting data and curves
+```{r}
+cr_test <- cr_extract(2)
+
+cr_perf <- cr_test %>%
+  mutate(corr = ifelse(keymap == CR_catResp.keys, 1, 0)) %>%                         #codes correct answers
+  mutate(block = c(rep(1, 60), rep(2, 60), rep(3, 60), rep(4, 60), rep(5,60))) %>%   #creates block numbers of 5 x 60 = 300
+  dplyr::count(corr, block) %>%   #creates a "count" df
+  filter(corr == 1) %>%        #only selects correct answers
+  mutate(perf = n/60) %>%    #computes accuracy %
+  mutate(cond = factor(rep("CR", 5))) %>%  #adds condition label
+  mutate(block = factor(block)) %>%
+  select(cond, block, perf)
+
+cr_perf
+
+```
+
+
+
+
+
+
+
+Functions for extracting learning curves
+```{r}
+ii_curve <- function(nppt){
+  
+  #reads in ppt datafile
+  ii_data <- read.csv(paste0("C:/Users/Tim/Google Drive/category/analysis/pav", nppt, ".csv"))
+  
+  #extracts only the ii-learning curve
+  ii_data <- ii_data %>%
+    select(keymap, freq, orient, II_catResp.keys) %>%
+    slice(1:120) %>%
+    mutate(corr = ifelse(keymap == II_catResp.keys, 1, 0)) %>%   #codes correct answers
+    mutate(block = c(rep(1, 30), rep(2, 30), rep(3, 30), rep(4, 30))) %>%   #creates block numbers of 4 x 30 = 120
+    dplyr::count(corr, block) %>%  #counts per block
+    filter(corr == 1) %>%
+    mutate(perf = n/30) %>%
+    mutate(block = factor(block)) %>%
+    mutate(cond = factor(rep("II", 4))) %>% #add condition label
+    mutate(ppt = factor(rep(nppt, 4))) %>% #add participant number
+    select(ppt, cond, block, perf)
+  
+  return(ii_data)
+}
+
+cr_curve <- function(nppt){
+  
+  #reads in ppt datafile
+  cr_data <- read.csv(paste0("C:/Users/Tim/Google Drive/category/analysis/pav", nppt, ".csv"))
+  
+  #extracts only the cr-learning curve
+  cr_data <- cr_data %>%
+    select(keymap, freq, orient, CR_catResp.keys) %>%
+    slice(121:240) %>%
+    mutate(corr = ifelse(keymap == CR_catResp.keys, 1, 0)) %>%   #codes correct answers
+    mutate(block = c(rep(1, 30), rep(2, 30), rep(3, 30), rep(4, 30))) %>%   #creates block numbers of 4 x 30 = 120
+    dplyr::count(corr, block) %>%  #counts per block
+    filter(corr == 1) %>%
+    mutate(perf = n/30) %>%
+    mutate(block = factor(block)) %>%
+    mutate(cond = factor(rep("cr", 4))) %>% #add condition label
+    mutate(ppt = factor(rep(nppt, 4))) %>% #add participant number
+    select(ppt, cond, block, perf)
+  
+  return(cr_data)
+}
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//better function elsewhere??
+```{r}
+#function for after data has been extracted
+#fits conjunctive and diagonal models and selects best model based on AIC
+#returns string designating best-fit model
+modelfit <- function(dati, cond){
+
+    dati <- na.omit(dati) #delete NA rows
+  
+    if (cond == "CR"){ #fits both II/CR strats depending on experimental condition 
+      cr_strat <- gcjc(CR_catResp.keys ~ freq + orient, data = dati, category = dati$keymap, config = 1)
+      ii_strat <- glc(CR_catResp.keys ~ freq + orient, data = dati, category = dati$keymap, zlimit=7)
+    } else if (cond == "II"){
+      cr_strat <- gcjc(II_catResp.keys ~ freq + orient, data = dati, category = dati$keymap, config = 1)
+      ii_strat <- glc(II_catResp.keys ~ freq + orient, data = dati, category = dati$keymap, zlimit=7)
+    } else {
+      print("Experimental condition for input datafile not specified")
+    }
+  
+  aic_report <- AIC(cr_strat, ii_strat) #returns AIC 
+  
+  cr_score <- aic_report[1,2]
+  ii_score <- aic_report[2,2]
+  
+  if(cr_score < ii_score){  #lower AIC is better model
+    return("CR")
+  } else if (ii_score < cr_score){
+    return("II")
+  } else {
+    return("NA")
+  } #returns ppt strategy use as string
+  
+}
+
+
+
+```
+
+
+
+
+
+
+
+COPY OF WORKING code
+
+cr_curve <- function(cr_df){
+  
+  id <- rep(cr_df[1,"participant"], 5)
+
+
+  cr_perf <- cr_df %>%
+  mutate(corr = ifelse(keymap == CR_catResp.keys, 1, 0)) %>%                         #codes correct answers
+  mutate(block = c(rep(1, 60), rep(2, 60), rep(3, 60), rep(4, 60), rep(5,60))) %>%   #creates block numbers of 5 x 60 = 300
+  dplyr::count(corr, block) %>%   #creates a "count" df
+  filter(corr == 1) %>%        #only selects correct answers
+  mutate(perf = n/60) %>%    #computes accuracy %
+  mutate(cond = factor(rep("CR", 5))) %>%  #adds condition label
+  # mutate(block = factor(block)) %>%
+  select(cond, block, perf)
+  
+  cr_perf <- cbind(id, cr_perf)
+  
+  return(cr_perf)
+  
+}
+
+
+
+
+TESTBLOCK
+
+```{r}
+ii_df <- ii_extract(5)
+
+
+id <- rep(ii_df[1,"participant"], 5)
+
+
+ii_perf <- ii_df %>%
+  mutate(corr = ifelse(keymap == II_catResp.keys, 1, 0)) %>%                         #codes correct answers
+  mutate(block = c(rep(1, 60), rep(2, 60), rep(3, 60), rep(4, 60), rep(5,60))) %>%   #creates block numbers of 5 x 60 = 300
+  mutate(block = factor(block, levels = c("1", "2", "3", "4", "5"))) %>%  #makes blocks factors
+  mutate(corr = ifelse(is.na(corr), 9, corr)) %>%  #pseudocodes NA values as '9'
+  mutate(corr = factor(corr, levels = c("0", "1", '9'), labels = c('wrong', 'right', 'none'))) %>% #makes answers factors
+  dplyr::group_by(block, .drop = FALSE) %>%  #groups by block
+  count(corr, .drop = FALSE) %>%  #counts number of each answer for each block
+  filter(corr == 'right' | corr == 'none') %>%        #gathers correct answers and NA responses
+  spread(corr, n) %>%
+  mutate(ntrial = 60 - none) %>%   #finds number of trials with non-zero answer
+  mutate(perf = right/ntrial) %>%    #computes accuracy of completed trials
+  mutate(cond = factor("II")) %>%
+  select(cond, block, perf)
+  
+ii_perf <- cbind(id, ii_perf)
+
+ii_perf
+```
+
+
+
+
+
+
+
+

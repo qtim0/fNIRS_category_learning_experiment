@@ -1,0 +1,1148 @@
+---
+title: "R Notebook"
+output: html_notebook
+---
+
+
+Load packages
+```{r, message = FALSE, echo = FALSE, warning = FALSE}
+library(janitor)
+library(stringr)
+library(reshape2)
+library(Rcpp)
+library(rstatix)
+library(lme4)
+library(lmerTest)
+library(ggpubr)
+library(grt)
+library(tidyverse)
+library(ggsci)
+library(latex2exp)
+options(digits=4)
+```
+
+
+
+
+
+# Load Data for REST contrasts (t = 4,16)
+
+Load in and modify channel index
+This file is used to label channel numbers
+//TODO add left/right to chindex
+```{r}
+ch_index <- read.csv('channel_index.csv')
+
+ch_index <- ch_index %>%
+  mutate(NIRx_index = paste0(NIRx_src, '_', NIRx_det)) %>%
+  mutate(fOLD_ch = paste0('ch_', fOLD_ch),
+         NIRx_ch = paste0('ch_', NIRx_ch))
+
+ch_index
+```
+
+
+Load the preprocessed HRF data.
+This has been exported from the Homer3 environment.
+```{r}
+
+# setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/hrf/")
+setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/nirs_group/beta_rest/")
+
+nkey <- Sys.glob("*.csv")  #read in ppt filenames
+
+rawbeta_restc <- list()  #Loads hrf into list while preserving key-value names
+for (i in nkey){
+  rawbeta_restc[[i]] <- read.csv(i, header = FALSE)
+  print(i)
+}
+
+# rawbeta_restc[[4]]
+# rawbeta_restc[[5]]
+# rawbeta_restc[[6]]
+# rawbeta_restc[[7]]
+
+print(paste0("number of files: ", length(rawbeta_restc)))
+```
+
+
+
+Clean the beta data for rest condition
+Get proper names, condition, orders etc.
+```{r}
+vch <- c()
+for (i in 1:22){
+  vch <- c(vch, paste0('ch_', i))
+}
+vch
+
+lbeta <- list()   #make clean betas
+
+for (i in names(rawbeta_restc)){
+  
+  print(i)
+  
+  lbeta[[i]] <- rawbeta_restc[[i]] %>%
+    dplyr::select(V1, V2, V4) %>%
+    rename('b_CATG' = 'V1',
+           'b_CTRL' = 'V2',
+           'b_REST' = 'V4') %>%
+    mutate(NIRx_ch = vch) %>%            #assign nirx channel numbers
+    mutate(pptid = substr(i, 1, 6)) %>%
+    mutate(cond = substr(i, 8, 9)) %>%
+    mutate(order = substr(i, 11, 11)) %>%
+    left_join(ch_index, by = 'NIRx_ch') %>%
+    dplyr::select(pptid, cond, order, fOLD_ch, b_CATG, b_CTRL, b_REST)
+}
+
+lbeta[[69]]  #show 1 listbeta
+
+
+#Generate aggregate beta dataframe in long format
+beta <- data.frame()
+for(i in names(lbeta)){
+  beta <- rbind(beta, lbeta[[i]])
+}
+
+#clean final beta dataframe
+
+scalar = 1e4  #convert M to uM
+
+beta_restc <- beta %>%
+  mutate(b_CATG = b_CATG * scalar) %>%
+  mutate(b_CTRL = b_CTRL * scalar) %>%
+  mutate(b_REST = b_REST * scalar) %>%
+  mutate(b_CATG = ifelse(b_CATG == 0, NA, b_CATG)) %>%
+  mutate(b_CTRL = ifelse(b_CTRL == 0, NA, b_CTRL)) %>%
+  mutate(b_REST = ifelse(b_REST == 0, NA, b_REST)) %>%
+  mutate(catgrest = b_CATG - b_REST) %>%
+  mutate(catgctrl = b_CATG - b_CTRL) %>%
+  mutate(ctrlrest = b_CTRL - b_REST)
+
+beta_restc
+```
+
+
+
+
+# Load Data for TASK contrasts (t = 5-20)
+
+Load in and modify channel index
+This file is used to label channel numbers
+//TODO add left/right to chindex
+```{r}
+ch_index <- read.csv('channel_index.csv')
+
+ch_index <- ch_index %>%
+  mutate(NIRx_index = paste0(NIRx_src, '_', NIRx_det)) %>%
+  mutate(fOLD_ch = paste0('ch_', fOLD_ch),
+         NIRx_ch = paste0('ch_', NIRx_ch))
+
+ch_index
+```
+
+
+Load the preprocessed HRF data.
+This has been exported from the Homer3 environment.
+```{r}
+
+# setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/hrf/")
+setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/nirs_group/beta_task/")
+
+nkey <- Sys.glob("*.csv")  #read in ppt filenames
+
+rawbeta_taskc <- list()  #Loads hrf into list while preserving key-value names
+for (i in nkey){
+  rawbeta_taskc[[i]] <- read.csv(i, header = FALSE)
+  print(i)
+}
+
+# rawbeta_restc[[4]]
+# rawbeta_restc[[5]]
+# rawbeta_restc[[6]]
+# rawbeta_restc[[7]]
+
+print(paste0("number of files: ", length(rawbeta_taskc)))
+```
+
+
+
+Clean the beta data
+Get proper names, condition, orders etc.
+```{r}
+vch <- c()
+for (i in 1:22){
+  vch <- c(vch, paste0('ch_', i))
+}
+vch
+
+lbeta <- list()   #make clean betas
+for (i in names(rawbeta_taskc)){
+  lbeta[[i]] <- rawbeta_taskc[[i]] %>%
+    dplyr::select(V1, V2, V4) %>%
+    rename('b_CATG' = 'V1',
+           'b_CTRL' = 'V2',
+           'b_REST' = 'V4') %>%
+    mutate(NIRx_ch = vch) %>%            #assign nirx channel numbers
+    mutate(pptid = substr(i, 1, 6)) %>%
+    mutate(cond = substr(i, 8, 9)) %>%
+    mutate(order = substr(i, 11, 11)) %>%
+    left_join(ch_index, by = 'NIRx_ch') %>%
+    dplyr::select(pptid, cond, order, fOLD_ch, b_CATG, b_CTRL, b_REST)
+}
+
+lbeta[[69]]  #show 1 listbeta
+
+
+#Generate aggregate beta dataframe in long format
+beta <- data.frame()
+for(i in names(lbeta)){
+  beta <- rbind(beta, lbeta[[i]])
+}
+
+#clean final beta dataframe
+
+scalar = 1e3 #convert M to uM
+
+beta_taskc <- beta %>%
+  mutate(b_CATG = b_CATG * scalar) %>%
+  mutate(b_CTRL = b_CTRL * scalar) %>%
+  mutate(b_REST = b_REST * scalar) %>%
+  mutate(b_CATG = ifelse(b_CATG == 0, NA, b_CATG)) %>%
+  mutate(b_CTRL = ifelse(b_CTRL == 0, NA, b_CTRL)) %>%
+  mutate(b_REST = ifelse(b_REST == 0, NA, b_REST)) %>%
+  mutate(catgrest = b_CATG - b_REST) %>%
+  mutate(catgctrl = b_CATG - b_CTRL) %>%
+  mutate(ctrlrest = b_CTRL - b_REST)
+
+beta_taskc
+```
+
+
+
+
+
+
+
+
+
+# SECOND-LEVEL MODELING
+
+
+
+## Behavioural Analyses
+
+//TODO modeling and add into mixed models.
+
+Define functions for extracting behavioural dataframe, flexible for both conditions.
+```{r}
+#wd must be this for behav_extract to work
+setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/behav/")
+
+
+#Takes two arguments, the participant number and the condition.
+#returns cleaned behavioural data
+behav_extract <- function(n, cond){
+  
+  
+  #checks condition and extracts data based on condition
+  if(cond == "CR"){
+    behav_raw <- read.csv(paste0("behav_CR (", n ,").csv"))
+  } else if (cond == "II"){
+    behav_raw <- read.csv(paste0("behav_II (", n ,").csv"))
+  } else {
+    print("condition not specified")
+    stop()
+  }
+
+  #clean data
+  behav_tb <- behav_raw %>%
+    as_tibble() %>%
+    dplyr::select(participant, cpi, deg, keymap, stimID, keyLearn.keys, key_gaborTrial.keys) %>%
+    mutate(stimID = na_if(stimID, ""),       #cleans "" and "None" entries
+           keyLearn.keys = na_if(keyLearn.keys, ""),
+           keyLearn.keys = na_if(keyLearn.keys, "None"),
+           key_gaborTrial.keys = na_if(key_gaborTrial.keys, ""),
+           key_gaborTrial.keys = na_if(key_gaborTrial.keys, "None"),
+           keyLearn.keys = as.numeric(keyLearn.keys),
+           key_gaborTrial.keys = as.numeric(key_gaborTrial.keys),
+           keypress = coalesce(keyLearn.keys, key_gaborTrial.keys),
+           corr = ifelse(is.na(keypress), NA, ifelse(keymap == keypress, 1, 0)), #checks if correct while maintaining null responses
+           cond = cond) %>%
+    drop_na(stimID) %>% #gets rid of trials that are not gabor
+    dplyr::select(!c(keyLearn.keys, key_gaborTrial.keys))
+  
+  return(behav_tb)
+}
+
+
+
+#Takes tidy data from behav_extract() as input
+#outputs performance curve df
+behav_curve <- function(x){
+
+  curve_tb <- x %>%
+  mutate(block = c(rep(1, 60), rep(2, 60), rep(3, 60), rep(4, 60), rep(5, 60))) %>% #assign block number
+  group_by(participant, cond, block) %>%
+  mutate(corr = addNA(corr)) %>%
+  count(corr, .drop = FALSE) %>%
+  mutate(corr = as.character(corr)) %>%
+  mutate(corr = ifelse(is.na(corr), "x", corr)) %>% #change na to 'x' for no response
+  filter(corr == 1 | corr == 'x') %>%  #count num correct and na
+  spread(corr, n) %>%
+  rename(noresp = "x", corr = "1") %>%
+  mutate(noresp = ifelse(is.na(noresp), 0, noresp)) %>%
+  mutate(ntrial = 60 - noresp) %>%
+  mutate(perf = corr / ntrial) %>%
+  dplyr::select(participant, cond, block, perf)
+
+  return(curve_tb)
+
+}
+
+
+#demo
+setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/behav/")
+x <- behav_extract(2, "CR")
+
+  curve_tb <- x %>%
+  mutate(block = c(rep(1, 60), rep(2, 60), rep(3, 60), rep(4, 60), rep(5, 60))) %>% #assign block number
+  group_by(participant, cond, block) %>%
+  mutate(corr = addNA(corr)) %>%
+  count(corr, .drop = FALSE) %>%
+  mutate(corr = as.character(corr)) %>%
+  mutate(corr = ifelse(is.na(corr), "x", corr)) %>% #change na to 'x' for no response
+  filter(corr == 1 | corr == 'x') %>%  #count num correct and na
+  spread(corr, n) %>%
+  rename(noresp = "x", corr = "1") %>%
+  mutate(noresp = ifelse(is.na(noresp), 0, noresp)) %>%
+  mutate(ntrial = 60 - noresp) %>%
+  mutate(perf = corr / ntrial) %>%
+  dplyr::select(participant, cond, block, perf)
+  
+curve_tb
+
+
+
+
+# y <- behav_curve(x)
+# 
+# x
+# y
+```
+
+
+
+
+Extract cleandata from all participants.
+Extract separate files for CR/II and smush them together 
+```{r}
+#wd must be this for behav_extract to work
+setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/behav/")
+
+#extract CR data
+pptperf_cr <- tibble()
+for (i in 1:47){
+  print(i)
+  
+  pptdat <- behav_extract(i, "CR")
+  pptcurve <- behav_curve(pptdat)
+  
+  pptperf_cr <- rbind(pptperf_cr, pptcurve)
+}
+
+#extract II data
+pptperf_ii <- tibble()
+for (i in 1:45){
+  print(i)
+  
+  pptdat <- behav_extract(i, "II")
+  pptcurve <- behav_curve(pptdat)
+  
+  pptperf_ii <- rbind(pptperf_ii, pptcurve)
+}
+
+#combine
+pptperf <- rbind(pptperf_cr, pptperf_ii)
+
+pptperf_cr
+pptperf_ii
+pptperf
+
+```
+
+
+Brief viz together
+```{r}
+#get performance means and confidence intervals
+vizdf <- pptperf %>%
+  mutate(block = as.numeric(block)) %>%  #chg type for painfree plots
+  group_by(cond, block) %>%  #yo group_by is a lit function you can group by more than just one variable
+  summarise(perf_m = mean(perf, na.rm = TRUE),
+            cilo = confint(lm(perf~1))[1],
+            cihi = confint(lm(perf~1))[2])  #gets confidence interval on mean
+#Note: the regression of an intercept only produces the mean perf~1
+
+learncurve <- ggplot(data = vizdf,
+       mapping = aes(x = block, y = perf_m)) + 
+  geom_errorbar(aes(ymin = cilo, ymax = cihi, color = cond), size = 1, width = 0.1, position = position_dodge(width = 0.2)) +
+  geom_point(aes(shape = cond, color = cond), size = 4, position = position_dodge(width = 0.2)) +
+  geom_line(aes(linetype = cond, color = cond), size = 1) +
+  scale_color_manual(name = "Condition", labels = c("RB", "II"), values = c("#086375", "#B9314F", "#5B3000", "#47682C", "#F9E0D9")) + 
+  scale_shape_manual(name = "Condition", labels = c("RB", "II"), values = c(17,19)) +
+  scale_linetype_manual(name = "Condition", labels = c("RB", "II"), values = c('solid', 'dashed')) +
+  ylim(0.70, 0.95) +
+  xlab("Blocks (60 trials)") +
+  ylab("Accuracy") +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+        axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+        axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+        axis.text = element_text(color = "black", face = "bold", size = 14),
+        legend.title = element_text(color = "black", face = "bold", size = 14),
+        legend.text = element_text(color = "black", face = "bold", size = 10)) 
+
+ggsave(plot = learncurve, "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/outputs/exp3-learn-curve.png", dpi = 1000)
+learncurve
+```
+
+
+
+
+Behavioural Stats
+
+Repeated Measures ANOVA
+```{r}
+pptlist <- c('alnd06', 'amot96', 'anve09', 'asca01', 'asta05', 'aywa58', 'cang09', 'caon12', 'daer10', 'diry06', 'ebon04', 'elod06', 'elun02', 'enod03', 'erng43', 'eror06', 'errn04', 'erwa04', 'eyge08', 'ghon08', 'hare99', 'iaam10', 'iamm11', 'idod07', 'ieay11', 'inds03', 'irni08', 'ison04', 'juer07', 'lars98', 'lyor04', 'maan08', 'murn03', 'nand12', 'naod04', 'ngiu02', 'oele04', 'onia06', 'road04', 'saey06', 'sige01', 'yack04', 'yall02')
+
+#Change variable types to run stats
+aovdf <- pptperf %>%
+  mutate(participant = factor(participant)) %>%
+  mutate(block = factor(block)) %>%
+  mutate(cond = factor(cond)) %>%
+  ungroup() %>%
+  filter(participant %in% pptlist)
+
+
+
+aovdf
+
+#Run ANOVA model
+repaov <- anova_test(data = aovdf, 
+                     dv = perf, 
+                     wid = participant,
+                     within = c(cond, block))
+
+#Extract ANOVA parameters
+get_anova_table(repaov)
+
+```
+
+
+Post-hoc main effect block for each condition
+```{r}
+ph_b <- pptperf %>%
+  group_by(cond) %>%
+  anova_test(dv = perf,
+             wid = participant,
+             within = block) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "holm")
+
+ph_b
+
+```
+
+Pairwise block comparisons
+```{r}
+pwb <- pptperf %>%
+  group_by(cond) %>%
+  pairwise_t_test(
+    formula = perf ~ block,
+    paired = TRUE,
+    p.adjust.method = "holm"
+  )
+
+pwb
+```
+
+pairwise condition comparisons
+```{r}
+ph_c <- pptperf %>%
+  group_by(block) %>%
+  anova_test(dv = perf,
+             wid = participant,
+             within = cond) %>%
+  get_anova_table() %>%
+  adjust_pvalue(method = "holm")
+
+ph_c
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+## Strategy Modeling
+
+//TODO modify function output for participant modeling instead of optimized for running simulations... (especially text output could probably be a dataframe or smg)
+
+Function for fitting model and determining best fit with AIC Used below for error simulations
+CR = Conjunctive, II = Info-Integ, FR = Freq Rule, OR = Orient Rule.
+```{r}
+#Function fits 4 categorization strategies and pulls AIC values for each
+#pptdata: a dataframe input with columns - category, respones, cpi, deg
+#plots: whether you want to see the decision bounds plotted, a boolean
+modelfit <- function(pptdat, plots){
+  
+  #fits CR,II models
+  cr_strat <- gcjc(keypress ~ cpi + deg, data = pptdat, category = pptdat$keymap, config = 1, zlimit=7)  #2D Conjunctive rule 
+  ii_strat <- glc(keypress ~ cpi + deg, data = pptdat, category = pptdat$keymap, zlimit=7)     #2D information integration
+  fr_strat <- glc(keypress ~ cpi, data = pptdat, category = pptdat$keymap, zlimit=7)           #1D frequency rule (fr)
+  or_strat <- glc(keypress ~ deg, data = pptdat, category = pptdat$keymap, zlimit=7)           #1D orientation rule (or)
+
+  #computes AIC for all models
+  aic_report <- AIC(cr_strat, ii_strat, fr_strat, or_strat) #returns AIC 
+  aic_report
+
+  #gets AIC from aic_report, order of AIC values are hardcoded (CR, II, FR, OR)
+  aicLabel <- c(aic_report$AIC)
+  
+  
+  #prints plots 
+  if (plots == TRUE){
+    plot.gcjc(cr_strat)
+    plot.glc(ii_strat)
+  }
+
+  return(aicLabel)
+  
+}
+```
+
+
+
+Extract raw response data
+```{r}
+#wd must be this for behav_extract to work
+setwd("C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/behav/")
+
+#extract CR data
+pptresp_cr <- tibble()
+for (i in 1:40){
+  print(i)
+  
+  pptdat <- behav_extract(i, "CR") %>%
+    na.omit %>%
+    mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+    mutate(keypress = ifelse(keypress == 0, 2, 1)) #changes 0->2 otherwise gcjc breaks
+  
+  pptresp_cr <- rbind(pptresp_cr, pptdat)
+}
+
+#extract II data
+pptresp_ii <- tibble()
+for (i in 1:38){
+  print(i)
+  
+  pptdat <- behav_extract(i, "II") %>%
+    na.omit() %>%
+    mutate(keymap = ifelse(keymap == 0, 2, 1)) %>% #changes 0->2 otherwise gcjc breaks
+    mutate(keypress = ifelse(keypress == 0, 2, 1)) #changes 0->2 otherwise gcjc breaks
+    
+  pptresp_ii <- rbind(pptresp_ii, pptdat) 
+}
+
+#combine
+pptresp <- rbind(pptresp_cr, pptresp_ii) %>%
+  mutate(ukey = paste0(participant, "_", cond))
+
+pptresp
+```
+
+
+
+
+
+Fit the computational models and extract AIC
+```{r}
+pptid <- unique(pptresp$ukey)  #get unique pptid names
+
+pptaic <- data.frame(matrix(ncol = 5, nrow = 1))
+colnames(pptaic) <- c("ukey", "cr", "ii", "fr", "or")
+pptaic
+
+for (i in pptid){
+  
+  #dplyr::select only one unique key' (run) data
+  moddf <- pptresp %>%
+    filter(ukey == i)
+
+  #run the model and acquire AICs
+  tempaic <- modelfit(moddf, plots = FALSE)
+  tempaic <- c(i, tempaic) #add pptid
+
+  pptaic <- rbind(pptaic, tempaic)
+  
+}
+
+pptaic <- pptaic %>%
+  na.omit() %>%
+  mutate(strat = ifelse(ii < cr & ii < fr & ii < or,   #checks if ii is bestfit, otherwise it is rb
+                        'ii',
+                        'rb')) %>%
+  mutate(strat = factor(strat, levels = c("rb", "ii"))) %>%
+  mutate(bound = ifelse(ii < cr & ii < fr & ii < or,
+                        'ii',
+                        ifelse(cr < ii & cr < fr & cr < or,
+                               'cr',
+                               'rb'))) %>%
+  mutate(bound = factor(bound, levels = c("ii", "rb", "cr")))
+
+pptaic
+```
+
+
+
+
+
+//TODO visualize proportions in barchart
+```{r}
+prop_df <- pptaic %>%
+  mutate(cond = substr(ukey, 8,9)) %>%
+  group_by(cond, strat) %>%
+  summarise(count = n(),
+            prop = count / (nrow(pptaic) / 2),
+            se = sqrt((prop * (1-prop)) / sum(count))) %>%
+  mutate(sehi = prop + se) %>%
+  mutate(selo = prop - se) %>%
+  mutate(selo = ifelse(selo < 0, 0.01, selo))
+
+prop_df
+
+
+stratprop <- ggplot(prop_df, aes(fill = strat, x = cond, y = prop)) +
+  geom_bar(aes(fill = strat), color = "black", position = "dodge", stat = "identity", width = .5) +
+  geom_errorbar(aes(ymin = selo, ymax = sehi, color = strat), color = "black", size = 1, width = 0.1, position = position_dodge(width = 0.5)) +
+  scale_fill_manual(name = "Model Strategy", labels = c("RB", "II"), values = c("#086375", "#B9314F", "#5B3000", "#47682C", "#F9E0D9")) + 
+  scale_x_discrete(labels = c("RB", "II")) +
+  ylim(0,1) +
+  xlab("Experimental Condition") +
+  ylab("Proportion of Best Fit Model") +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+        axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+        axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+        axis.text = element_text(color = "black", face = "bold", size = 14),
+        legend.title = element_text(color = "black", face = "bold", size = 14),
+        legend.text = element_text(color = "black", face = "bold", size = 10)) 
+
+# ggsave("C:/Users/Tim/Google Drive/category/analysis/outputs/strat-prop.png", dpi = 600)
+
+stratprop
+
+ggsave(plot = stratprop,
+       filename = "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/outputs/exp3-strat-prop.png",
+       width = 7,
+       height = 7,
+       units = "in",
+       dpi = 1000)
+```
+
+
+
+
+
+
+
+## Mixed Modeling
+
+//TODO add computational modelings
+//TODO add all relevant contrasts into the same dataframe...
+
+
+```{r}
+#Clean the behavioural dataframe
+df_perf = pptperf %>%
+  filter(block == 3 | block == 4 | block == 5) %>%
+  group_by(participant, cond) %>%
+  summarise(m_perf = mean(perf, na.rm = TRUE)) %>%
+  ungroup() %>%
+  mutate(z_perf = (m_perf - mean(m_perf)) / sd(m_perf))
+
+df_perf
+```
+
+
+
+gather results in a clean dataframe
+double left join to both the behavioural and modeling data
+```{r}
+vch <- c()
+for (i in 1:18){
+  vch <- c(vch, paste0('ch_', i))
+}
+
+dfmixmod <- beta_restc %>%
+  dplyr::select(!c(b_CATG, b_CTRL, b_REST, ctrlrest)) %>%
+  left_join(df_perf, by = c('pptid' = 'participant', 'cond' = 'cond')) %>%
+  mutate(ukey = paste0(pptid, '_', cond)) %>%
+  relocate(ukey) %>%
+  left_join(pptaic, by = 'ukey') %>%
+  dplyr::select(fOLD_ch, pptid, cond, order, strat, bound, z_perf, catgrest, catgctrl) %>%
+  rename(zperf = z_perf) %>%
+  mutate(pptid = factor(pptid),
+         cond = factor(cond, levels = c('II', 'CR')),
+         order = factor(order),
+         strat = factor(strat, levels = c('ii', 'rb')))
+
+dfmixmod
+
+```
+
+
+
+
+
+
+Run the model channel-wise and refine to acquire significant predictors  FULL MODEL
+```{r, echo = T, results = 'hide'}
+modlist <- list()
+reflist <- list()
+for (i in vch){
+  
+  #channel wise modeling
+  dfchmod <- dfmixmod %>%
+    filter(fOLD_ch == i) %>%
+    na.omit()
+  
+  lmod <- lm(formula = catgrest ~ order * zperf * cond, data = dfchmod)
+
+  refmod <- step(lmod, direction = 'both')
+  
+  modlist[[i]] <- summary(lmod)
+  reflist[[i]] <- summary(refmod)
+}
+```
+
+
+
+
+
+Show full model results
+```{r}
+for (i in names(modlist)){
+   print(i)
+   print(modlist[[i]])
+}
+```
+
+
+Show refined model results
+```{r}
+#print model results
+for (i in names(reflist)){
+   print(i)
+   print(reflist[[i]])
+}
+```
+
+
+
+
+Gather and show only models with significant fixed effects
+```{r}
+siglist <- list()
+
+for (i in names(reflist)){
+  
+  checkdf <- reflist[[i]]$coefficients %>%  #grab fixed effects dataframe from refined model
+    as.data.frame() %>%
+    rename("pval" = "Pr(>|t|)")
+  
+  checkp <- checkdf$pval   #grab vector of pvalues on F of regressor
+  
+  if (any(checkp < .05)){   #if any significant regressors
+    siglist[[i]] <- reflist[[i]]  #store model object with 
+    print(i)
+    print(reflist[[i]])  #print to show significant 
+    print("-----------------------------------------------------------------")
+  }
+  
+}
+```
+
+
+
+
+
+Gather results of full models in one dataframe (statdf)
+```{r}
+fullstatdf <- data.frame() #initialize
+
+for (i in names(modlist)){
+  
+  tempstat <- coef(modlist[[i]]) %>%
+    data.frame() %>%
+    rename(beta = Estimate,
+          se = Std..Error,
+          t = t.value,
+          p = Pr...t..) %>%
+    rownames_to_column(var = "reg") %>%
+    mutate(reg = ifelse(reg == "(Intercept)", "int", reg)) %>% #change "intercept" to "int"
+    dplyr::select(reg, beta, se, t, p) %>%
+    mutate(ch = i) %>%
+    relocate(ch)
+  
+  fullstatdf <- rbind(fullstatdf, tempstat)
+  
+}
+
+fullstatdf <- fullstatdf %>%
+  filter(ch != 'ch_19' & ch != 'ch_20', ch != 'ch_21', ch != 'ch_22') %>%
+  mutate(mod = "full") %>%
+  relocate(mod, .after = ch) %>%
+  mutate(testid = paste0(ch, "_", reg)) %>%
+  relocate(testid)
+
+fullstatdf
+```
+
+
+
+
+Gather results of refined, significant models into one dataframe
+```{r}
+sigstatdf <- data.frame() #initialize
+
+for (i in names(siglist)){
+  
+  print(i)
+  
+  tempstat <- siglist[[i]] %>%
+    coef() %>%
+    data.frame() %>%
+    rename(beta = Estimate,
+          se = Std..Error,
+          t = t.value,
+          p = Pr...t..) %>%
+    rownames_to_column(var = "reg") %>%
+    mutate(reg = ifelse(reg == "(Intercept)", "int", reg)) %>% #change "intercept" to "int"
+    dplyr::select(reg, beta, se, t, p) %>%
+    mutate(ch = i) %>%
+    relocate(ch)
+    
+
+  sigstatdf <- rbind(sigstatdf, tempstat)
+
+}
+
+sigstatdf <- sigstatdf %>%
+  filter(ch != 'ch_19' & ch != 'ch_20', ch != 'ch_21', ch != 'ch_22') %>%
+  mutate(mod = "sig") %>%
+  relocate(mod, .after = ch) %>%
+  mutate(testid = paste0(ch, "_", reg)) %>%
+  relocate(testid)
+
+sigstatdf
+```
+
+
+
+Combine significant models with insignificant model results
+```{r}
+
+aggstatdf <- fullstatdf %>%
+  filter(!(testid %in% sigstatdf$testid)) %>%
+  rbind(sigstatdf) %>%
+  mutate(ch_n = substring(ch, 4)) %>%
+  mutate(ch_n = as.numeric(ch_n)) %>%
+  relocate(ch_n, .after = ch) %>%
+  arrange(ch_n)
+
+aggstatdf
+
+```
+
+
+
+
+
+
+
+
+Print to file the stats associated with condition
+```{r}
+sigcond <- aggstatdf %>%
+  # filter(p < .05) %>%
+  # filter(grepl(pattern = "condCR", x = reg, ignore.case = TRUE)) %>%
+  filter(reg == "condCR") %>%
+  rename(fOLD_ch = ch, statistic = t) %>%
+  left_join(ch_index) %>%
+  rename(channel = fOLD_ch,
+         tstat = statistic,
+         sens = Sensitivity) %>%
+  dplyr::select(channel, reg, beta, se, tstat, p, sens, ROI_BA, x, y, z, Side)
+  # mutate(padj = p.adjust(p, method = "fdr", n = 6)) %>%
+  # relocate(padj, .after = p)
+  
+
+sigcond
+write.csv(sigcond, "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/visdf/mod_crii_cond.csv")
+
+```
+
+
+
+
+
+Print to file the stats associated with perf
+```{r}
+sigperf <- aggstatdf %>%
+  # filter(p < .05) %>%
+  # filter(grepl(pattern = "zperf", x = reg, ignore.case = TRUE)) %>%
+  filter(reg == "zperf") %>%
+  rename(fOLD_ch = ch, statistic = t) %>%
+  left_join(ch_index) %>%
+  rename(channel = fOLD_ch,
+         tstat = statistic,
+         sens = Sensitivity) %>%
+  select(channel, reg, beta, se, tstat, p, sens, ROI_BA, x, y, z, Side)
+
+sigperf
+write.csv(sigperf, "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/visdf/mod_crii_zperf.csv")
+
+```
+
+
+
+
+Print to file the stats associated with perf:condCR
+```{r}
+sigperf <- aggstatdf %>%
+  # filter(p < .05) %>%
+  filter(reg == "zperf:condCR") %>%
+  rename(fOLD_ch = ch, statistic = t) %>%
+  left_join(ch_index) %>%
+  rename(channel = fOLD_ch,
+         tstat = statistic,
+         sens = Sensitivity) %>%
+  select(channel, reg, beta, se, tstat, p, sens, ROI_BA, x, y, z, Side) %>%
+  arrange(desc(tstat))
+
+sigperf
+write.csv(sigperf, "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/visdf/mod_crii_zperfcondCR.csv")
+
+```
+
+
+
+
+
+
+
+
+
+
+
+Visualizing effect of performance interaction with condition on activation
+
+```{r}
+plotdf <- dfmixmod %>%
+  filter(fOLD_ch == "ch_16")
+
+ch16_condperfint <- ggplot(data = plotdf,
+       mapping = aes(x = zperf,
+                     y = catgrest,
+                     color = cond,
+                     shape = cond)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", fullrange = TRUE, size = 2, se = FALSE) +
+  scale_color_manual(name = "Condition", labels = c("II", "RB"), values = c("#B9314F", "#086375",  "#5B3000", "#47682C", "#F9E0D9")) + 
+  scale_shape_manual(name = "Condition", labels = c("II", "RB"), values = c(17,19)) +
+  ylim(-20,20) +
+  xlim(-3, 3) +
+  xlab("Performance (z-scored)") +
+  ylab(TeX("$\\beta_{CATG} > \\beta_{REST}$")) +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+        axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+        axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+        axis.text = element_text(color = "black", face = "bold", size = 14),
+        legend.title = element_text(color = "black", face = "bold", size = 14),
+        legend.text = element_text(color = "black", face = "bold", size = 10),
+        aspect.ratio = 1,
+        legend.position = "none") 
+
+
+ch16_condperfint
+
+ggsave(plot = ch16_condperfint, "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/outputs/exp3-ch16-condperfint.png",
+       height = 7,
+       width = 7,
+       dpi = 1000)
+
+```
+
+
+```{r}
+plotdf <- dfmixmod %>%
+  filter(fOLD_ch == "ch_6")
+
+ch6_condperfint <- ggplot(data = plotdf,
+       mapping = aes(x = zperf,
+                     y = catgrest,
+                     color = cond,
+                     shape = cond)) +
+  geom_point(size = 2) +
+  geom_smooth(method = "lm", fullrange = TRUE, se = FALSE, size = 2) +
+  scale_color_manual(name = "Condition", labels = c("II", "CR"), values = c("#B9314F", "#086375",  "#5B3000", "#47682C", "#F9E0D9")) +
+  scale_shape_manual(name = "Condition", labels = c("II", "CR"), values = c(17,19)) +
+  ylim(-20,20) +
+  xlim(-2, 2) +
+  xlab("Performance (z-scored)") +
+  ylab(TeX("$\\beta_{CATG} > \\beta_{REST}$")) +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+        axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+        axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+        axis.text = element_text(color = "black", face = "bold", size = 14),
+        legend.title = element_text(color = "black", face = "bold", size = 14),
+        legend.text = element_text(color = "black", face = "bold", size = 10),
+        aspect.ratio = 1,
+        legend.position = "none") 
+
+
+ch6_condperfint
+
+ggsave(plot = ch6_condperfint, "C:/Users/user00/My Drive/category_fNIRS/exp3_analysis/outputs/exp3-ch6-condperfint.png",
+       height = 7,
+       width = 7,
+       dpi = 1000)
+```
+
+
+
+
+
+
+
+
+
+# DIAGNOSTICS
+
+
+```{r}
+
+dfchmod <- dfmixmod %>%
+  filter(fOLD_ch == "ch_16")
+lmod <- lm(formula = catgrest ~ order * zperf * cond, data = dfchmod)
+rmod <- step(lmod)
+
+summary(rmod)
+
+plot(rmod)
+```
+
+
+```{r}
+tempstat <- coef(modlist[[i]]) %>%
+    data.frame() %>%
+    rename(beta = Estimate,
+          se = Std..Error,
+          t = t.value,
+          p = Pr...t..) %>%
+    rownames_to_column(var = "reg") %>%
+    mutate(reg = ifelse(reg == "(Intercept)", "int", reg)) %>% #change "intercept" to "int"
+    select(reg, beta, se, t, p) %>%
+    mutate(ch = i) %>%
+    relocate(ch)
+
+tempstat
+```
+
+
+
+
+
+
+
+
+Run the model channel-wise and refine to acquire significant predictors
+```{r}
+modlist <- list()
+reflist <- list()
+for (i in vch){
+  
+  #channel wise modeling
+  dfchmod <- dfmixmod %>%
+    filter(fOLD_ch == i) %>%
+    na.omit()
+  
+  lmod <- lmer(formula = catgrest ~ (1 | order) + (1 | pptid) + zperf * cond, data = dfchmod, REML = FALSE)
+
+  refmod <- step(lmod, direction = 'both')
+  
+  modlist[[i]] <- summary(lmod)
+  reflist[[i]] <- refmod
+}
+```
+
+
+Show full model results
+```{r}
+for (i in names(modlist)){
+   print(i)
+   print(modlist[[i]])
+}
+```
+
+
+Show refined model results
+```{r}
+#print model results
+for (i in names(reflist)){
+   print(i)
+   print(reflist[[i]])
+}
+```
+
+
+
+
+Gather and show only models with significant fixed effects
+```{r}
+siglist <- list()
+
+for (i in names(reflist)){
+  
+  checkdf <- reflist[[i]]$fixed %>%  #grab fixed effects dataframe from refined model
+    as.data.frame() %>%
+    rename("pval" = "Pr(>F)")
+  
+  checkp <- checkdf$pval   #grab vector of pvalues on F of regressor
+  
+  if (any(checkp < .05)){   #if any significant regressors
+    siglist[[i]] <- reflist[[i]]  #store model object with 
+    print(i)
+    print(reflist[[i]])  #print to show significant 
+    print("-----------------------------------------------------------------")
+  }
+  
+}
+```
+
+
+
+
+
+
+

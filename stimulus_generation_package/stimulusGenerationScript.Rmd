@@ -1,0 +1,1218 @@
+---
+title: "Gabor Stimulus Generation"
+output: html_notebook
+---
+
+Scripts written by Tim Qiu 2022.
+Some code was adapted from previous scripts written by John P. Minda and Kazunaga Matsuki.
+Category Learning Lab
+Brain and Mind Institute
+University of Western Ontario
+
+
+
+
+# Load in the necessary packages
+```{r}
+library(tidyverse)
+library(grt)
+library(MASS)
+library(ggpubr)
+options(digits = 4)
+```
+
+
+
+# Overview
+
+In this script the logic to generate stimuli of a particular category set is as follows:  
+STEP 1. Define category structure within arbitrary space  
+STEP 2. Define parameters (means, bounds, rules) of the stimulus space  
+STEP 3. Map the arbitrary space onto the stimulus space  
+STEP 4. Generate outputs (.csv, plots, stimuli)  
+
+*Note: in several codeblocks, it starts with some kind of 'filepath' or 'dirpath' variable. You will need to change those to your directory in order to save outputs properly.
+
+Format
+
+Stimulus Generation
+  Information-Integration
+    Step1: define arbitrary space
+    Step2: define stimulus space
+    Step3: map arbitrary to stimuli
+    Step4: generate outputs
+  Conjunctive-Rule
+    Step1: define arbitrary space
+    Step2: define stimulus space
+    Step3: map arbitrary to stimuli
+    Step4: generate outputs
+  1D Rule-Based
+    Step1: define arbitrary space
+    Step2: define stimulus space
+    Step3: map arbitrary to stimuli
+    Step4: generate outputs
+Model Validation Simulator
+  Fit and AIC Function
+  II simulation
+  CR simulation
+
+
+# Stimulus Generation
+
+## Information Integration
+
+### STEP 1: Define Category Structure in Arbitrary Space
+
+We will define a two-dimensional space with arbitrary units. The category structure and rule bounds will be initially defined within this space. By default the origin is (0,0) and all significant sections will be defined relative to the origin. By default we will bound the space at (-100, 100) arbitrary units for both x and y dimensions for simplicity's sake. I prefer starting out with high N (>= 500) to get a good visual sample of how the category structure looks. You can turn down N when ready to mint stimuli images.
+
+The following parameters are defined: 
+
+Num: How many stimuli per category would you like to generate?
+v: What is the default category variance you would like?
+r: How much covariance would you like? How diagonal would you like your categories? (0-1)
+d: What is the distance between category sets A/B?
+ori: default set to (0,0)
+bounds: arbitrary bounds of space for mapping and plotting
+
+```{r}
+#Define parameters of stimuli here
+Num <- 150
+r <- 0.81
+v <- 800
+d <- 85
+ori <- c(0,0)
+loBound <- -100
+hiBound <- 100
+```
+
+
+
+Next, the parameters are used to construct the categories, sample, and plot them.  
+This part is iterative, you can keep changing the parameters until you're happy with the category structure before moving on.  
+The plot is generated with ggplot so you can add your own aesthetics and whatever.
+```{r}
+#Generate category structures
+hyp <- d/2                    #get hypotenuse from origin
+leg <- sqrt((hyp^2)/2)        #get leg of triangle
+muA <- ori + c(-leg, leg)     #add/subtract leg to origin to get category centroids
+muB <- ori + c(leg, -leg)
+Sig <- matrix(c(v,(r*v),(r*v),v),2,2) #define covariance matrix for bivariate normal distributions
+
+
+#Get category coordinates from bivariate normal distribution based on above parameters
+set.seed(25)
+CatA <- mvrnorm(Num,muA,Sig)
+CatB <- mvrnorm(Num,muB,Sig)
+
+
+#Compute between group variance (average distance from each point to the line y=x+b that runs through the middle of the category set)
+bgvA <- data.frame(CatA) %>%
+  rename(x = X1, y = X2) %>%
+  mutate(b = y - x) %>%  #computes the intercepts of line 1 with equation (y = 1x + b)
+  mutate(b1 = mean(b)) %>%   #mean of intercepts is the intercept of line L1 passing through the exact middle of cluster
+  mutate(b2 = y + x)  %>%   #computes intercept of line with exact opposite slope (y = -1x + b). Also the euclidean distance from point to L1.
+  mutate(poix = (b2 - b1)/2) %>%  #compute point of intersection (x) of two perpendicular lines
+  mutate(poiy = poix + b1) %>%   #plug back into L1 to find point of intersection (y)
+  mutate(verify = (poiy - b1)/poix) %>%  #verifies points really fall on L1 (y = 1x + b)
+  mutate(dx = abs(poix - x),      #computes absolute difference in x/y direction between line and point
+         dy = abs(poiy - y)) %>%
+  mutate(h = sqrt((dx^2) + (dy^2)))   #computes hypotnuse (absolute difference between point and line)
+
+bgvB <- data.frame(CatB) %>%
+  rename(x = X1, y = X2) %>%
+  mutate(b = y - x) %>%  #computes the intercepts of line 1 with equation (y = 1x + b)
+  mutate(b1 = mean(b)) %>%   #mean of intercepts is the intercept of line L1 passing through the exact middle of cluster
+  mutate(b2 = y + x)  %>%   #computes intercept of line with exact opposite slope (y = -1x + b). Also the euclidean distance from point to L1.
+  mutate(poix = (b2 - b1)/2) %>%  #compute point of intersection (x) of two perpendicular lines
+  mutate(poiy = poix + b1) %>%   #plug back into L1 to find point of intersection (y)
+  mutate(verify = (poiy - b1)/poix) %>%  #verifies points really fall on L1 (y = 1x + b)
+  mutate(dx = abs(poix - x),      #computes absolute difference in x/y direction between line and point
+         dy = abs(poiy - y)) %>%
+  mutate(h = sqrt((dx^2) + (dy^2)))   #computes hypotnuse (absolute difference between point and line)
+
+bgv_all <- c(bgvA$h,bgvB$h)
+bgv <- mean(bgv_all)
+std_dis <- d/bgv  #computes standard distance (distance between centroids divided by between group variance)
+print(paste0("Standard Distance: ", std_dis, " = ", d, " / ", bgv))  #print to console
+
+
+
+#Convert coordinates to dataframe and rename to cycles per image (cpi) and degrees (deg).
+CatA <- CatA %>% 
+  as.data.frame() %>%
+  rename(cpi = V1, deg = V2) 
+
+CatB <- CatB %>%
+  as.data.frame() %>%
+  rename(cpi = V1, deg = V2)
+
+
+#Generate a plot of the aribrary space
+ggplot(mapping = aes(x = cpi, y = deg)) +
+  coord_fixed() +
+  geom_point(data = CatA, shape = 22, size = 2, fill = "#C46E71", color = "black") +                 #plot category A
+  geom_point(data = CatB, shape = 24, size = 2, fill = "#05A39E", color = "black") +                 #plot category B
+  geom_segment(aes(x = loBound, xend = hiBound, y = 0, yend = 0)) +                                  #draw x-axis
+  geom_segment(aes(x = 0, xend = 0, y = loBound, yend = hiBound)) +                                  #draw y-axis
+  geom_segment(aes(x = loBound, xend = hiBound, y = loBound, yend = hiBound), color = 'red') +       #draw II-boundary in red
+  xlim(loBound, hiBound) +
+  ylim(loBound, hiBound)
+```
+
+
+
+The next part will confirm your currently generated category structure and write to file the parameters, coordinates, as well as the visual plot. The coordinates files can be imported into analysis scripts for testing or modeling.
+
+Please define the directory you would like to store these outputs in the variable dirpath
+```{r}
+#define filepath
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage"
+# dirpath = "G:/My Drive/category/stimulusGenerationPackage" #work
+
+#print plot to file
+ggsave(filename = "II_arbitrarySpace.png", dpi = 1000)
+
+#write individual categories to .csv
+write.csv(CatA, "II_A_arbitrary.csv", row.names = FALSE)
+write.csv(CatB, "II_B_arbitrary.csv", row.names = FALSE)
+
+#create combined category coordinates with keymap (A = 1, B = 0)
+CatA <- CatA %>%
+  mutate(keymap = 1) %>%
+  mutate(stimNum = seq(1,Num)) %>%
+  mutate(stimID = paste0("stim_II/II_A_", stimNum, ".png"))
+
+CatB <- CatB %>% 
+  mutate(keymap = 0) %>%
+  mutate(stimNum = seq(1,Num)) %>%
+  mutate(stimID = paste0("stim_II/II_B_", stimNum, ".png"))
+
+II_coord <- rbind(CatA, CatB)
+
+write.csv(II_coord, "II_coord_arbitrary.csv", row.names = FALSE)
+```
+
+
+
+
+
+### STEP 2: Define Parameters of Stimulus Space
+
+Categories from the previously defined arbitrary space will now be mapped onto a stimulus space with your given parameters. We will be using gabor patches so the two variables of interest are cycles per image (cpi) as well as orientation in degrees (deg). Technically, we will be applying a linear transformation of the arbitrary space onto the stimulus space.
+
+The appropriate bounds for gabor frequency can be tricky to choose. Here, I visualize cycles per image (cpi = 1,20) to get an idea of what the final stimuli will look like. Run the code below to see the images. You may need to change /demo/ folder to store these images.
+
+In my estimation, images with cpi < 6 are too easily distinguishable. Minor numerical changes correspond to dramatic visual changes. Conversely, when cpi > 15 almost any change is associated with a very minor visual change, so it may be too difficult to distinguish. Therefore, I've defined the appropriate frequency range as (6 < cpi < 15), this is set as default but can be easily changed. 
+
+This codeblock is just for visualization purposes only. It does not need to be run to generate stimuli.
+```{r}
+#define folder for demos
+demopath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/demo/"
+
+for (cpi in 1:20){  #loop cpi from 1-20
+  
+gp <- gaborPatch(sf = cpi, theta = 45, npoints = 500)  #create gp for each cpi value
+
+png(filename = paste0(demopath, "cpi_", cpi, ".png"))  #opens graphic device to plot gp
+	par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+	image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+	dev.off()
+}
+```
+
+
+
+In order to map the arbitrary space to the stimulus space, we must first define the boundaries and center of the stimulus space.
+
+Here we define the stimulus space parameters for each dimension. There are 6 parameters required to transform arbitrary space to stimulus space. However you only need to define three parameters. The rest can be deduced by code. Though, you can manually define them by deleting the code and writing your own. (Say for example, you don't want to use the full 180 degree space available in the orientation dimension)
+
+REQUIRED
+cpiLo: low bound of frequency in cpi
+cpiHi: high bound of frequency in cpi
+degOri: origin or center value along the range of possible angles (0-360)
+
+COMPUTED or OPTIONAL
+degHi: hi bound for angle
+degLo: lo bound for angle
+cpiOri: origin or center value along the range of frequency
+
+
+*Note: Gabor function counts degrees counterclockwise
+
+```{r}
+#define stimulus space parameters here
+cpiLo <- 6
+cpiHi <- 15
+degOri <- 117
+```
+
+
+Compute the other parameters necessary for transformation
+```{r}
+cpiOri <- ((cpiHi - cpiLo) / 2) + cpiLo #finds the middle point in range of cpi
+degLo <- degOri - 90  #finds upper angle bound
+degHi <- degOri + 90  #finds lower angle bound
+```
+
+
+
+### STEP 3: Map Arbitrary space onto Stimulus space
+
+Linear transformation from arbitrary space to stimulus space. This code effectively maps the previously defined categories in arbitrary space onto the newly defined stimulus space with the parameters defined directly above.
+```{r}
+#compute new stimulus ranges necessary for transformation
+arbitraryRange <- hiBound - loBound
+cpiStimRange <- cpiHi - cpiLo
+degStimRange <- degHi - degLo
+
+#Linear Transformation for both cpi and deg
+CatAStim <- CatA %>%
+  mutate(cpi = (((cpi - loBound) * cpiStimRange) / arbitraryRange) + cpiLo) %>%
+  mutate(deg = (((deg - loBound) * degStimRange) / arbitraryRange) + degLo) %>%
+  as.data.frame()
+
+CatBStim <- CatB %>%
+  mutate(cpi = (((cpi - loBound) * cpiStimRange) / arbitraryRange) + cpiLo) %>%
+  mutate(deg = (((deg - loBound) * degStimRange) / arbitraryRange) + degLo) %>%
+  as.data.frame()
+
+#Plot newly mapped stimulus space for visualization
+ggplot(mapping = aes(x = cpi, y = deg)) +
+  geom_point(data = CatAStim, shape = 22, size = 2, fill = "#086375") +                 #plot category A
+  geom_point(data = CatBStim, shape = 24, size = 2, fill = "#B9314F") +                 #plot category B
+  # geom_segment(aes(x = cpiLo, xend = cpiHi, y = degOri, yend = degOri)) +                                  #draw x-axis
+  # geom_segment(aes(x = cpiOri, xend = cpiOri, y = degLo, yend = degHi)) +                                  #draw y-axis
+  geom_segment(aes(x = cpiLo, xend = cpiHi, y = degLo, yend = degHi), size = 1, color = 'black') +       #draw II-boundary in red
+  xlim(cpiLo, cpiHi) +
+  ylim(degLo, degHi) +
+  xlab("Frequency") +
+  ylab("Orientation") +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+      axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+      axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+      axis.text = element_text(color = "black", face = "bold", size = 14))
+```
+
+
+```{r}
+#define filepath
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage"
+
+#print plot to file
+ggsave(filename = "II_stimulusSpace.png", dpi = 1000)
+
+#write individual categories to .csv
+write.csv(CatAStim, "II_A_stimulus.csv", row.names = FALSE)
+write.csv(CatBStim, "II_B_stimulus.csv", row.names = FALSE)
+
+#create combined category coordinates with keymap (A = 1, B = 0)
+II_coordStim <- rbind(CatAStim, CatBStim)
+write.csv(II_coordStim, "II_coord_stimulus.csv", row.names = FALSE)
+```
+
+
+
+
+
+### STEP 4: Print Stimuli to File
+
+Loops from 1 to Num (specified earlier) and prints each gabor patch to file as specified in the CatAStim/CatBStim coordinates file. Beware this process could take a while if you're running on a slower system. Depending on the number of files, resolution (npoints) and your cpu power, it could take anywhere from 10min to a couple hours. I recommend double checking everything before running because R will be locked up until stimulus generation completes. Also, please make a folder for the stimuli or at least set the directory where you want it so your work folders don't get flooded by 1000 pictures of sine gratings.
+```{r}
+
+IIpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/stim_II/"
+
+#Generate stim for category A
+time0 <- Sys.time()  #keep track of running time
+for (counter in 1:Num)
+{
+  
+  #define the parameters of the gabor patch
+  cpi <- CatAStim[counter,1]      #cycles per image
+  theta <- CatAStim[counter,2]   #degrees
+  
+  
+  gp <- gaborPatch(sf = cpi, theta = theta, npoints = 800, sigma = .13, trim = .001, trim.col = .501) #generates the gabor patch, use npoint >= 500
+  
+  png(filename = paste0(IIpath, "II_A_", counter, ".png"))  #opens graphic device
+  par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+  image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+  dev.off()                                                                                          #closes graphic device+
+	
+}
+time1 <- Sys.time()  #records runtime
+print(time1 - time0)
+
+
+#Generate stim for category B
+time0 <- Sys.time()
+for (counter in 1:Num)
+{
+  
+	#define the parameters of the gabor patch
+  cpi <- CatBStim[counter,1]      #cycles per image
+  theta <- CatBStim[counter,2]   #degrees
+	
+	gp <- gaborPatch(sf = cpi, theta = theta, npoints = 800, sigma = .13, trim = .001, trim.col = .501) #generates the gabor patch, use npoint >= 500
+	
+	png(filename = paste0(IIpath, "II_B_", counter, ".png"))  #opens graphic device
+	par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+	image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+	dev.off() 
+}
+time1 <- Sys.time()
+print(time1 - time0)
+
+```
+
+
+
+
+
+
+
+
+## Conjunctive-Rule
+
+
+### STEP 1: Define Category Structure in Arbitrary Space
+
+We will define a two-dimensional space with arbitrary units. The category structure and rule bounds will be initially defined within this space. By default the origin is (0,0) and all significant sections will be defined relative to the origin. By default we will bound the space at (-100, 100) for both x and y dimensions for simplicity's sake. I don't recommend making arbitrary space too big (ie. -1000, +1000 it breaks the models for some reason). I prefer starting out with high N (>= 500) to get a good visual sample of how the category structure looks. You can turn down N when ready to print stimuli images.
+
+The following parameters are defined: 
+
+Num: How many stimuli per category would you like to generate? Please use N divisible by 3 to ensure even conjunctive category structure.
+v: What is the default category variance you would like?
+d: What is the distance between category sets A/B?
+ori: default set to (0,0)
+bounds: of arbitrary space for mapping and plotting
+
+```{r}
+#Define parameters of stimuli here
+Num <- 150
+v <- 215
+d <- 140
+ori <- c(0,0)
+loBound <- -100
+hiBound <- 100
+```
+
+
+Next, the parameters are used to construct the categories, sample, and plot them.  
+This part is iterative, you can keep changing the parameters until you're happy with the category structure before moving on.  
+The plot is generated with ggplot so you can add your own aesthetics and whatever.
+```{r}
+#Generate category structures
+hyp <- d/2                   #get hypotenuse from origin
+leg <- sqrt((hyp^2)/2)       #get leg of triangle
+
+muA <- ori + c(leg, leg)     #add/subtract leg to origin to get category centroids
+muB1 <- ori + c(-leg, leg)   #quadrant 1 is A, quadrant 2,3,4 are B
+muB2 <- ori + c(-leg, -leg)
+muB3 <- ori + c(leg, -leg)
+
+Sig <- matrix(c(v,0,0,v),2,2) #define covariance matrix for bivariate normal distributions
+
+
+#Get category coordinates from bivariate normal distribution based on above parameters
+set.seed(14)
+CatA <- mvrnorm(Num,muA,Sig)
+CatB1 <- mvrnorm(Num/3,muB1,Sig)
+CatB2 <- mvrnorm(Num/3,muB2,Sig)
+CatB3 <- mvrnorm(Num/3,muB3,Sig)
+
+
+#Compute between group variances (symmetrical bivariate, variance is equidistant)
+bgvA <- CatA %>%
+  data.frame() %>%
+  rename(x = X1, y = X2) %>%
+  mutate(mx = mean(x),
+         my = mean(y)) %>%
+  mutate(dx = abs(x - mx),
+         dy = abs(y - my))
+
+bgvB1 <- CatB1 %>%
+  data.frame() %>%
+  rename(x = X1, y = X2) %>%
+  mutate(mx = mean(x)) %>%
+  mutate(dx = abs(x - mx))
+
+bgvB3 <- CatB3 %>%
+  data.frame() %>%
+  rename(x = X1, y = X2) %>%
+  mutate(my = mean(y)) %>%
+  mutate(dy = abs(y - my))
+
+bgvx <- mean(c(bgvA$dx, bgvB1$dx))  #compute bgv in x direction
+bgvy <- mean(c(bgvA$dy, bgvB3$dy))  #bgv in y direction
+bgv <- mean(bgvx, bgvy)  #overall between-group variance along direction of comparison
+
+ed = sqrt(((d^2) / 2))  #calculate euclidean distance between categories (not distance from origin)
+std_dis <- ed/bgv #standard distance
+print(paste0("Standard Distance: ", std_dis, " = ", ed, " / ", bgv))  #print to console
+
+
+#Join B subcategories into one dataframe
+CatB1 <- as.data.frame(CatB1)
+CatB2 <- as.data.frame(CatB2)
+CatB3 <- as.data.frame(CatB3)
+CatB <- rbind(CatB1, CatB2, CatB3)
+
+#Convert coordinates to dataframe and rename to cycles per image (cpi) and degrees (deg).
+CatA <- CatA %>% 
+  as.data.frame() %>%
+  rename(cpi = V1, deg = V2) 
+
+CatB <- CatB %>%
+  as.data.frame() %>%
+  rename(cpi = V1, deg = V2)
+
+#Generate a plot of the aribrary space
+ggplot(mapping = aes(x = cpi, y = deg)) +
+  coord_fixed() +
+  geom_point(data = CatA, shape = 22, size = 2, fill = "#C46E71", color = "black") +                 #plot category A
+  geom_point(data = CatB, shape = 24, size = 2, fill = "#05A39E", color = "black") +                 #plot category B
+  # geom_segment(aes(x = loBound, xend = hiBound, y = 0, yend = 0)) +                                  #draw x-axis
+  # geom_segment(aes(x = 0, xend = 0, y = loBound, yend = hiBound)) +                                  #draw y-axis
+  geom_segment(aes(x = 0, xend = 0, y = 0, yend = hiBound), color = 'black') +       #draw CR-boundary in red
+  geom_segment(aes(x = 0, xend = hiBound, y = 0, yend = 0), color = 'black') + 
+  xlim(loBound, hiBound) +
+  ylim(loBound, hiBound)
+```
+
+
+
+The next part will confirm your currently generated category structure and write to file the parameters, coordinates, as well as the visual plot. The coordinates files can be imported into analysis scripts for testing or modeling.
+
+Please define the directory you would like to store these outputs in the variable dirpath
+```{r}
+#define filepath
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage" #home
+# dirpath = "G:/My Drive/category/stimulusGenerationPackage" #work
+
+#print plot to file
+ggsave(filename = "CR_arbitrarySpace.png", dpi = 1000)
+
+#write individual categories to .csv
+write.csv(CatA, "CR_A_arbitrary.csv", row.names = FALSE)
+write.csv(CatB, "CR_B_arbitrary.csv", row.names = FALSE)
+
+#create combined category coordinates with keymap (A = 1, B = 0)
+CatA <- CatA %>%
+  mutate(keymap = 1) %>%
+  mutate(stimNum = seq(1,Num)) %>%
+  mutate(stimID = paste0("stim_CR/CR_A_", stimNum, ".png"))
+
+CatB <- CatB %>%
+  mutate(keymap = 0) %>%
+  mutate(stimNum = seq(1,Num)) %>%
+  mutate(stimID = paste0("stim_CR/CR_B_", stimNum, ".png"))
+
+
+CR_coord <- rbind(CatA, CatB)
+write.csv(CR_coord, "CR_coord_arbitrary.csv", row.names = FALSE)
+```
+
+
+
+
+
+### STEP 2: Define Parameters of Stimulus Space
+
+Categories from the previously defined arbitrary space will now be mapped onto a stimulus space with your given parameters. We will be using gabor patches so the two variables of interest are cycles per image (cpi) as well as orientation in degrees (deg). Technically, we will be applying a linear transformation of the arbitrary space onto the stimulus space.
+
+The appropriate bounds for gabor frequency can be tricky to choose. Here, I visualize cycles per image (cpi = 1,20) to get an idea of what the final stimuli will look like. Run the code below to see the images. You may need to change /demo/ folder to store these images.
+
+In my estimation, images with cpi < 6 are too easily distinguishable. Minor numerical changes correspond to dramatic visual changes. Conversely, when cpi > 15 almost any change is associated with a very minor visual change, so it may be too difficult to distinguish. Therefore, I've defined the appropriate frequency range as (6 < cpi < 15), this is set as default but can be easily changed.
+```{r}
+#define folder for demos
+demopath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/demo/"
+
+for (cpi in 1:20){  #loop cpi from 1-20
+  
+gp <- gaborPatch(sf = cpi, theta = 45, npoints = 500)  #create gp for each cpi value
+
+png(filename = paste0(demopath, "cpi_", cpi, ".png"))  #opens graphic device to plot gp
+	par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+	image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+	dev.off()
+	
+}
+```
+
+
+
+Here we define the stimulus space parameters for each dimension. There are 6 parameters required to transform arbitrary space to stimulus space. However you only need to define three parameters. The rest can be deduced by code. Though, you can manually define them by deleting the code and writing your own. (Say for example, you don't want to use the full 180 degree space available in the orientation dimension)
+
+REQUIRED
+cpiLo: low bound of frequency in cpi
+cpiHi: high bound of frequency in cpi
+degOri: origin or center value along the range of possible angles (0-360)
+
+COMPUTED or OPTIONAL
+degHi: hi bound for angle
+degLo: lo bound for angle
+cpiOri: origin or center value along the range of frequency
+
+
+*Note: Gabor function counts degrees counterclockwise
+
+```{r}
+#define stimulus space parameters here
+cpiLo <- 6
+cpiHi <- 15
+degOri <- 74
+```
+
+
+Compute the other parameters necessary for transformation
+```{r}
+cpiOri <- ((cpiHi - cpiLo) / 2) + cpiLo #finds the middle point in range of cpi
+degLo <- degOri - 90  #finds upper angle bound
+degHi <- degOri + 90  #finds lower angle bound
+```
+
+
+
+### STEP 3: Map Arbitrary space onto Stimulus space
+
+Linear transformation from arbitrary space to stimulus space. This code effectively maps the previously defined categories in arbitrary space onto the newly defined stimulus space with the parameters defined directly above.
+```{r}
+#compute new stimulus ranges necessary for transformation
+arbitraryRange <- hiBound - loBound
+cpiStimRange <- cpiHi - cpiLo
+degStimRange <- degHi - degLo
+
+#Linear Transformation for both cpi and deg
+CatAStim <- CatA %>%
+  mutate(cpi = (((cpi - loBound) * cpiStimRange) / arbitraryRange) + cpiLo) %>%
+  mutate(deg = (((deg - loBound) * degStimRange) / arbitraryRange) + degLo) %>%
+  as.data.frame()
+
+CatBStim <- CatB %>%
+  mutate(cpi = (((cpi - loBound) * cpiStimRange) / arbitraryRange) + cpiLo) %>%
+  mutate(deg = (((deg - loBound) * degStimRange) / arbitraryRange) + degLo) %>%
+  as.data.frame()
+
+#Plot newly mapped stimulus space for visualization
+ggplot(mapping = aes(x = cpi, y = deg)) +
+  geom_point(data = CatAStim, shape = 22, size = 2, fill = "#086375") +                 #plot category A
+  geom_point(data = CatBStim, shape = 24, size = 2, fill = "#B9314F") +                 #plot category B
+  # geom_segment(aes(x = cpiLo, xend = cpiHi, y = degOri, yend = degOri)) +                                  #draw x-axis
+  # geom_segment(aes(x = cpiOri, xend = cpiOri, y = degLo, yend = degHi)) +                                  #draw y-axis
+  geom_segment(aes(x = cpiOri, xend = cpiOri, y = degOri, yend = degHi), size = 1, color = 'black') +       #draw CR-boundary in red
+  geom_segment(aes(x = cpiOri, xend = cpiHi, y = degOri, yend = degOri), size = 1, color = 'black') + 
+  xlim(cpiLo, cpiHi) +
+  ylim(degLo, degHi) +
+  xlab("Frequency") +
+  ylab("Orientation") +
+  theme_pubr() +
+  theme(axis.line = element_line(colour = 'black', size = 1.5),
+      axis.title.x = element_text(color="black", size= 16, face="bold", margin = margin(t = 10)),   #increase axis thickness
+      axis.title.y = element_text(color="black", size= 16, face="bold", margin = margin(r = 10)),
+      axis.text = element_text(color = "black", face = "bold", size = 14))
+```
+
+
+```{r}
+#define filepath
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage"
+
+#print plot to file
+ggsave(filename = "CR_stimulusSpace.png", dpi = 1000)
+
+#write individual categories to .csv
+write.csv(CatAStim, "CR_A_stimulus.csv", row.names = FALSE)
+write.csv(CatBStim, "CR_B_stimulus.csv", row.names = FALSE)
+
+#create combined category coordinates with keymap (A = 1, B = 0)
+CR_coordStim <- rbind(CatAStim, CatBStim)
+write.csv(CR_coordStim, "CR_coord_stimulus.csv", row.names = FALSE)
+```
+
+
+
+
+
+### STEP 4: Print Stimuli to File
+
+Loops from 1 to Num (specified earlier) and prints each gabor patch to file as specified in the CatAStim/CatBStim coordinates file. Beware this process could take a while if you're running on a slower system. Depending on the number of files, resolution (npoints) and your cpu power, it could take anywhere from 10min to a couple hours. I recommend double checking everything before running because R will be locked up until stimulus generation completes. Also, please make a folder for the stimuli or at least set the directory where you want it so your work folders don't get flooded by 1000 pictures of sine gratings.
+```{r}
+
+CRpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/stim_CR/"
+
+#Generate stim for category A
+time0 <- Sys.time()  #keep track of running time
+for (counter in 1:Num)
+{
+  
+  #define the parameters of the gabor patch
+  cpi <- CatAStim[counter,1]      #cycles per image
+  theta <- CatAStim[counter,2]   #degrees
+  
+  
+  gp <- gaborPatch(sf = cpi, theta = theta, npoints = 800, sigma = .13, trim = .001, trim.col = .501) #generates the gabor patch, use npoint >= 500
+  
+  png(filename = paste0(CRpath, "CR_A_", counter, ".png"))  #opens graphic device
+  par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+  image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+  dev.off()                                                                                          #closes graphic device+
+	
+}
+time1 <- Sys.time()  #records runtime
+print(time1 - time0)
+
+
+#Generate stim for category B
+time0 <- Sys.time()
+for (counter in 1:Num)
+{
+  
+	#define the parameters of the gabor patch
+  cpi <- CatBStim[counter,1]      #cycles per image
+  theta <- CatBStim[counter,2]   #degrees
+	
+	gp <- gaborPatch(sf = cpi, theta = theta, npoints = 800, sigma = .13, trim = .001, trim.col = .501) #generates the gabor patch, use npoint >= 500
+	
+	png(filename = paste0(CRpath, "CR_B_", counter, ".png"))  #opens graphic device
+	par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+	image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+	dev.off() 
+}
+time1 <- Sys.time()
+print(time1 - time0)
+
+```
+
+
+
+
+## Single Dimeniosnal Rule-Based 
+
+
+### STEP 1: Define Category Structure in Arbitrary Space
+
+We will define a two-dimensional space with arbitrary units. The category structure and rule bounds will be initially defined within this space. By default the origin is (0,0) and all significant sections will be defined relative to the origin. By default we will bound the space at (-100, 100) for both x and y dimensions for simplicity's sake. I don't recommend making arbitrary space too big (ie. -1000, +1000 it breaks the models for some reason). I prefer starting out with high N (>= 500) to get a good visual sample of how the category structure looks. You can turn down N when ready to print stimuli images.
+
+The following parameters are defined: 
+
+Num: How many stimuli per category would you like to generate?
+v: What is the default category variance you would like?
+r: covariance along the y axis
+d: What is the distance between category sets A/B?
+ori: default set to (0,0)
+bounds: of arbitrary space for mapping and plotting
+
+```{r}
+#Define parameters of stimuli here
+Num <- 150
+v <- 1000
+r <- 0.8
+d <- 70
+ori <- c(0,0)
+loBound <- -100
+hiBound <- 100
+```
+
+
+Next, the parameters are used to construct the categories, sample, and plot them.  
+This part is iterative, you can keep changing the parameters until you're happy with the category structure before moving on.  
+The plot is generated with ggplot so you can add your own aesthetics and whatever.
+```{r}
+#compute distance from origin
+leg <- d/2
+
+#Generate category structures
+muA <- ori + c(leg, 0)     #add/subtract leg to origin to get category centroids
+muB <- ori + c(-leg, 0)   #quadrant 1 is A, quadrant 2,3,4 are B
+
+r <- 1-r
+Sig <- matrix(c(r*v,0,0,v),2,2) #define covariance matrix for bivariate normal distributions
+
+
+#Get category coordinates from bivariate normal distribution based on above parameters
+set.seed(11)
+CatA <- mvrnorm(Num,muA,Sig)
+CatB <- mvrnorm(Num,muB,Sig)
+
+#Convert coordinates to dataframe and rename to cycles per image (cpi) and degrees (deg).
+CatA <- CatA %>% 
+  as.data.frame() %>%
+  rename(cpi = V1, deg = V2) 
+
+CatB <- CatB %>%
+  as.data.frame() %>%
+  rename(cpi = V1, deg = V2)
+
+#Generate a plot of the aribrary space
+ggplot(mapping = aes(x = cpi, y = deg)) +
+  coord_fixed() +
+  geom_point(data = CatA, shape = 22, size = 2, fill = "#C46E71", color = "black") +                 #plot category A
+  geom_point(data = CatB, shape = 24, size = 2, fill = "#05A39E", color = "black") +                 #plot category B
+  geom_segment(aes(x = 0, xend = 0, y = loBound, yend = hiBound), color = "red") +                                  #draw boundary
+  xlim(loBound, hiBound) +
+  ylim(loBound, hiBound)
+```
+
+
+
+The next part will confirm your currently generated category structure and write to file the parameters, coordinates, as well as the visual plot. The coordinates files can be imported into analysis scripts for testing or modeling.
+
+Please define the directory you would like to store these outputs in the variable dirpath
+```{r}
+#define filepath
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage"
+
+#print plot to file
+ggsave(filename = "RB_arbitrarySpace.png", dpi = 1000)
+
+#write individual categories to .csv
+write.csv(CatA, "RB_A_arbitrary.csv", row.names = FALSE)
+write.csv(CatB, "RB_B_arbitrary.csv", row.names = FALSE)
+
+#RBeate combined category coordinates with keymap (A = 1, B = 0)
+CatA <- mutate(CatA, keymap = 1)
+CatB <- mutate(CatB, keymap = 2)
+RB_coord <- rbind(CatA, CatB)
+write.csv(RB_coord, "RB_coord_arbitrary.csv", row.names = FALSE)
+
+#compute and print dprime for category set
+mc <- mcovs(keymap ~ cpi + deg, RB_coord)
+print(paste0("dprime: ", dprimef(mc$means, mc$covs)))
+```
+
+
+
+
+
+### STEP 2: Define Parameters of Stimulus Space
+
+Categories from the previously defined arbitrary space will now be mapped onto a stimulus space with your given parameters. We will be using gabor patches so the two variables of interest are cycles per image (cpi) as well as orientation in degrees (deg). Technically, we will be applying a linear transformation of the arbitrary space onto the stimulus space.
+
+The appropriate bounds for gabor frequency can be tricky to choose. Here, I visualize cycles per image (cpi = 1,20) to get an idea of what the final stimuli will look like. Run the code below to see the images. You may need to change /demo/ folder to store these images.
+
+In my estimation, images with cpi < 6 are too easily distinguishable. Minor numerical changes correspond to dramatic visual changes. Conversely, when cpi > 15 almost any change is associated with a very minor visual change, so it may be too difficult to distinguish. Therefore, I've defined the appropriate frequency range as (6 < cpi < 15), this is set as default but can be easily changed.
+```{r}
+#define folder for demos
+demopath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/demo/"
+
+for (cpi in 1:20){  #loop cpi from 1-20
+  
+gp <- gaborPatch(sf = cpi, theta = 45, npoints = 500)  #create gp for each cpi value
+
+png(filename = paste0(demopath, "cpi_", cpi, ".png"))  #opens graphic device to plot gp
+	par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+	image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+	dev.off()
+	
+}
+```
+
+
+
+Here we define the stimulus space parameters for each dimension. There are 6 parameters required to transform arbitrary space to stimulus space. However you only need to define three parameters. The rest can be deduced by code. Though, you can manually define them by deleting the code and writing your own. (Say for example, you don't want to use the full 180 degree space available in the orientation dimension)
+
+REQUIRED
+cpiLo: low bound of frequency in cpi
+cpiHi: high bound of frequency in cpi
+degOri: origin or center value along the range of possible angles (0-360)
+
+COMPUTED or OPTIONAL
+degHi: hi bound for angle
+degLo: lo bound for angle
+cpiOri: origin or center value along the range of frequency
+
+
+*Note: Gabor function counts degrees counterclockwise
+
+```{r}
+#define stimulus space parameters here
+cpiLo <- 6
+cpiHi <- 15
+degOri <- 74
+```
+
+
+Compute the other parameters necessary for transformation
+```{r}
+cpiOri <- ((cpiHi - cpiLo) / 2) + cpiLo #finds the middle point in range of cpi
+degLo <- degOri - 90  #finds upper angle bound
+degHi <- degOri + 90  #finds lower angle bound
+```
+
+
+
+### STEP 3: Map Arbitrary space onto Stimulus space
+
+Linear transformation from arbitrary space to stimulus space. This code effectively maps the previously defined categories in arbitrary space onto the newly defined stimulus space with the parameters defined directly above.
+```{r}
+#compute new stimulus ranges necessary for transformation
+arbitraryRange <- hiBound - loBound
+cpiStimRange <- cpiHi - cpiLo
+degStimRange <- degHi - degLo
+
+#Linear Transformation for both cpi and deg
+CatAStim <- CatA %>%
+  mutate(cpi = (((cpi - loBound) * cpiStimRange) / arbitraryRange) + cpiLo) %>%
+  mutate(deg = (((deg - loBound) * degStimRange) / arbitraryRange) + degLo) %>%
+  as.data.frame()
+
+CatBStim <- CatB %>%
+  mutate(cpi = (((cpi - loBound) * cpiStimRange) / arbitraryRange) + cpiLo) %>%
+  mutate(deg = (((deg - loBound) * degStimRange) / arbitraryRange) + degLo) %>%
+  as.data.frame()
+
+#Plot newly mapped stimulus space for visualization
+ggplot(mapping = aes(x = cpi, y = deg)) +
+  geom_point(data = CatAStim, shape = 22, size = 2, fill = "#C46E71", color = "black") +                 #plot category A
+  geom_point(data = CatBStim, shape = 24, size = 2, fill = "#05A39E", color = "black") +                 #plot category B
+  geom_segment(aes(x = cpiOri, xend = cpiOri, y = degLo, yend = degHi)) +        
+  xlim(cpiLo, cpiHi) +
+  ylim(degLo, degHi)
+```
+
+
+```{r}
+#define filepath
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage"
+
+#print plot to file
+ggsave(filename = "RB_stimulusSpace.png", dpi = 1000)
+
+#write individual categories to .csv
+write.csv(CatAStim, "RB_A_stimulus.csv", row.names = FALSE)
+write.csv(CatBStim, "RB_B_stimulus.csv", row.names = FALSE)
+
+#RBeate combined category coordinates with keymap (A = 1, B = 0)
+RB_coordStim <- rbind(CatAStim, CatBStim)
+write.csv(RB_coordStim, "RB_coord_stimulus.csv", row.names = FALSE)
+```
+
+
+
+
+
+### STEP 4: Print Stimuli to File
+
+Loops from 1 to Num (specified earlier) and prints each gabor patch to file as specified in the CatAStim/CatBStim coordinates file. Beware this process could take a while if you're running on a slower system. Depending on the number of files, resolution (npoints) and your cpu power, it could take anywhere from 10min to a couple hours. I recommend double checking everything before running because R will be locked up until stimulus generation completes. Also, please make a folder for the stimuli or at least set the directory where you want it so your work folders don't get flooded by 1000 pictures of sine gratings.
+```{r}
+
+RBpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/stim_RB/"
+
+#Generate stim for category A
+time0 <- Sys.time()  #keep track of running time
+for (counter in 1:Num)
+{
+  
+  #define the parameters of the gabor patch
+  cpi <- CatAStim[counter,1]      #cycles per image
+  theta <- CatAStim[counter,2]   #degrees
+  
+  
+  gp <- gaborPatch(sf = cpi, theta = theta, npoints = 800, sigma = .13, trim = .001, trim.col = .501) #generates the gabor patch, use npoint >= 500
+  
+  png(filename = paste0(RBpath, "RB_A_", counter, ".png"))  #opens graphic device
+  par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+  image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+  dev.off()                                                                                          #closes graphic device+
+	
+}
+time1 <- Sys.time()  #records runtime
+print(time1 - time0)
+
+
+#Generate stim for category B
+time0 <- Sys.time()
+for (counter in 1:Num)
+{
+  
+	#define the parameters of the gabor patch
+  cpi <- CatBStim[counter,1]      #cycles per image
+  theta <- CatBStim[counter,2]   #degrees
+	
+	gp <- gaborPatch(sf = cpi, theta = theta, npoints = 800, sigma = .13, trim = .001, trim.col = .501) #generates the gabor patch, use npoint >= 500
+	
+	png(filename = paste0(RBpath, "RB_B_", counter, ".png"))  #opens graphic device
+	par(mar = c(0,0,0,0), bg = NA)                                                                              #gets rid of margins
+	image(gp, useRaster = TRUE, axes = FALSE, col = grey(seq(0,1, length = 256)))                      #draws gp matrix to grayscale image
+	dev.off() 
+}
+time1 <- Sys.time()
+print(time1 - time0)
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+# Model Validation Simulator
+
+The code below is for simulating performance on stimuli generated above. It simulates error rates ranging from 1% to 50% and provides the AIC for each of the models while selecting the best model to see if your stimulus set actually elicits the intended strategy. Beware this simulation just adds random error to the "responses" which isn't fully representative of a real participant. Real participants are more likely to make errors closer to the boundary and less likely to make errors further away.
+
+
+## Modelfit and AIC
+
+Initially we define a function that when given a dataframe containing category, coordinates, and response will fit all the relevant models and extract and ouput the AIC for each model.
+
+Function for fitting model and determining best fit with AIC Used below for error simulations
+```{r}
+#Function fits 4 categorization strategies and pulls AIC values for each
+#pptdata: a dataframe input with columns - category, respones, cpi, deg
+#plots: whether you want to see the decision bounds plotted, a boolean
+modelfit <- function(pptdat, plots){
+  
+  #fits CR,II models
+  cr_strat <- gcjc(response ~ cpi + deg, data = pptdat, category = pptdat$keymap, config = 1, zlimit=7)  #2D Conjunctive rule 
+  ii_strat <- glc(response ~ cpi + deg, data = pptdat, category = pptdat$keymap, zlimit=7)     #2D information integration
+  fr_strat <- glc(response ~ cpi, data = pptdat, category = pptdat$keymap, zlimit=7)           #1D frequency rule (fr)
+  or_strat <- glc(response ~ deg, data = pptdat, category = pptdat$keymap, zlimit=7)           #1D orientation rule (or)
+
+  #computes AIC for all models
+  aic_report <- AIC(cr_strat, ii_strat, fr_strat, or_strat) #returns AIC 
+  aic_report
+
+  #gets AIC from aic_report, order of AIC values are hardcoded (CR, II, FR, OR)
+  aicLabel <- c(aic_report$AIC)
+  
+  
+  #prints plots 
+  if (plots == TRUE){
+    plot.gcjc(cr_strat)
+    plot.glc(ii_strat)
+  }
+
+  return(aicLabel)
+  
+}
+```
+
+
+Using the previously defined function, we can now simulate for each category set. 
+For all simulation outpus:
+
+CR = conjunctive rule
+II = information integration
+FR = frequency rule
+OR = orientation rule
+
+## CR Simulation
+
+Loop to checks best fit model for all error percentages 1-50. Notice error is 'e' counter in loop.
+```{r}
+
+#point directory to the one containing the stimulus coordinates file
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/"  #home
+# dirpath = "G:/My Drive/category/stimulusGenerationPackage/" #work
+
+
+CR_coords <- read.csv(paste0(dirpath, "CR_coord_arbitrary.csv"))
+
+CR_modaic <- data.frame(matrix(ncol=4, nrow=0)) #initaite dataframe to store model AICs
+
+for (e in 1:50){
+
+  CR_simdf <- CR_coords #resets simulated dataframe simdf per loop
+
+  #randomizes simulated answers rng = percentage error
+  CR_simdf <- CR_simdf %>%
+    mutate(keymap = ifelse(keymap == 0, 2, 1)) %>%  #changes 0->2 otherwise gcjc breaks
+    mutate(rng = floor(runif(n = nrow(CR_simdf), min = 0, max = 100))) %>%
+    mutate(response = ifelse(test = rng <= e,
+                         yes = ifelse(keymap == 1, 2, 1),
+                         no = keymap)) %>%
+    mutate(response = as.integer(response))
+
+  #calls earlier defined modelfit function to extract AIC, and bind to CR_modaic dataframe
+  CR_modaic <- rbind(CR_modaic, modelfit(CR_simdf, plots = T))  #do you want to see plots? plots = T/F
+
+}
+
+#rename dataframe column names
+colnames(CR_modaic) <- c("CR", "II", "FR", "OR")
+
+#Generate column that records best fitting model
+CR_modaic$bestfit <- names(CR_modaic)[apply(CR_modaic, MARGIN = 1, FUN = which.min)]
+CR_modaic$error <- seq(1,50)
+
+CR_modaic
+```
+
+
+## II Simulation
+
+
+Loop to checks best fit model for all error percentages 1-50. Notice error is 'e' counter in loop.
+```{r}
+
+#please point to same folder as the coordinates files
+dirpath = "C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/" #home
+# dirpath = "G:/My Drive/category/stimulusGenerationPackage/" #work
+
+II_coords <- read.csv(paste0(dirpath, "II_coord_arbitrary.csv"))
+
+II_modaic <- data.frame(matrix(ncol=4, nrow=0)) #initaite dataframe to store model AICs
+
+for (e in 1:50){
+
+  II_simdf <- II_coords #resets simulated dataframe simdf per loop
+
+  #randomizes simulated answers rng = percentage error
+  II_simdf <- II_simdf %>%
+    mutate(keymap = ifelse(keymap == 0, 2, 1)) %>%  #changes 0->2 otherwise gcjc breaks
+    mutate(rng = floor(runif(n = nrow(II_simdf), min = 0, max = 100))) %>%
+    mutate(response = ifelse(test = rng <= e,
+                         yes = ifelse(keymap == 1, 2, 1),
+                         no = keymap)) %>%
+    mutate(response = as.integer(response))
+
+  #calls earlier defined modelfit function to extract AIC, and bind to II_modaic dataframe
+  II_modaic <- rbind(II_modaic, modelfit(II_simdf, plots = FALSE))  #do you want to see plots? plots = T/F
+
+}
+
+#rename dataframe column names
+colnames(II_modaic) <- c("CR", "II", "FR", "OR")
+
+#Generate column that records best fitting model
+II_modaic$bestfit <- names(II_modaic)[apply(II_modaic, MARGIN = 1, FUN = which.min)]
+II_modaic$error <- seq(1,50)
+
+II_modaic
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#IGNORE BELOW
+
+
+
+TESTING SHIT
+
+
+#Modeling Debugging
+
+
+//TODO WHY THE FUCK CR MODEL DOESN"T FIT?!?!?!?
+
+//apparently the way to fix fucked up conjunctive model is to change the labels from 0/1 -> 1/2 with 1 being the conjunct category this is so fucking stupid.
+```{r}
+testCR <- read.csv("G:/My Drive/category/stimulusGenerationPackage/CR_coord_arbitrary.csv")
+testCR <- testCR %>% mutate(rng = floor(runif(n = nrow(testCR), min = 0, max = 100))) %>%
+  mutate(keymap = ifelse(keymap == 0, 2, 1)) %>%
+  mutate(response = ifelse(test = rng <= 5,
+                         yes = ifelse(keymap == 1, 2, 1),
+                         no = keymap)) %>%
+  mutate(response = as.numeric(response)) %>%
+  mutate(keymap = as.numeric(keymap)) %>%
+  mutate(cpi = as.double(cpi)) %>%
+  mutate(deg = as.double(deg))
+
+testCR
+
+#fits CR,II models
+cr_strat <- gcjc(response ~ cpi + deg, data = testCR, category = testCR$keymap, config = 3)   #
+ii_strat <- glc(response ~ cpi + deg, data = testCR, category = testCR$keymap, zlimit=7)      #
+fr_strat <- glc(response ~ cpi, data = testCR, category = testCR$keymap, zlimit=7)            #1D frequency rule (fr)
+or_strat <- glc(response ~ deg, data = testCR, category = testCR$keymap, zlimit=7)            #1D orientation rule (or)
+  
+aic_report <- AIC(cr_strat, ii_strat, fr_strat, or_strat) #returns AIC 
+aic_report
+
+aicLabel <- c(1, aic_report$AIC)
+aicLabel
+# #stores AIC scores
+# cr_score <- aic_report[1,2] 
+# ii_score <- aic_report[2,2]
+
+plot.gcjc(cr_strat)
+plot.glc(ii_strat)
+
+coef.gcjc(cr_strat)
+```
+
+
+```{r}
+# dirpath = 
+testII <- read.csv("C:/Users/Tim/Google Drive/category/stimulusGenerationPackage/II_coord_arbitrary.csv")
+testII <- testII %>% mutate(rng = floor(runif(n = 200, min = 0, max = 100))) %>%
+  mutate(response = ifelse(test = rng <= 5,
+                         yes = ifelse(keymap == 1, 2, 1),
+                         no = keymap)) %>%
+  mutate(response = as.factor(response)) %>%
+  mutate(keymap = as.factor(keymap)) %>%
+  mutate(cpi = as.double(cpi)) %>%
+  mutate(deg = as.double(deg))
+
+
+ii_strat <- glc(response ~ cpi + deg, data = testII, category = testII$keymap)
+
+plot(ii_strat)
+
+# data(subjdemo_cj)
+# m.cj <- gcjc(response ~ x1 + x2, data=subjdemo_cj,
+# config=2, category=subjdemo_cj$category, zlimit=7)
+# 
+# plot(m.cj)
+
+```
+
+
+
+
+
+
+
+method to compute dprime
+//TODO add dprime calculation to prior stuff.
+```{r}
+
+mc <- mcovs(keymap ~ cpi + deg, CR_coords)
+dprimef(mc$means, mc$covs)
+
+```
+
+
